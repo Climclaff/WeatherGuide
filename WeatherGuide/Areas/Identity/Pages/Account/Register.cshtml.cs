@@ -63,12 +63,15 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
-            [RegularExpression(@"^[a-zA-Z''-'\s]{2,40}$", ErrorMessage = "This field must contain from 2 to 40 alphabetical characters")]
+            
+            [RegularExpression(@"^(([A-za-zÀ-ÙÜŞß¥ª²¯à-ùüşÿ´º³¿]+[\s]{1}[A-za-zÀ-ÙÜŞß¥ª²¯à-ùüşÿ´º³¿]+)|([A-Za-zÀ-ÙÜŞß¥ª²¯à-ùüşÿ´º³¿]+))$", 
+                ErrorMessage = "The Name field must contain alphabetical characters")]
             [Display(Name = "Name")]
             public string Name { get; set; }
 
             [Required]
-            [RegularExpression(@"^[a-zA-Z''-'\s]{2,40}$", ErrorMessage = "This field must contain from 2 to 40 alphabetical characters")]
+            [RegularExpression(@"^(([A-za-zÀ-ÙÜŞß¥ª²¯à-ùüşÿ´º³¿]+[\s]{1}[A-za-zÀ-ÙÜŞß¥ª²¯à-ùüşÿ´º³¿]+)|([A-Za-zÀ-ÙÜŞß¥ª²¯à-ùüşÿ´º³¿]+))$",
+                ErrorMessage = "The Surname field must contain alphabetical characters")]
             [Display(Name = "Surname")]
             public string Surname { get; set; }
 

@@ -537,11 +537,11 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.SqlServer/3.1.17": {
+      "Microsoft.EntityFrameworkCore.SqlServer/3.1.20": {
         "type": "package",
         "dependencies": {
           "Microsoft.Data.SqlClient": "1.1.3",
-          "Microsoft.EntityFrameworkCore.Relational": "3.1.17"
+          "Microsoft.EntityFrameworkCore.Relational": "3.1.20"
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.SqlServer.dll": {}
@@ -564,10 +564,10 @@
           "lib/netstandard1.3/Microsoft.EntityFrameworkCore.SqlServer.Design.dll": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Tools/3.1.17": {
+      "Microsoft.EntityFrameworkCore.Tools/3.1.20": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Design": "3.1.17"
+          "Microsoft.EntityFrameworkCore.Design": "3.1.20"
         },
         "compile": {
           "lib/netstandard2.0/_._": {}
@@ -3492,17 +3492,17 @@
         "microsoft.entityframeworkcore.relational.design.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.SqlServer/3.1.17": {
-      "sha512": "tKqYOteDUYMm69O3bje87/Y99m+T/qUbf7YgJJgLqFBoiC8adZZkhkIvAr40WMzHQNyD+s/WrJUTqThYPQinFw==",
+    "Microsoft.EntityFrameworkCore.SqlServer/3.1.20": {
+      "sha512": "hTodEQPimBhjE1sYQ2SFpoQVuO9UeLu/2xNhejk6ChwQC4fw5CoDg1yxbLr2LXaw5qp1oiVJQS9SHiexRZ1FyQ==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.sqlserver/3.1.17",
+      "path": "microsoft.entityframeworkcore.sqlserver/3.1.20",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.SqlServer.dll",
         "lib/netstandard2.0/Microsoft.EntityFrameworkCore.SqlServer.xml",
-        "microsoft.entityframeworkcore.sqlserver.3.1.17.nupkg.sha512",
+        "microsoft.entityframeworkcore.sqlserver.3.1.20.nupkg.sha512",
         "microsoft.entityframeworkcore.sqlserver.nuspec"
       ]
     },
@@ -3521,17 +3521,17 @@
         "microsoft.entityframeworkcore.sqlserver.design.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Tools/3.1.17": {
-      "sha512": "9jnkaQPEOqvrzpI1K85MXzhUFO8Iz+aDjmXNSY6Oz61zDz4pYLHLWlMqMIjU+e9yo7PBHcQiTyTwBgbzAKdlSA==",
+    "Microsoft.EntityFrameworkCore.Tools/3.1.20": {
+      "sha512": "zkIn1fuIBQWxzQZQqbZZIDkSgSOZ/4YgLglI/pfVjPRcRM+nBGEbGdDHimA6COrgqZg7FYZZLehcV+QhyF+bag==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.tools/3.1.17",
+      "path": "microsoft.entityframeworkcore.tools/3.1.20",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/netstandard2.0/_._",
-        "microsoft.entityframeworkcore.tools.3.1.17.nupkg.sha512",
+        "microsoft.entityframeworkcore.tools.3.1.20.nupkg.sha512",
         "microsoft.entityframeworkcore.tools.nuspec",
         "tools/EntityFrameworkCore.PS2.psd1",
         "tools/EntityFrameworkCore.PS2.psm1",
@@ -9026,9 +9026,9 @@
       "Microsoft.EntityFrameworkCore >= 3.1.20",
       "Microsoft.EntityFrameworkCore.Design >= 3.1.20",
       "Microsoft.EntityFrameworkCore.Relational.Design >= 1.1.6",
-      "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.17",
+      "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.20",
       "Microsoft.EntityFrameworkCore.SqlServer.Design >= 1.1.6",
-      "Microsoft.EntityFrameworkCore.Tools >= 3.1.17",
+      "Microsoft.EntityFrameworkCore.Tools >= 3.1.20",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.5"
     ]
   },
@@ -9103,15 +9103,17 @@
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
-            "version": "[3.1.17, )"
+            "version": "[3.1.20, )"
           },
           "Microsoft.EntityFrameworkCore.SqlServer.Design": {
             "target": "Package",
             "version": "[1.1.6, )"
           },
           "Microsoft.EntityFrameworkCore.Tools": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
             "target": "Package",
-            "version": "[3.1.17, )"
+            "version": "[3.1.20, )"
           },
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",

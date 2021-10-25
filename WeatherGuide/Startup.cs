@@ -34,6 +34,10 @@ namespace WeatherGuide
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddMvc(options =>
+            {
+                options.EnableEndpointRouting = false;
+            });
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("IsAdminPolicy",
@@ -62,14 +66,22 @@ namespace WeatherGuide
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "administration",
+                    template: "{controller=Administration}/{action=Index}/{id?}");
+            });
+        /*    app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");              
                 endpoints.MapRazorPages();
-            });
+            });*/
         }
     }
 }

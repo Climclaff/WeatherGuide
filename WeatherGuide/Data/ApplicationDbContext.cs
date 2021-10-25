@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using WeatherGuide.Models;
 namespace WeatherGuide.Data
 {
     public class ApplicationDbContext : IdentityDbContext
@@ -12,5 +12,8 @@ namespace WeatherGuide.Data
             : base(options)
         {
         }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<State> States { get; set; }
+
     }
 }
