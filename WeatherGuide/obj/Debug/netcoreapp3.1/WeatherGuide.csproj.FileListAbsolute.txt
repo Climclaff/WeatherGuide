@@ -944,3 +944,4 @@ C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcor
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.dll
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.pdb
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.genruntimeconfig.cache
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Home\Administration.cshtml.g.cs

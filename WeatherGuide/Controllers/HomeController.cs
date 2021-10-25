@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WeatherGuide.Models;
-
+using Microsoft.AspNetCore.Authorization;
 namespace WeatherGuide.Controllers
 {
     public class HomeController : Controller
@@ -24,6 +24,11 @@ namespace WeatherGuide.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        [Authorize("IsAdminPolicy")]
+        public IActionResult Administration()
         {
             return View();
         }

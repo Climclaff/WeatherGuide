@@ -92,7 +92,8 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
                 {
                     List<Claim> claims = new List<Claim> { 
                         new Claim("Name", Input.Name), 
-                        new Claim("Surname", Input.Surname) 
+                        new Claim("Surname", Input.Surname),
+                        new Claim("IsAdmin", "false")
                         };
                     for (int i = 0; i<claims.Count; ++i)
                     await _userManager.AddClaimAsync(user, claims[i]);
