@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
@@ -60,6 +61,17 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [RegularExpression(@"^[a-zA-Z''-'\s]{2,40}$", ErrorMessage = "This field must contain from 2 to 40 alphabetical characters")]
+            [Display(Name = "Name")]
+            public string Name { get; set; }
+
+            [Required]
+            [RegularExpression(@"^[a-zA-Z''-'\s]{2,40}$", ErrorMessage = "This field must contain from 2 to 40 alphabetical characters")]
+            [Display(Name = "Surname")]
+            public string Surname { get; set; }
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -78,6 +90,13 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    List<Claim> claims = new List<Claim> { 
+                        new Claim("Name", Input.Name), 
+                        new Claim("Surname", Input.Surname) 
+                        };
+                    for (int i = 0; i<claims.Count; ++i)
+                    await _userManager.AddClaimAsync(user, claims[i]);
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
