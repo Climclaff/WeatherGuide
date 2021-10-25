@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using WeatherGuide.Models;
 namespace WeatherGuide.Data
@@ -14,6 +16,6 @@ namespace WeatherGuide.Data
         }
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
-
+       
     }
 }

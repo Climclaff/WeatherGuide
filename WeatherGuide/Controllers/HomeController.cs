@@ -27,6 +27,7 @@ namespace WeatherGuide.Controllers
         {
             return View();
         }
+
         [Authorize("IsAdminPolicy")]
         public IActionResult Administration()
         {
