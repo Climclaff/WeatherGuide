@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WeatherGuide.Data;
 using WeatherGuide.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeatherGuide.Controllers
 {
-
+    [Authorize("IsAdminPolicy")]
+    [Route("Administration/[controller]/[action]/{id?}")]
     public class StateController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -43,14 +45,14 @@ namespace WeatherGuide.Controllers
                 return NotFound();
             }
 
-            return View(state);
+            return View("~/Views/Administration/State/Details.cshtml",state);
         }
 
         // GET: State/Create
         public IActionResult Create()
         {
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id");
-            return View();
+            return View("~/Views/Administration/State/Create.cshtml");
         }
 
         // POST: State/Create
@@ -67,7 +69,7 @@ namespace WeatherGuide.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", state.CountryId);
-            return View(state);
+            return View("~/Views/Administration/State/Create.cshtml", state);
         }
 
         // GET: State/Edit/5
@@ -84,7 +86,7 @@ namespace WeatherGuide.Controllers
                 return NotFound();
             }
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", state.CountryId);
-            return View(state);
+            return View("~/Views/Administration/State/Edit.cshtml",state);
         }
 
         // POST: State/Edit/5
@@ -120,7 +122,7 @@ namespace WeatherGuide.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", state.CountryId);
-            return View(state);
+            return View("~/Views/Administration/State/Edit.cshtml", state);
         }
 
         // GET: State/Delete/5
@@ -139,7 +141,7 @@ namespace WeatherGuide.Controllers
                 return NotFound();
             }
 
-            return View(state);
+            return View("~/Views/Administration/State/Delete.cshtml",state);
         }
 
         // POST: State/Delete/5

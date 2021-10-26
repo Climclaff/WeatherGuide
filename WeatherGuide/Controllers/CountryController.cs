@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WeatherGuide.Data;
 using WeatherGuide.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeatherGuide.Controllers
 {
+    [Authorize("IsAdminPolicy")]
+    [Route("Administration/[controller]/[action]/{id?}")]
     public class CountryController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -42,13 +45,13 @@ namespace WeatherGuide.Controllers
                 return NotFound();
             }
 
-            return View(country);
+            return View("~/Views/Administration/Country/Details.cshtml", country);
         }
 
         // GET: Country/Create
         public IActionResult Create()
         {
-            return View();
+            return View("~/Views/Administration/Country/Create.cshtml");
         }
 
         // POST: Country/Create
@@ -64,7 +67,7 @@ namespace WeatherGuide.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(country);
+            return View("~/Views/Administration/Country/Create.cshtml", country);
         }
 
         // GET: Country/Edit/5
@@ -80,7 +83,7 @@ namespace WeatherGuide.Controllers
             {
                 return NotFound();
             }
-            return View(country);
+            return View("~/Views/Administration/Country/Edit.cshtml", country);
         }
 
         // POST: Country/Edit/5
@@ -115,7 +118,7 @@ namespace WeatherGuide.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(country);
+            return View("~/Views/Administration/Country/Edit.cshtml", country);
         }
 
         // GET: Country/Delete/5
@@ -133,7 +136,7 @@ namespace WeatherGuide.Controllers
                 return NotFound();
             }
 
-            return View(country);
+            return View("~/Views/Administration/Country/Delete.cshtml", country);
         }
 
         // POST: Country/Delete/5

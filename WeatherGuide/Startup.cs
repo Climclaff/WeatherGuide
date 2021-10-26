@@ -73,7 +73,7 @@ namespace WeatherGuide
                     template: "{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute(
                     name: "administration",
-                    template: "{controller=Administration}/{action=Index}/{id?}");
+                    template: "Administration/{controller=Administration}/{action=Index}/{id?}");
             });
         /*    app.UseEndpoints(endpoints =>
             {
