@@ -14,10 +14,10 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ConfirmEmailChangeModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<Models.AppUser> _userManager;
+        private readonly SignInManager<Models.AppUser> _signInManager;
 
-        public ConfirmEmailChangeModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public ConfirmEmailChangeModel(UserManager<Models.AppUser> userManager, SignInManager<Models.AppUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

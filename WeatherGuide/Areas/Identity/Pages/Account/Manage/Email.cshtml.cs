@@ -15,13 +15,13 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 {
     public partial class EmailModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<Models.AppUser> _userManager;
+        private readonly SignInManager<Models.AppUser> _signInManager;
         private readonly IEmailSender _emailSender;
 
         public EmailModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<Models.AppUser> userManager,
+            SignInManager<Models.AppUser> signInManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -49,7 +49,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
             public string NewEmail { get; set; }
         }
 
-        private async Task LoadAsync(IdentityUser user)
+        private async Task LoadAsync(Models.AppUser user)
         {
             var email = await _userManager.GetEmailAsync(user);
             Email = email;
@@ -102,9 +102,14 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
                     Input.NewEmail,
                     "Confirm your email",
                     $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                if (_userManager.FindByEmailAsync(Input.NewEmail).Result == null)
+                {
+                    await _userManager.ChangeEmailAsync(user, Input.NewEmail, code);
+                    StatusMessage = "Your Email has been changed successfully.";
+                                   
+                    return RedirectToPage();
+                }
 
-                StatusMessage = "Confirmation link to change email sent. Please check your email.";
-                return RedirectToPage();
             }
 
             StatusMessage = "Your email is unchanged.";

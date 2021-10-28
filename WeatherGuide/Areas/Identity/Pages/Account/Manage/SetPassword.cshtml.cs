@@ -11,12 +11,12 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<Models.AppUser> _userManager;
+        private readonly SignInManager<Models.AppUser> _signInManager;
 
         public SetPasswordModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<Models.AppUser> userManager,
+            SignInManager<Models.AppUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
