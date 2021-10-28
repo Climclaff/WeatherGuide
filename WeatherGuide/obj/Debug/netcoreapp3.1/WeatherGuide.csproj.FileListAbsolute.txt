@@ -970,6 +970,11 @@ C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcor
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Recommendation\Details.cshtml.g.cs
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Recommendation\Edit.cshtml.g.cs
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Recommendation\Index.cshtml.g.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Category\Create.cshtml.g.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Category\Delete.cshtml.g.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Category\Details.cshtml.g.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Category\Edit.cshtml.g.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Category\Index.cshtml.g.cs
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Clothing\Create.cshtml.g.cs
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Clothing\Delete.cshtml.g.cs
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Clothing\Details.cshtml.g.cs
