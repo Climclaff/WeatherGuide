@@ -25,13 +25,18 @@
                 <span asp-validation-for="NameUA" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Warmth" class="control-label"></label>
+                <input asp-for="Warmth" class="form-control" />
+                <span asp-validation-for="Warmth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="file" id="file2" 
-                name="file2" 
+                <input type="file" id="file1" 
+                name="file1" 
                 multiple="multiple" />
             </div>
             <div class="form-group">

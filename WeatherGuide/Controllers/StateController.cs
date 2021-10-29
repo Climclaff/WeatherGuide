@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace WeatherGuide.Controllers
 {
     [Authorize("IsAdminPolicy")]
-    [Route("Administration/[controller]/[action]/{id?}")]
     public class StateController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,6 +22,7 @@ namespace WeatherGuide.Controllers
         }
 
         // GET: State    
+        [Route("Administration/[controller]/[action]/")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.States.Include(s => s.Country);

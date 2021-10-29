@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<WeatherGuide.Models.Measurement>
 
 @{
-    ViewData["Title"] = "Managing measurements";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Managing measurements</h1>
+<h1>Manage measurements</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -25,7 +25,10 @@
                 @Html.DisplayNameFor(model => model.DateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sensor)
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.State)
             </th>
             <th></th>
         </tr>
@@ -46,7 +49,10 @@
                 @Html.DisplayFor(modelItem => item.DateTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sensor.Id)
+                @Html.DisplayFor(modelItem => item.Country.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

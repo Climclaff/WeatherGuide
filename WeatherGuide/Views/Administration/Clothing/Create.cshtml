@@ -24,6 +24,11 @@
                 <span asp-validation-for="NameUA" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Warmth" class="control-label"></label>
+                <input asp-for="Warmth" class="form-control" />
+                <span asp-validation-for="Warmth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>

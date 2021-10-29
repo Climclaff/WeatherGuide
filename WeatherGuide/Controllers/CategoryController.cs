@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace WeatherGuide.Controllers
 {
     [Authorize("IsAdminPolicy")]
-    [Route("Administration/[controller]/[action]/{id?}")]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,6 +21,7 @@ namespace WeatherGuide.Controllers
         }
 
         // GET: Category
+        [Route("Administration/[controller]/[action]/")]
         public async Task<IActionResult> Index()
         {
             return View("~/Views/Administration/Category/index.cshtml", await _context.Categories.ToListAsync());

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WeatherGuide.Models;
 using Microsoft.AspNetCore.Authorization;
+
 namespace WeatherGuide.Controllers
 {
     public class HomeController : Controller

@@ -13,7 +13,6 @@ using System.IO;
 namespace WeatherGuide.Controllers
 {
     [Authorize("IsAdminPolicy")]
-    [Route("Administration/[controller]/[action]/{id?}")]
     public class ClothingController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,8 +23,9 @@ namespace WeatherGuide.Controllers
         }
 
         // GET: Clothing
+        [Route("Administration/[controller]/[action]/")]
         public async Task<IActionResult> Index()
-        {          
+        {
             var applicationDbContext = _context.Clothings.Include(c => c.Category);
             return View("~/Views/Administration/Clothing/index.cshtml", await applicationDbContext.ToListAsync());
         }
@@ -61,7 +61,7 @@ namespace WeatherGuide.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NameEN,NameUA,CategoryId,ImageData")] Clothing clothing)
+        public async Task<IActionResult> Create([Bind("Id,NameEN,NameUA,Warmth,CategoryId,ImageData")] Clothing clothing)
         {
             if (ModelState.IsValid && Request.Form.Files.Count > 0)
             {
@@ -96,18 +96,21 @@ namespace WeatherGuide.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NameEN,NameUA,CategoryId,ImageData")] Clothing clothing)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NameEN,NameUA,Warmth,CategoryId,ImageData")] Clothing clothing)
         {
             if (id != clothing.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid && Request.Form.Files.Count > 0)
+            if (ModelState.IsValid)
             {
                 try
                 {
-                    clothing.ImageData = UploadFile();
+                    if (Request.Form.Files.Count > 0)
+                    {
+                        clothing.ImageData = UploadFile();
+                    }
                     _context.Update(clothing);
                     await _context.SaveChangesAsync();
                 }
@@ -164,15 +167,16 @@ namespace WeatherGuide.Controllers
         }
         private byte[] UploadFile()
         {
-                var file = Request.Form.Files[0];
-                MemoryStream ms = new MemoryStream();
+            var file = Request.Form.Files[0];
+            System.IO.MemoryStream ms = new MemoryStream();
 
-                file.CopyTo(ms);
-                byte[] imgData = ms.ToArray();
-                ms.Close();
-                ms.Dispose();
+            file.CopyTo(ms);
+            byte[] imgData = ms.ToArray();
+            ms.Close();
+            ms.Dispose();
 
             return imgData;
         }
+
     }
 }

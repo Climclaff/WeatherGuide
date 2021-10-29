@@ -15,10 +15,14 @@ namespace WeatherGuide.Models
 
         public int WindSpeed { get; set; }
 
-        public DateTime? DateTime { get; set; } 
+        public DateTime? DateTime { get; set; }
 
-        public int SensorId { get; set; }
+        public int? CountryId { get; set; }
 
-        public Sensor Sensor { get; set; }
+        public Country Country { get; set; }
+
+        public int? StateId { get; set; }
+
+        public State State { get; set; }
     }
 }

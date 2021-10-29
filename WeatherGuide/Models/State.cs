@@ -15,7 +15,7 @@ namespace WeatherGuide.Models
 
         public Country Country { get; set; }
 
-        public ICollection<Sensor> Sensors { get; set; }
+        public ICollection<Measurement> Measurements { get; set; }
 
         public ICollection<AppUser> Users { get; set; }
     }

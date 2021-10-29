@@ -9,11 +9,9 @@ using WeatherGuide.Data;
 using WeatherGuide.Models;
 using Microsoft.AspNetCore.Authorization;
 
-
 namespace WeatherGuide.Controllers
 {
     [Authorize("IsAdminPolicy")]
-    [Route("Administration/[controller]/[action]/{id?}")]
     public class RecommendationController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -24,10 +22,11 @@ namespace WeatherGuide.Controllers
         }
 
         // GET: Recommendation
+        [Route("Administration/[controller]/[action]/")]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Recommendations.Include(r => r.Clothing).Include(r => r.User);
-            return View("~/Views/Administration/Recommendation/Index.cshtml", await applicationDbContext.ToListAsync());
+            var applicationDbContext = _context.Recommendations.Include(r => r.FirstClothing).Include(r => r.SecondClothing).Include(r => r.ThirdClothing).Include(r => r.User);
+            return View("~/Views/Administration/Recommendation/index.cshtml", await applicationDbContext.ToListAsync());
         }
 
         // GET: Recommendation/Details/5
@@ -39,7 +38,9 @@ namespace WeatherGuide.Controllers
             }
 
             var recommendation = await _context.Recommendations
-                .Include(r => r.Clothing)
+                .Include(r => r.FirstClothing)
+                .Include(r => r.SecondClothing)
+                .Include(r => r.ThirdClothing)
                 .Include(r => r.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (recommendation == null)
@@ -53,7 +54,9 @@ namespace WeatherGuide.Controllers
         // GET: Recommendation/Create
         public IActionResult Create()
         {
-            ViewData["ClothingId"] = new SelectList(_context.Clothings, "Id", "Id");
+            ViewData["FirstClothingId"] = new SelectList(_context.Clothings, "Id", "Id");
+            ViewData["SecondClothingId"] = new SelectList(_context.Clothings, "Id", "Id");
+            ViewData["ThirdClothingId"] = new SelectList(_context.Clothings, "Id", "Id");
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View("~/Views/Administration/Recommendation/Create.cshtml");
         }
@@ -63,7 +66,7 @@ namespace WeatherGuide.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,AppUserId,ClothingId,DateTime")] Recommendation recommendation)
+        public async Task<IActionResult> Create([Bind("Id,AppUserId,FirstClothingId,SecondClothingId,ThirdClothingId,DateTime")] Recommendation recommendation)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +74,9 @@ namespace WeatherGuide.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClothingId"] = new SelectList(_context.Clothings, "Id", "Id", recommendation.ClothingId);
+            ViewData["FirstClothingId"] = new SelectList(_context.Clothings, "Id", "Id", recommendation.FirstClothingId);
+            ViewData["SecondClothingId"] = new SelectList(_context.Clothings, "Id", "Id", recommendation.SecondClothingId);
+            ViewData["ThirdClothingId"] = new SelectList(_context.Clothings, "Id", "Id", recommendation.ThirdClothingId);
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", recommendation.AppUserId);
             return View("~/Views/Administration/Recommendation/Create.cshtml", recommendation);
         }
@@ -89,7 +94,9 @@ namespace WeatherGuide.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClothingId"] = new SelectList(_context.Clothings, "Id", "Id", recommendation.ClothingId);
+            ViewData["FirstClothingId"] = new SelectList(_context.Clothings, "Id", "Id", recommendation.FirstClothingId);
+            ViewData["SecondClothingId"] = new SelectList(_context.Clothings, "Id", "Id", recommendation.SecondClothingId);
+            ViewData["ThirdClothingId"] = new SelectList(_context.Clothings, "Id", "Id", recommendation.ThirdClothingId);
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", recommendation.AppUserId);
             return View("~/Views/Administration/Recommendation/Edit.cshtml", recommendation);
         }
@@ -99,7 +106,7 @@ namespace WeatherGuide.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,AppUserId,ClothingId,DateTime")] Recommendation recommendation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,AppUserId,FirstClothingId,SecondClothingId,ThirdClothingId,DateTime")] Recommendation recommendation)
         {
             if (id != recommendation.Id)
             {
@@ -126,7 +133,9 @@ namespace WeatherGuide.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClothingId"] = new SelectList(_context.Clothings, "Id", "Id", recommendation.ClothingId);
+            ViewData["FirstClothingId"] = new SelectList(_context.Clothings, "Id", "Id", recommendation.FirstClothingId);
+            ViewData["SecondClothingId"] = new SelectList(_context.Clothings, "Id", "Id", recommendation.SecondClothingId);
+            ViewData["ThirdClothingId"] = new SelectList(_context.Clothings, "Id", "Id", recommendation.ThirdClothingId);
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", recommendation.AppUserId);
             return View("~/Views/Administration/Recommendation/Edit.cshtml", recommendation);
         }
@@ -140,7 +149,9 @@ namespace WeatherGuide.Controllers
             }
 
             var recommendation = await _context.Recommendations
-                .Include(r => r.Clothing)
+                .Include(r => r.FirstClothing)
+                .Include(r => r.SecondClothing)
+                .Include(r => r.ThirdClothing)
                 .Include(r => r.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (recommendation == null)

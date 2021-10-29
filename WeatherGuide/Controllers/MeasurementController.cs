@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using WeatherGuide.Data;
 using WeatherGuide.Models;
 using Microsoft.AspNetCore.Authorization;
+
 namespace WeatherGuide.Controllers
 {
     [Authorize("IsAdminPolicy")]
-    [Route("Administration/[controller]/[action]/{id?}")]
     public class MeasurementController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,9 +22,10 @@ namespace WeatherGuide.Controllers
         }
 
         // GET: Measurement
+        [Route("Administration/[controller]/[action]/")]
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Measurements.Include(m => m.Sensor);
+            var applicationDbContext = _context.Measurements.Include(m => m.Country).Include(m => m.State);
             return View("~/Views/Administration/Measurement/index.cshtml", await applicationDbContext.ToListAsync());
         }
 
@@ -37,7 +38,8 @@ namespace WeatherGuide.Controllers
             }
 
             var measurement = await _context.Measurements
-                .Include(m => m.Sensor)
+                .Include(m => m.Country)
+                .Include(m => m.State)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (measurement == null)
             {
@@ -50,7 +52,8 @@ namespace WeatherGuide.Controllers
         // GET: Measurement/Create
         public IActionResult Create()
         {
-            ViewData["SensorId"] = new SelectList(_context.Sensors, "Id", "Id");
+            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id");
+            ViewData["StateId"] = new SelectList(_context.States, "Id", "Id");
             return View("~/Views/Administration/Measurement/Create.cshtml");
         }
 
@@ -59,7 +62,7 @@ namespace WeatherGuide.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Temperature,Humidity,WindSpeed,DateTime,SensorId")] Measurement measurement)
+        public async Task<IActionResult> Create([Bind("Id,Temperature,Humidity,WindSpeed,DateTime,CountryId,StateId")] Measurement measurement)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +70,8 @@ namespace WeatherGuide.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SensorId"] = new SelectList(_context.Sensors, "Id", "Id", measurement.SensorId);
+            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", measurement.CountryId);
+            ViewData["StateId"] = new SelectList(_context.States, "Id", "Id", measurement.StateId);
             return View("~/Views/Administration/Measurement/Create.cshtml", measurement);
         }
 
@@ -84,7 +88,8 @@ namespace WeatherGuide.Controllers
             {
                 return NotFound();
             }
-            ViewData["SensorId"] = new SelectList(_context.Sensors, "Id", "Id", measurement.SensorId);
+            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", measurement.CountryId);
+            ViewData["StateId"] = new SelectList(_context.States, "Id", "Id", measurement.StateId);
             return View("~/Views/Administration/Measurement/Edit.cshtml", measurement);
         }
 
@@ -93,7 +98,7 @@ namespace WeatherGuide.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Temperature,Humidity,WindSpeed,DateTime,SensorId")] Measurement measurement)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Temperature,Humidity,WindSpeed,DateTime,CountryId,StateId")] Measurement measurement)
         {
             if (id != measurement.Id)
             {
@@ -120,7 +125,8 @@ namespace WeatherGuide.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SensorId"] = new SelectList(_context.Sensors, "Id", "Id", measurement.SensorId);
+            ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", measurement.CountryId);
+            ViewData["StateId"] = new SelectList(_context.States, "Id", "Id", measurement.StateId);
             return View("~/Views/Administration/Measurement/Edit.cshtml", measurement);
         }
 
@@ -133,7 +139,8 @@ namespace WeatherGuide.Controllers
             }
 
             var measurement = await _context.Measurements
-                .Include(m => m.Sensor)
+                .Include(m => m.Country)
+                .Include(m => m.State)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (measurement == null)
             {
