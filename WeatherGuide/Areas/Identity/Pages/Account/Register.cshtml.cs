@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-
+using WeatherGuide.Models;
 namespace WeatherGuide.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -79,7 +79,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            ReturnUrl = returnUrl;
+            ReturnUrl = returnUrl; 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 

@@ -959,7 +959,6 @@ C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcor
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Category\Details.cshtml.g.cs
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Category\Edit.cshtml.g.cs
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Category\Index.cshtml.g.cs
-C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.csproj.AssemblyReference.cache
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Clothing\Create.cshtml.g.cs
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Clothing\Delete.cshtml.g.cs
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Clothing\Details.cshtml.g.cs
@@ -975,3 +974,13 @@ C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcor
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Measurement\Details.cshtml.g.cs
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Measurement\Edit.cshtml.g.cs
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\Measurement\Index.cshtml.g.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\en\WeatherGuide.resources.dll
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\uk\WeatherGuide.resources.dll
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Controllers.HomeController.en.resources
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Controllers.HomeController.uk.resources
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.csproj.GenerateResource.cache
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\en\WeatherGuide.resources.dll
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\uk\WeatherGuide.resources.dll
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SelectLanguagePartial.cshtml.g.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.SharedResource.en.resources
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.SharedResource.uk.resources

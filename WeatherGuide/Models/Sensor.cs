@@ -17,6 +17,5 @@ namespace WeatherGuide.Models
 
         public State State { get; set; }
 
-        public ICollection<Measurement> Measurements { get; set; }
     }
 }

@@ -308,6 +308,14 @@
         "runtime": {
           "WeatherGuide.dll": {}
         },
+        "resources": {
+          "en/WeatherGuide.resources.dll": {
+            "locale": "en"
+          },
+          "uk/WeatherGuide.resources.dll": {
+            "locale": "uk"
+          }
+        },
         "compile": {
           "WeatherGuide.dll": {}
         }
