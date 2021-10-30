@@ -984,3 +984,4 @@ C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcor
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SelectLanguagePartial.cshtml.g.cs
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.SharedResource.en.resources
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.SharedResource.uk.resources
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.csproj.AssemblyReference.cache

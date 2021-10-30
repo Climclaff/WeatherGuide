@@ -107,9 +107,14 @@ namespace WeatherGuide.Controllers
             {
                 try
                 {
+                    
                     if (Request.Form.Files.Count > 0)
                     {
                         clothing.ImageData = UploadFile();
+                    }
+                    else
+                    {
+                        clothing.ImageData = _context.Clothings.AsNoTracking().FirstOrDefault(x => x.Id == clothing.Id).ImageData;
                     }
                     _context.Update(clothing);
                     await _context.SaveChangesAsync();

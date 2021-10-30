@@ -16,7 +16,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WeatherGuide.Data;
 using WeatherGuide.Models;
-
+using WeatherGuide.Repository;
 namespace WeatherGuide
 {
     public class Startup
@@ -47,7 +47,8 @@ namespace WeatherGuide
                     options.DataAnnotationLocalizerProvider = (type, factory) =>
                         factory.Create(typeof(SharedResource));
                 })
-                .AddViewLocalization(); 
+                .AddViewLocalization();
+            services.AddScoped<IRecommendationRepository, RecommendationRepository>();
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 var supportedCultures = new[]
