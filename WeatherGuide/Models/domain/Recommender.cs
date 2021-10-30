@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using WeatherGuide.Data;
 using WeatherGuide.Models;
 using WeatherGuide.Repository;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 namespace WeatherGuide.Models.domain
 {
     public class Recommender
@@ -16,11 +18,11 @@ namespace WeatherGuide.Models.domain
         public Recommender(IRecommendationRepository recommendationRepository, AppUser appUser)
         {
             _recommendationRepository = recommendationRepository;
-            currentUser = appUser;
-            currentMeasurement = _recommendationRepository.GetMeasurementForCurrentUser(appUser.Id);
+            currentUser = appUser;          
         }
         public async Task<string> RecommendAsync()
         {
+            currentMeasurement = await _recommendationRepository.GetMeasurementForCurrentUser(currentUser.Id);
             if (currentMeasurement.Temperature < 10)
             {
                 recommendation.FirstClothingId = await _recommendationRepository.GenerateRandomClothing(60, 1);

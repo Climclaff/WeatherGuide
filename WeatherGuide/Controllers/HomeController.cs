@@ -34,12 +34,11 @@ namespace WeatherGuide.Controllers
             _recommendationRepository = recommendationRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var userId = Convert.ToInt32(_userManager.GetUserId(HttpContext.User));
-            var user = _recommendationRepository.GetUser(userId);
+            var user = await _userManager.GetUserAsync(HttpContext.User);
             Recommender recommender = new Recommender(_recommendationRepository, user);
-            recommender.RecommendAsync();
+            await recommender.RecommendAsync();
             ViewData["Title"] = _localizer["Header"];
             return View();
         }

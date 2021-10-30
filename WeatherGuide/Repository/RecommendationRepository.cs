@@ -38,13 +38,10 @@ namespace WeatherGuide.Repository
         public async Task<Measurement> GetMeasurementForCurrentUser(int userId)
         {
             AppUser currentUser = await _context.Users.FindAsync(userId);
-            var measurementList = await
-                (from meas in _context.Measurements
-                 where (meas.CountryId == currentUser.CountryId && meas.StateId == currentUser.StateId)
-                 orderby meas.DateTime descending
-                 select meas).ToListAsync();
-            Measurement measurement = measurementList.First();
-            return measurement;
+            return await (from meas in _context.Measurements
+                                         where (meas.CountryId == currentUser.CountryId && meas.StateId == currentUser.StateId)
+                                         orderby meas.DateTime descending
+                                         select meas).FirstOrDefaultAsync();
         }
 
         public async Task<int> GenerateRecommendation(Recommendation model)
