@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Internal;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,36 +15,34 @@ namespace WeatherGuide.Repository
         {
             _context = context;
         }
-        public AppUser GetUser(int userId)
+        public async Task<AppUser> GetUser(int userId)
         {
-            var currentUser = (from user in _context.Users
-                                  where (user.Id == userId)
-                                  select user).SingleOrDefault();
+            var currentUser = await (from user in _context.Users
+                                     where (user.Id == userId)
+                                     select user).SingleOrDefaultAsync();
             return currentUser;
         }
-        public int GenerateRandomClothing(int warmth, int category)
+        public async Task<int> GenerateRandomClothing(int warmth, int category)
         {
-            var clothingList =
+            var clothingList = await
             _context
                 .Set<Clothing>()
                 .Where(x => x.Warmth >= warmth)
                 .Where(x => x.CategoryId == category)
-                .Take(3).ToList();
+                .Take(3).ToListAsync();
 
             var rand = new Random();
             var clothing = clothingList.ElementAt(rand.Next(clothingList.Count()));
             return clothing.Id;
         }
-        public Measurement GetMeasurementForCurrentUser(int userId)
+        public async Task<Measurement> GetMeasurementForCurrentUser(int userId)
         {
-            AppUser currentUser = (from user in _context.Users
-                                           where (user.Id == userId)
-                                           select user).SingleOrDefault();
-            var measurementList =
-                from meas in _context.Measurements
-                where (meas.CountryId == currentUser.CountryId && meas.StateId == currentUser.StateId)
-                orderby meas.DateTime descending
-                select meas;
+            AppUser currentUser = await _context.Users.FindAsync(userId);
+            var measurementList = await
+                (from meas in _context.Measurements
+                 where (meas.CountryId == currentUser.CountryId && meas.StateId == currentUser.StateId)
+                 orderby meas.DateTime descending
+                 select meas).ToListAsync();
             Measurement measurement = measurementList.First();
             return measurement;
         }

@@ -5,9 +5,9 @@ namespace WeatherGuide.Repository
 {
     public interface IRecommendationRepository
     {
-        int GenerateRandomClothing(int warmth, int category);
+        Task<int> GenerateRandomClothing(int warmth, int category);
         Task<int> GenerateRecommendation(Recommendation model);
-        Measurement GetMeasurementForCurrentUser(int userId);
-        AppUser GetUser(int userId);
+        Task<Measurement> GetMeasurementForCurrentUser(int userId);
+        Task<AppUser> GetUser(int userId);
     }
 }
