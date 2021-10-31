@@ -13,38 +13,37 @@ using Microsoft.AspNetCore.Http;
 using WeatherGuide.Repository;
 using WeatherGuide.Models.domain;
 using Microsoft.AspNetCore.Identity;
-
+using WeatherGuide.Services;
 namespace WeatherGuide.Controllers
 {
     public class HomeController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<HomeController> _logger;
-        private readonly IRecommendationRepository _recommendationRepository;
+        private readonly IRecommendationService _recommendationService;
         private readonly IStringLocalizer<HomeController> _localizer;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
         public HomeController(ILogger<HomeController> logger, IStringLocalizer<HomeController> localizer, 
-                              IStringLocalizer<SharedResource> sharedLocalizer, IRecommendationRepository recommendationRepository,
+                              IStringLocalizer<SharedResource> sharedLocalizer, IRecommendationService recommendationService, 
                               UserManager<AppUser> userManager)
         {
             _logger = logger;
             _localizer = localizer;
             _sharedLocalizer = sharedLocalizer;
             _userManager = userManager;
-            _recommendationRepository = recommendationRepository;
+            _recommendationService = recommendationService;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            Recommender recommender = new Recommender(_recommendationRepository, user);
-            await recommender.RecommendAsync();
+        public IActionResult Index()
+        {              
             ViewData["Title"] = _localizer["Header"];
             return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            string recommendation = await _recommendationService.GetRecommendation(user);
             return View();
         }
 

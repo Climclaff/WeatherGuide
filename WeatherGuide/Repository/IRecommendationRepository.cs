@@ -5,7 +5,7 @@ namespace WeatherGuide.Repository
 {
     public interface IRecommendationRepository
     {
-        Task<int> GenerateRandomClothing(int warmth, int category);
+        Task<Clothing> GenerateRandomClothing(int warmth, int category);
         Task<int> GenerateRecommendation(Recommendation model);
         Task<Measurement> GetMeasurementForCurrentUser(int userId);
         Task<AppUser> GetUser(int userId);

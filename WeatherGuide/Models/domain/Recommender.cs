@@ -25,9 +25,9 @@ namespace WeatherGuide.Models.domain
             currentMeasurement = await _recommendationRepository.GetMeasurementForCurrentUser(currentUser.Id);
             if (currentMeasurement.Temperature < 10)
             {
-                recommendation.FirstClothingId = await _recommendationRepository.GenerateRandomClothing(60, 1);
-                recommendation.SecondClothingId = await _recommendationRepository.GenerateRandomClothing(60, 2);
-                recommendation.ThirdClothingId = await _recommendationRepository.GenerateRandomClothing(60, 3);
+             //   recommendation.FirstClothingId = await _recommendationRepository.GenerateRandomClothing(60, 1);
+             //   recommendation.SecondClothingId = await _recommendationRepository.GenerateRandomClothing(60, 2);
+              //  recommendation.ThirdClothingId = await _recommendationRepository.GenerateRandomClothing(60, 3);
                 recommendation.DateTime = DateTime.UtcNow;
                 recommendation.AppUserId = currentUser.Id;
                 await _recommendationRepository.GenerateRecommendation(recommendation);

@@ -22,7 +22,7 @@ namespace WeatherGuide.Repository
                                      select user).SingleOrDefaultAsync();
             return currentUser;
         }
-        public async Task<int> GenerateRandomClothing(int warmth, int category)
+        public async Task<Clothing> GenerateRandomClothing(int warmth, int category)
         {
             var clothingList = await
             _context
@@ -33,7 +33,7 @@ namespace WeatherGuide.Repository
 
             var rand = new Random();
             var clothing = clothingList.ElementAt(rand.Next(clothingList.Count()));
-            return clothing.Id;
+            return clothing;
         }
         public async Task<Measurement> GetMeasurementForCurrentUser(int userId)
         {
@@ -49,9 +49,9 @@ namespace WeatherGuide.Repository
             var generatedRecommendation = new Recommendation()
             {
                 DateTime = DateTime.UtcNow,
-                FirstClothingId = model.FirstClothingId,
-                SecondClothingId = model.SecondClothingId,
-                ThirdClothingId = model.ThirdClothingId,
+                FirstClothingId = model.FirstClothing.Id,
+                SecondClothingId = model.SecondClothing.Id,
+                ThirdClothingId = model.ThirdClothing.Id,
                 AppUserId = model.AppUserId
             };
             await _context.Recommendations.AddAsync(generatedRecommendation);
