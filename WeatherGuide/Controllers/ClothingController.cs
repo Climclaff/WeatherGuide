@@ -61,7 +61,7 @@ namespace WeatherGuide.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NameEN,NameUA,Warmth,CategoryId,ImageData")] Clothing clothing)
+        public async Task<IActionResult> Create([Bind("Id,NameEN,NameUA,Warmth,MoistureResistance,CategoryId,ImageData")] Clothing clothing)
         {
             if (ModelState.IsValid && Request.Form.Files.Count > 0)
             {
@@ -96,7 +96,7 @@ namespace WeatherGuide.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NameEN,NameUA,Warmth,CategoryId,ImageData")] Clothing clothing)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NameEN,NameUA,Warmth,MoistureResistance,CategoryId,ImageData")] Clothing clothing)
         {
             if (id != clothing.Id)
             {

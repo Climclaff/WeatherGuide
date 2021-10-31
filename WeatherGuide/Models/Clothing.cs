@@ -16,6 +16,8 @@ namespace WeatherGuide.Models
 
         public int Warmth { get; set; }
 
+        public int MoistureResistance { get; set; }
+
         public int CategoryId { get; set; }
 
         public Category Category { get; set; }

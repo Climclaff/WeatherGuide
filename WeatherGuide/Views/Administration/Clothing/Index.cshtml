@@ -22,6 +22,9 @@
                 @Html.DisplayNameFor(model => model.Warmth)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.MoistureResistance)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Category)
             </th>
             <th>
@@ -41,6 +44,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Warmth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoistureResistance)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Category.Id)

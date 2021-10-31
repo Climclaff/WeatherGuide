@@ -11,7 +11,6 @@ using Microsoft.Extensions.Localization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
 using WeatherGuide.Repository;
-using WeatherGuide.Models.domain;
 using Microsoft.AspNetCore.Identity;
 using WeatherGuide.Services;
 namespace WeatherGuide.Controllers

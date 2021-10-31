@@ -6,21 +6,22 @@ using WeatherGuide.Repository;
 using WeatherGuide.Models;
 namespace WeatherGuide.Builders.RecommendationService
 {
-    public class FreezingWeatherBuilder : RecommendationBuilder
+    public class WarmHumidWeatherBuilder : RecommendationBuilder
     {
-        public FreezingWeatherBuilder(IRecommendationRepository recommendationRepository) 
+        public WarmHumidWeatherBuilder(IRecommendationRepository recommendationRepository)
             : base(recommendationRepository) { }
         public override async Task GenerateFirstItem()
         {
-            this.Recommendation.FirstClothing = await _recommendationRepository.GenerateRandomClothing(67, 40, 1);
+            this.Recommendation.FirstClothing = await _recommendationRepository.GenerateRandomClothing(25, 60, 1);
         }
         public override async Task GenerateSecondItem()
         {
-            this.Recommendation.SecondClothing = await _recommendationRepository.GenerateRandomClothing(67, 40, 2);
+            this.Recommendation.SecondClothing = await _recommendationRepository.GenerateRandomClothing(25, 60, 2);
         }
         public override async Task GenerateThirdItem()
         {
-            this.Recommendation.ThirdClothing = await _recommendationRepository.GenerateRandomClothing(67, 75, 3);
+            this.Recommendation.ThirdClothing = await _recommendationRepository.GenerateRandomClothing(25, 60, 3);
         }
+
     }
 }
