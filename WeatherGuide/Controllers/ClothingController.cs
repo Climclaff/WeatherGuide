@@ -65,7 +65,7 @@ namespace WeatherGuide.Controllers
         {
             if (ModelState.IsValid && Request.Form.Files.Count > 0)
             {
-                clothing.ImageData = UploadFile();
+                clothing.ImageData = await UploadFile();
                 _context.Add(clothing);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -110,7 +110,7 @@ namespace WeatherGuide.Controllers
                     
                     if (Request.Form.Files.Count > 0)
                     {
-                        clothing.ImageData = UploadFile();
+                        clothing.ImageData = await UploadFile();
                     }
                     else
                     {
@@ -170,15 +170,15 @@ namespace WeatherGuide.Controllers
         {
             return _context.Clothings.Any(e => e.Id == id);
         }
-        private byte[] UploadFile()
+        private async Task<byte[]> UploadFile()
         {
             var file = Request.Form.Files[0];
             System.IO.MemoryStream ms = new MemoryStream();
 
-            file.CopyTo(ms);
+            await file.CopyToAsync(ms);
             byte[] imgData = ms.ToArray();
             ms.Close();
-            ms.Dispose();
+            await ms.DisposeAsync();
 
             return imgData;
         }

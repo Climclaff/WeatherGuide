@@ -18,9 +18,9 @@ namespace WeatherGuide.Builders.RecommendationService
         {
             Recommendation = new Recommendation();
         }
-        public abstract Task<bool> GenerateFirstItem();
-        public abstract Task<bool> GenerateSecondItem();
-        public abstract Task<bool> GenerateThirdItem();
+        public abstract Task GenerateFirstItem();
+        public abstract Task GenerateSecondItem();
+        public abstract Task GenerateThirdItem();
 
     }
 }

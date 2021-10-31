@@ -10,20 +10,17 @@ namespace WeatherGuide.Builders.RecommendationService
     {
         public FreezingWeatherBuilder(IRecommendationRepository recommendationRepository) 
             : base(recommendationRepository) { }
-        public override async Task<bool> GenerateFirstItem()
+        public override async Task GenerateFirstItem()
         {
             this.Recommendation.FirstClothing = await _recommendationRepository.GenerateRandomClothing(60, 1);
-            return true;
         }
-        public override async Task<bool> GenerateSecondItem()
+        public override async Task GenerateSecondItem()
         {
             this.Recommendation.SecondClothing = await _recommendationRepository.GenerateRandomClothing(60, 2);
-            return true;
         }
-        public override async Task<bool> GenerateThirdItem()
+        public override async Task GenerateThirdItem()
         {
             this.Recommendation.ThirdClothing = await _recommendationRepository.GenerateRandomClothing(60, 3);
-            return true;
         }
     }
 }
