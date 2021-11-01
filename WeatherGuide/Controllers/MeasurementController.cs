@@ -21,7 +21,6 @@ namespace WeatherGuide.Controllers
             _context = context;
         }
 
-        // GET: Measurement
         [Route("Administration/[controller]/[action]/")]
         public async Task<IActionResult> Index()
         {
@@ -29,7 +28,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Measurement/index.cshtml", await applicationDbContext.ToListAsync());
         }
 
-        // GET: Measurement/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,7 +47,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Measurement/Details.cshtml", measurement);
         }
 
-        // GET: Measurement/Create
         public IActionResult Create()
         {
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id");
@@ -57,9 +54,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Measurement/Create.cshtml");
         }
 
-        // POST: Measurement/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Temperature,Humidity,WindSpeed,DateTime,CountryId,StateId")] Measurement measurement)
@@ -75,7 +69,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Measurement/Create.cshtml", measurement);
         }
 
-        // GET: Measurement/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -93,9 +86,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Measurement/Edit.cshtml", measurement);
         }
 
-        // POST: Measurement/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Temperature,Humidity,WindSpeed,DateTime,CountryId,StateId")] Measurement measurement)
@@ -130,7 +120,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Measurement/Edit.cshtml", measurement);
         }
 
-        // GET: Measurement/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -150,7 +139,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Measurement/Delete.cshtml", measurement);
         }
 
-        // POST: Measurement/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

@@ -20,14 +20,12 @@ namespace WeatherGuide.Controllers
             _context = context;
         }
 
-        // GET: Category
         [Route("Administration/[controller]/[action]/")]
         public async Task<IActionResult> Index()
         {
             return View("~/Views/Administration/Category/index.cshtml", await _context.Categories.ToListAsync());
         }
 
-        // GET: Category/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -51,9 +49,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Category/Create.cshtml");
         }
 
-        // POST: Category/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
@@ -67,7 +62,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Category/Create.cshtml", category);
         }
 
-        // GET: Category/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,9 +77,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Category/Edit.cshtml", category);
         }
 
-        // POST: Category/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Category category)
@@ -118,7 +109,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Category/Edit.cshtml", category);
         }
 
-        // GET: Category/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -136,7 +126,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Category/Delete.cshtml", category);
         }
 
-        // POST: Category/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

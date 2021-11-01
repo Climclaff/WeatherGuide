@@ -10,7 +10,7 @@ namespace WeatherGuide.Builders.RecommendationService
     {     
             public static RecommendationBuilder createBuilder(IRecommendationRepository repository,Measurement measurement)
         {          
-            if (measurement.Temperature < 10 && measurement.WindSpeed > 25 && measurement.Humidity > 40)
+            if (measurement.Temperature < 17 && measurement.WindSpeed > 25)
             {
                 return new StormyWeatherBuilder(repository);
             }
@@ -22,11 +22,19 @@ namespace WeatherGuide.Builders.RecommendationService
             {
                 return new WarmHumidWeatherBuilder(repository);
             }
-            if (measurement.Temperature < -15)
+            if (measurement.Temperature < -7)
             {
                 return new FreezingWeatherBuilder(repository);
             }
-            return new FreezingWeatherBuilder(repository);
+            if (measurement.Temperature >= 27)
+            {
+                return new HotWeatherBuilder(repository);
+            }
+            if (measurement.Temperature >= 17)
+            {
+                return new WarmWeatherBuilder(repository);
+            }
+            return new ShiftyWeatherBuilder(repository);
         }
     }
 }

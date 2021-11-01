@@ -22,7 +22,6 @@ namespace WeatherGuide.Controllers
             _context = context;
         }
 
-        // GET: Country
         [Route("Administration/[controller]/[action]/")]
         public async Task<IActionResult> Index()
         {
@@ -30,7 +29,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Country/index.cshtml", await _context.Countries.ToListAsync());
         }
 
-        // GET: Country/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,15 +46,11 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Country/Details.cshtml", country);
         }
 
-        // GET: Country/Create
         public IActionResult Create()
         {
             return View("~/Views/Administration/Country/Create.cshtml");
         }
 
-        // POST: Country/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Country country)
@@ -70,7 +64,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Country/Create.cshtml", country);
         }
 
-        // GET: Country/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,9 +79,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Country/Edit.cshtml", country);
         }
 
-        // POST: Country/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Country country)
@@ -121,7 +111,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Country/Edit.cshtml", country);
         }
 
-        // GET: Country/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -139,7 +128,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Country/Delete.cshtml", country);
         }
 
-        // POST: Country/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

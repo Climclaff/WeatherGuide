@@ -22,7 +22,6 @@ namespace WeatherGuide.Controllers
             _context = context;
         }
 
-        // GET: Clothing
         [Route("Administration/[controller]/[action]/")]
         public async Task<IActionResult> Index()
         {
@@ -30,7 +29,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Clothing/index.cshtml", await applicationDbContext.ToListAsync());
         }
 
-        // GET: Clothing/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -49,16 +47,12 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Clothing/Details.cshtml", clothing);
         }
 
-        // GET: Clothing/Create
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id");
             return View("~/Views/Administration/Clothing/Create.cshtml");
         }
 
-        // POST: Clothing/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NameEN,NameUA,Warmth,MoistureResistance,CategoryId,ImageData")] Clothing clothing)
@@ -74,7 +68,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Clothing/Create.cshtml", clothing);
         }
 
-        // GET: Clothing/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -91,9 +84,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Clothing/Edit.cshtml", clothing);
         }
 
-        // POST: Clothing/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,NameEN,NameUA,Warmth,MoistureResistance,CategoryId,ImageData")] Clothing clothing)
@@ -136,7 +126,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Clothing/Edit.cshtml", clothing);
         }
 
-        // GET: Clothing/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -155,7 +144,6 @@ namespace WeatherGuide.Controllers
             return View("~/Views/Administration/Clothing/Delete.cshtml", clothing);
         }
 
-        // POST: Clothing/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
