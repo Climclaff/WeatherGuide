@@ -39,7 +39,7 @@ namespace WeatherGuide.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Privacy()
+        public async Task<IActionResult> Recommendations()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
             string recommendation = await _recommendationService.GetRecommendation(user);
