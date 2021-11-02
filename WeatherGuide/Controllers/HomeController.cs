@@ -18,19 +18,21 @@ namespace WeatherGuide.Controllers
     public class HomeController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<HomeController> _logger;
         private readonly IRecommendationService _recommendationService;
         private readonly IStringLocalizer<HomeController> _localizer;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
         public HomeController(ILogger<HomeController> logger, IStringLocalizer<HomeController> localizer, 
                               IStringLocalizer<SharedResource> sharedLocalizer, IRecommendationService recommendationService, 
-                              UserManager<AppUser> userManager)
+                              UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _logger = logger;
             _localizer = localizer;
             _sharedLocalizer = sharedLocalizer;
             _userManager = userManager;
             _recommendationService = recommendationService;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -41,8 +43,11 @@ namespace WeatherGuide.Controllers
 
         public async Task<IActionResult> Recommendations()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            string recommendation = await _recommendationService.GetRecommendation(user);
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                string recommendation = await _recommendationService.GetRecommendation(user);
+            }        
             return View();
         }
 

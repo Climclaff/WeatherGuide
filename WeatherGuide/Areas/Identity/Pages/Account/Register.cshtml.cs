@@ -90,6 +90,8 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new Models.AppUser { UserName = Input.Email, Email = Input.Email };
+                user.CountryId = 1;
+                user.StateId = 1;
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -99,8 +101,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
                         new Claim("IsAdmin", "false")
                         };
                     for (int i = 0; i<claims.Count; ++i)
-                    await _userManager.AddClaimAsync(user, claims[i]);
-
+                    await _userManager.AddClaimAsync(user, claims[i]);                
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

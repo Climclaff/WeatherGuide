@@ -11,7 +11,7 @@ namespace WeatherGuide.Builders.RecommendationService
             public static RecommendationBuilder createBuilder(IRecommendationRepository repository,Measurement measurement)
         {          
             if (measurement.Temperature < 17 && measurement.WindSpeed > 25)
-            {
+            {   
                 return new StormyWeatherBuilder(repository);
             }
             if (measurement.Humidity > 70 && measurement.Temperature < 10)
