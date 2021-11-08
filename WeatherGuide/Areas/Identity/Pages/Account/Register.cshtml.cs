@@ -8,18 +8,23 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using WeatherGuide.Data;
 using WeatherGuide.Models;
 namespace WeatherGuide.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
+        private readonly ApplicationDbContext _context;
         private readonly SignInManager<Models.AppUser> _signInManager;
         private readonly UserManager<Models.AppUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
@@ -29,21 +34,27 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
             UserManager<Models.AppUser> userManager,
             SignInManager<Models.AppUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
+        [BindProperty(SupportsGet = true)]    
+        public int CountryId { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public int StateId { get; set; }
+        public SelectList Countries { get; set; }
         [BindProperty]
         public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
         public class InputModel
         {
             [Required]
@@ -74,34 +85,56 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
                 ErrorMessage = "The Surname field must contain alphabetical characters")]
             [Display(Name = "Surname")]
             public string Surname { get; set; }
-
         }
-
+        public async Task<IEnumerable<State>> GetStates(int countryId)
+        {
+            return await _context.States.Where(s => s.CountryId == countryId).ToListAsync();
+        }
+        public async Task OnGetStateSelect(string stateName, string countryId)
+        {
+            var state = await _context.Set<State>().Where(x => x.CountryId == Convert.ToInt32(countryId)).Where(x => x.Name == stateName).FirstOrDefaultAsync();
+            TempData["StateId"] = Convert.ToString(state.Id);
+            TempData.Keep("StateId");
+        }
         public async Task OnGetAsync(string returnUrl = null)
         {
-            ReturnUrl = returnUrl; 
+            ReturnUrl = returnUrl;
+            Countries = new SelectList(_context.Countries, nameof(Country.Id), nameof(Country.Name));
+     //       ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name");
+     //       ViewData["StateId"] = new SelectList(_context.States, "Id", "Name");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
-
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<JsonResult> OnGetStates()
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            return new JsonResult(await GetStates(CountryId));
+        }
+        public async Task<IActionResult> OnPostRegisterAsync(string returnUrl = null)
+        {          
+            returnUrl = returnUrl ?? Url.Content("~/"); 
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();           
+            StateId = Convert.ToInt32(TempData.Peek("StateId"));
+            if (CountryId != 0 && StateId > 0)
+            {
+                ModelState.Remove(nameof(StateId));
+            }
             if (ModelState.IsValid)
             {
                 var user = new Models.AppUser { UserName = Input.Email, Email = Input.Email };
-                user.CountryId = 1;
-                user.StateId = 1;
+                    user.CountryId = CountryId;
+                    user.StateId = StateId;
+                           
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+
                     List<Claim> claims = new List<Claim> { 
                         new Claim("Name", Input.Name), 
                         new Claim("Surname", Input.Surname),
-                        new Claim("IsAdmin", "false")
+                        new Claim("IsAdmin", "false"),
+                        new Claim("IsDesigner", "false")
                         };
                     for (int i = 0; i<claims.Count; ++i)
-                    await _userManager.AddClaimAsync(user, claims[i]);                
+                    await _userManager.AddClaimAsync(user, claims[i]);        
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

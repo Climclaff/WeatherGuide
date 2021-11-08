@@ -87,6 +87,22 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.5, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "Syncfusion.EJ2.AspNet.Core": {
+              "target": "Package",
+              "version": "[19.3.0.48, )"
+            },
+            "Syncfusion.EJ2.JavaScript": {
+              "target": "Package",
+              "version": "[19.3.0.48, )"
+            },
+            "Syncfusion.EJ2.MVC5": {
+              "target": "Package",
+              "version": "[19.3.0.48, )"
             }
           },
           "imports": [

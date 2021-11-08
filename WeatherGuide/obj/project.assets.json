@@ -1065,7 +1065,7 @@
           "System.Xml.XDocument": "4.3.0"
         }
       },
-      "Newtonsoft.Json/12.0.2": {
+      "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -1290,6 +1290,45 @@
             "assetType": "native",
             "rid": "win-x86"
           }
+        }
+      },
+      "Syncfusion.EJ2.AspNet.Core/19.3.0.48": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "[11.0.2, 14.0.0)",
+          "Syncfusion.Licensing": "19.3.0.48"
+        },
+        "compile": {
+          "lib/netstandard2.1/Syncfusion.EJ2.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Syncfusion.EJ2.dll": {}
+        }
+      },
+      "Syncfusion.EJ2.JavaScript/19.3.0.48": {
+        "type": "package"
+      },
+      "Syncfusion.EJ2.MVC5/19.3.0.48": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "(9.0.0, )",
+          "Syncfusion.EJ2.JavaScript": "19.3.0.48",
+          "Syncfusion.Licensing": "19.3.0.48"
+        },
+        "compile": {
+          "lib/net45/Syncfusion.EJ2.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Syncfusion.EJ2.dll": {}
+        }
+      },
+      "Syncfusion.Licensing/19.3.0.48": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/Syncfusion.Licensing.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Syncfusion.Licensing.dll": {}
         }
       },
       "System.AppContext/4.3.0": {
@@ -4492,10 +4531,10 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/12.0.2": {
-      "sha512": "rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "type": "package",
-      "path": "newtonsoft.json/12.0.2",
+      "path": "newtonsoft.json/13.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4514,12 +4553,9 @@
         "lib/netstandard1.3/Newtonsoft.Json.xml",
         "lib/netstandard2.0/Newtonsoft.Json.dll",
         "lib/netstandard2.0/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.12.0.2.nupkg.sha512",
-        "newtonsoft.json.nuspec"
+        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
       ]
     },
     "NuGet.Frameworks/4.7.0": {
@@ -4824,6 +4860,110 @@
         "runtimes/win-x86/native/sni.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "Syncfusion.EJ2.AspNet.Core/19.3.0.48": {
+      "sha512": "JrIyFQyCp6bM33fvJ5CgndNmVtocOT7r4ExpYdiZqrhF4JQp12vmTLNwWBpJ07p+tlIsqjcihPJSDIebD9bJrw==",
+      "type": "package",
+      "path": "syncfusion.ej2.aspnet.core/19.3.0.48",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "lib/net451/Syncfusion.EJ2.dll",
+        "lib/netstandard1.6/Syncfusion.EJ2.dll",
+        "lib/netstandard2.0/Syncfusion.EJ2.dll",
+        "lib/netstandard2.1/Syncfusion.EJ2.dll",
+        "syncfusion.ej2.aspnet.core.19.3.0.48.nupkg.sha512",
+        "syncfusion.ej2.aspnet.core.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
+    "Syncfusion.EJ2.JavaScript/19.3.0.48": {
+      "sha512": "rC/7zJzAvAN8L4apIfQhbwi1nsAHVYfDpqk/9RtBo8ZpMcdGFOrnLprX2fTRZc7dIQ6Bw3qdnXlJ4mpPeRTxLQ==",
+      "type": "package",
+      "path": "syncfusion.ej2.javascript/19.3.0.48",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "content/Content/ej2/bootstrap-dark.css",
+        "content/Content/ej2/bootstrap.css",
+        "content/Content/ej2/bootstrap4.css",
+        "content/Content/ej2/bootstrap5-dark.css",
+        "content/Content/ej2/bootstrap5.css",
+        "content/Content/ej2/compatibility/bootstrap.css",
+        "content/Content/ej2/compatibility/bootstrap.scss",
+        "content/Content/ej2/compatibility/bootstrap4.css",
+        "content/Content/ej2/compatibility/bootstrap4.scss",
+        "content/Content/ej2/compatibility/fabric.css",
+        "content/Content/ej2/compatibility/fabric.scss",
+        "content/Content/ej2/compatibility/highcontrast.css",
+        "content/Content/ej2/compatibility/highcontrast.scss",
+        "content/Content/ej2/compatibility/material.css",
+        "content/Content/ej2/compatibility/material.scss",
+        "content/Content/ej2/fabric-dark.css",
+        "content/Content/ej2/fabric.css",
+        "content/Content/ej2/highcontrast.css",
+        "content/Content/ej2/material-dark.css",
+        "content/Content/ej2/material.css",
+        "content/Content/ej2/tailwind-dark.css",
+        "content/Content/ej2/tailwind.css",
+        "content/Scripts/ej2/ej2.d.ts",
+        "content/Scripts/ej2/ej2.min.js",
+        "syncfusion.ej2.javascript.19.3.0.48.nupkg.sha512",
+        "syncfusion.ej2.javascript.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
+    "Syncfusion.EJ2.MVC5/19.3.0.48": {
+      "sha512": "upxLR+dog5XBogdaSI7q7FN2Iy63dGnTdzKyFhEErVs0f//dvYfHfUJOqR+gs4ZcPdjSwqDN3J/t2cna2zNhoQ==",
+      "type": "package",
+      "path": "syncfusion.ej2.mvc5/19.3.0.48",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "README.md",
+        "lib/net45/Syncfusion.EJ2.XML",
+        "lib/net45/Syncfusion.EJ2.dll",
+        "syncfusion.ej2.mvc5.19.3.0.48.nupkg.sha512",
+        "syncfusion.ej2.mvc5.nuspec",
+        "syncfusion_logo.png"
+      ]
+    },
+    "Syncfusion.Licensing/19.3.0.48": {
+      "sha512": "SwXgwDO7Fv7MWD8ILjXryTdTGhRAT0+uBCZ5LekGTlfQj9wrivEyZhghEegV0f+8cnlpj7uAQcMRijqBYZqR3g==",
+      "type": "package",
+      "path": "syncfusion.licensing/19.3.0.48",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/MonoAndroid10.0/Syncfusion.Licensing.dll",
+        "lib/MonoAndroid90/Syncfusion.Licensing.dll",
+        "lib/Xamarin.Mac/Syncfusion.Licensing.dll",
+        "lib/Xamarin.iOS10/Syncfusion.Licensing.dll",
+        "lib/net20/Syncfusion.Licensing.dll",
+        "lib/net35/Syncfusion.Licensing.dll",
+        "lib/net40/Syncfusion.Licensing.dll",
+        "lib/net45/Syncfusion.Licensing.dll",
+        "lib/net451/Syncfusion.Licensing.dll",
+        "lib/net46/Syncfusion.Licensing.dll",
+        "lib/net5.0-windows10.0/Syncfusion.Licensing.dll",
+        "lib/net5.0/Syncfusion.Licensing.dll",
+        "lib/netcoreapp3.1/Syncfusion.Licensing.dll",
+        "lib/netstandard1.0/Syncfusion.Licensing.dll",
+        "lib/netstandard1.2/Syncfusion.Licensing.dll",
+        "lib/netstandard1.4/Syncfusion.Licensing.dll",
+        "lib/netstandard2.0/Syncfusion.Licensing.dll",
+        "lib/portable-win+net45+wp80+win81+wpa81/Syncfusion.Licensing.dll",
+        "lib/uap10.0/Syncfusion.Licensing.dll",
+        "syncfusion.licensing.19.3.0.48.nupkg.sha512",
+        "syncfusion.licensing.nuspec",
+        "syncfusion_logo.png"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -9029,7 +9169,11 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.20",
       "Microsoft.EntityFrameworkCore.SqlServer.Design >= 1.1.6",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.20",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.5"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.5",
+      "Newtonsoft.Json >= 13.0.1",
+      "Syncfusion.EJ2.AspNet.Core >= 19.3.0.48",
+      "Syncfusion.EJ2.JavaScript >= 19.3.0.48",
+      "Syncfusion.EJ2.MVC5 >= 19.3.0.48"
     ]
   },
   "packageFolders": {
@@ -9118,6 +9262,22 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[3.1.5, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.1, )"
+          },
+          "Syncfusion.EJ2.AspNet.Core": {
+            "target": "Package",
+            "version": "[19.3.0.48, )"
+          },
+          "Syncfusion.EJ2.JavaScript": {
+            "target": "Package",
+            "version": "[19.3.0.48, )"
+          },
+          "Syncfusion.EJ2.MVC5": {
+            "target": "Package",
+            "version": "[19.3.0.48, )"
           }
         },
         "imports": [
@@ -9141,5 +9301,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"Syncfusion.EJ2.MVC5 19.3.0.48\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \".NETCoreApp,Version=v3.1\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "Syncfusion.EJ2.MVC5",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

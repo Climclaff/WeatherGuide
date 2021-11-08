@@ -47,10 +47,9 @@ namespace WeatherGuide.Controllers
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 string recommendation = await _recommendationService.GetRecommendation(user);
-            }        
+            }
             return View();
         }
-
         [Authorize("IsAdminPolicy")]
         public IActionResult Administration()
         {
