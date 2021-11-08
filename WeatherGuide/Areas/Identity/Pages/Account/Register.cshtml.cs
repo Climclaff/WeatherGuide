@@ -113,6 +113,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/"); 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();           
             StateId = Convert.ToInt32(TempData.Peek("StateId"));
+            TempData.Remove("StateId");
             if (CountryId != 0 && StateId > 0)
             {
                 ModelState.Remove(nameof(StateId));
