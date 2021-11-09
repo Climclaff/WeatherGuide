@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WeatherGuide.Data;
 using WeatherGuide.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace WeatherGuide.Controllers
 {
+    [Authorize("IsAdminPolicy")]
     public class AppUserController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -18,15 +21,13 @@ namespace WeatherGuide.Controllers
         {
             _context = context;
         }
-
-        // GET: AppUser
+        [Route("Administration/[controller]/[action]/")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Users.Include(a => a.Country).Include(a => a.State);
-            return View(await applicationDbContext.ToListAsync());
+            return View("~/Views/Administration/AppUser/index.cshtml", await applicationDbContext.ToListAsync());
         }
 
-        // GET: AppUser/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,7 +44,7 @@ namespace WeatherGuide.Controllers
                 return NotFound();
             }
 
-            return View(appUser);
+            return View("~/Views/Administration/AppUser/Details.cshtml", appUser);
         }
 
         // GET: AppUser/Create
@@ -51,12 +52,9 @@ namespace WeatherGuide.Controllers
         {
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id");
             ViewData["StateId"] = new SelectList(_context.States, "Id", "Id");
-            return View();
+            return View("~/Views/Administration/AppUser/Create.cshtml");
         }
 
-        // POST: AppUser/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CountryId,StateId,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] AppUser appUser)
@@ -69,12 +67,13 @@ namespace WeatherGuide.Controllers
             }
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", appUser.CountryId);
             ViewData["StateId"] = new SelectList(_context.States, "Id", "Id", appUser.StateId);
-            return View(appUser);
+            return View("~/Views/Administration/AppUser/Create.cshtml", appUser);
         }
 
-        // GET: AppUser/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            Claims claims = new Claims();
+            claims.ClaimsList = await _context.UserClaims.Where(x => x.UserId == id).ToListAsync();           
             if (id == null)
             {
                 return NotFound();
@@ -87,12 +86,10 @@ namespace WeatherGuide.Controllers
             }
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", appUser.CountryId);
             ViewData["StateId"] = new SelectList(_context.States, "Id", "Id", appUser.StateId);
-            return View(appUser);
+            ViewData["Claims"] = claims;
+            return View("~/Views/Administration/AppUser/Edit.cshtml", appUser);
         }
 
-        // POST: AppUser/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("CountryId,StateId,Id,UserName,NormalizedUserName,Email,NormalizedEmail,EmailConfirmed,PasswordHash,SecurityStamp,ConcurrencyStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEnd,LockoutEnabled,AccessFailedCount")] AppUser appUser)
@@ -124,10 +121,9 @@ namespace WeatherGuide.Controllers
             }
             ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Id", appUser.CountryId);
             ViewData["StateId"] = new SelectList(_context.States, "Id", "Id", appUser.StateId);
-            return View(appUser);
+            return View("~/Views/Administration/AppUser/Edit.cshtml", appUser);
         }
 
-        // GET: AppUser/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -144,10 +140,9 @@ namespace WeatherGuide.Controllers
                 return NotFound();
             }
 
-            return View(appUser);
+            return View("~/Views/Administration/AppUser/Delete.cshtml", appUser);
         }
 
-        // POST: AppUser/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -157,7 +152,15 @@ namespace WeatherGuide.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        [Route("[controller]/[action]/{id?}")]
+        public async Task<IActionResult> ClaimChange(int claimId, string value)
+        {
+           var claim = await _context.UserClaims.FindAsync(claimId);
+            claim.ClaimValue = value;
+            _context.UserClaims.Update(claim);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Edit", new { id = claim.UserId });
+        }
         private bool AppUserExists(int id)
         {
             return _context.Users.Any(e => e.Id == id);

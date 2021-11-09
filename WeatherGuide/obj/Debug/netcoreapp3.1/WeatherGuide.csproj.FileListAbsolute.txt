@@ -984,8 +984,10 @@ C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcor
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.dll
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.pdb
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.genruntimeconfig.cache
-C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\AppUser\Create.cshtml.g.cs
-C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\AppUser\Delete.cshtml.g.cs
-C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\AppUser\Details.cshtml.g.cs
-C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\AppUser\Edit.cshtml.g.cs
-C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\AppUser\Index.cshtml.g.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.csproj.AssemblyReference.cache
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\AppUser\Create.cshtml.g.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\AppUser\Delete.cshtml.g.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\AppUser\Details.cshtml.g.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\AppUser\Edit.cshtml.g.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\AppUser\Index.cshtml.g.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\AppUser\_ClaimsPartial.cshtml.g.cs
