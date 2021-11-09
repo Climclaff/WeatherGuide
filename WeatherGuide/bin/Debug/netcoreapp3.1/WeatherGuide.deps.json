@@ -43,9 +43,6 @@
           "Microsoft.EntityFrameworkCore.Tools": "3.1.20",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.5",
           "Newtonsoft.Json": "13.0.1",
-          "Syncfusion.EJ2.AspNet.Core": "19.3.0.48",
-          "Syncfusion.EJ2.JavaScript": "19.3.0.48",
-          "Syncfusion.EJ2.MVC5": "19.3.0.48",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -1486,40 +1483,6 @@
             "assetType": "native",
             "fileVersion": "4.6.25512.1"
           }
-        }
-      },
-      "Syncfusion.EJ2.AspNet.Core/19.3.0.48": {
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.1",
-          "Syncfusion.Licensing": "19.3.0.48"
-        }
-      },
-      "Syncfusion.EJ2.JavaScript/19.3.0.48": {},
-      "Syncfusion.EJ2.MVC5/19.3.0.48": {
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.1",
-          "Syncfusion.EJ2.JavaScript": "19.3.0.48",
-          "Syncfusion.Licensing": "19.3.0.48"
-        },
-        "runtime": {
-          "lib/net45/Syncfusion.EJ2.dll": {
-            "assemblyVersion": "19.3500.0.48",
-            "fileVersion": "19.3500.0.48"
-          }
-        },
-        "compile": {
-          "lib/net45/Syncfusion.EJ2.dll": {}
-        }
-      },
-      "Syncfusion.Licensing/19.3.0.48": {
-        "runtime": {
-          "lib/netcoreapp3.1/Syncfusion.Licensing.dll": {
-            "assemblyVersion": "19.3.0.48",
-            "fileVersion": "19.3.0.48"
-          }
-        },
-        "compile": {
-          "lib/netcoreapp3.1/Syncfusion.Licensing.dll": {}
         }
       },
       "System.AppContext/4.3.0": {
@@ -4667,34 +4630,6 @@
       "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
-    },
-    "Syncfusion.EJ2.AspNet.Core/19.3.0.48": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-JrIyFQyCp6bM33fvJ5CgndNmVtocOT7r4ExpYdiZqrhF4JQp12vmTLNwWBpJ07p+tlIsqjcihPJSDIebD9bJrw==",
-      "path": "syncfusion.ej2.aspnet.core/19.3.0.48",
-      "hashPath": "syncfusion.ej2.aspnet.core.19.3.0.48.nupkg.sha512"
-    },
-    "Syncfusion.EJ2.JavaScript/19.3.0.48": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-rC/7zJzAvAN8L4apIfQhbwi1nsAHVYfDpqk/9RtBo8ZpMcdGFOrnLprX2fTRZc7dIQ6Bw3qdnXlJ4mpPeRTxLQ==",
-      "path": "syncfusion.ej2.javascript/19.3.0.48",
-      "hashPath": "syncfusion.ej2.javascript.19.3.0.48.nupkg.sha512"
-    },
-    "Syncfusion.EJ2.MVC5/19.3.0.48": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-upxLR+dog5XBogdaSI7q7FN2Iy63dGnTdzKyFhEErVs0f//dvYfHfUJOqR+gs4ZcPdjSwqDN3J/t2cna2zNhoQ==",
-      "path": "syncfusion.ej2.mvc5/19.3.0.48",
-      "hashPath": "syncfusion.ej2.mvc5.19.3.0.48.nupkg.sha512"
-    },
-    "Syncfusion.Licensing/19.3.0.48": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-SwXgwDO7Fv7MWD8ILjXryTdTGhRAT0+uBCZ5LekGTlfQj9wrivEyZhghEegV0f+8cnlpj7uAQcMRijqBYZqR3g==",
-      "path": "syncfusion.licensing/19.3.0.48",
-      "hashPath": "syncfusion.licensing.19.3.0.48.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",

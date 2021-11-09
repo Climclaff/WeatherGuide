@@ -6,23 +6,35 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using WeatherGuide.Data;
+using WeatherGuide.Models;
 namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
         private readonly UserManager<Models.AppUser> _userManager;
         private readonly SignInManager<Models.AppUser> _signInManager;
-
+        private readonly ApplicationDbContext _context;
         public IndexModel(
             UserManager<Models.AppUser> userManager,
-            SignInManager<Models.AppUser> signInManager)
+            SignInManager<Models.AppUser> signInManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         public string Username { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public int CountryId { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public int StateId { get; set; }
+        public SelectList Countries { get; set; }
+        public SelectList States { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -32,36 +44,55 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+
         }
 
         private async Task LoadAsync(Models.AppUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
+            var countryId = user.CountryId;
+            var stateId = user.StateId;
             Username = userName;
-
+            CountryId = (int)countryId;
+            StateId = (int)stateId;
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+
             };
         }
-
+        public async Task<IEnumerable<State>> GetStatesAsync(int countryId)
+        {
+            return await _context.States.Where(s => s.CountryId == countryId).ToListAsync();
+        }
+        public async Task<JsonResult> OnGetStatesAsync()
+        {
+            return new JsonResult(await GetStatesAsync(CountryId));
+        }
+        public async Task OnGetStateSelectAsync(string stateName, string countryId)
+        {
+            var state = await _context.Set<State>().Where(x => x.CountryId == Convert.ToInt32(countryId)).Where(x => x.Name == stateName).FirstOrDefaultAsync();
+            TempData["StateId"] = Convert.ToString(state.Id);
+            TempData.Keep("StateId");
+        }
+        public async Task OnGetCountrySelectAsync(string id)
+        {
+            var state = await _context.Set<State>().Where(x => x.CountryId == Convert.ToInt32(id)).FirstOrDefaultAsync();
+            TempData["StateId"] = Convert.ToString(state.Id);
+            TempData.Keep("StateId");
+        }
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
+            }           
             await LoadAsync(user);
+            Countries = new SelectList(_context.Countries, nameof(Country.Id), nameof(Country.Name));
+            States = new SelectList(_context.States.Where(x => x.CountryId == CountryId), nameof(State.Id), nameof(State.Name));
             return Page();
         }
-
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -69,25 +100,37 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
-            if (!ModelState.IsValid)
+                StateId = Convert.ToInt32(TempData.Peek("StateId"));
+            if (StateId == 0)
+            {
+                var state = await _context.Set<State>().Where(x => x.CountryId == CountryId).FirstOrDefaultAsync();
+                StateId = state.Id;
+            }
+            if (StateId != user.StateId && StateId != 0)
+            {
+                ModelState.Remove(nameof(StateId));               
+            }
+            TempData.Remove("StateId");
+            if (!ModelState.IsValid || StateId == 0)
             {
                 await LoadAsync(user);
-                return Page();
+                return RedirectToPage();
             }
-
+            ModelState.SetModelValue(nameof(StateId), new Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult());
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            if (user.CountryId == CountryId && user.StateId == StateId)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
-                }
+                return RedirectToPage();
+            }
+            if (CountryId != user.CountryId || StateId != user.StateId)
+            {               
+                    user.CountryId = CountryId;
+                    user.StateId = StateId;
+                    _context.Update(user);
+                    await _context.SaveChangesAsync();
             }
 
-            await _signInManager.RefreshSignInAsync(user);
+                await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }

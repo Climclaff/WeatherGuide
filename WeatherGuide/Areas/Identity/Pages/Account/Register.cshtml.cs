@@ -86,11 +86,11 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
             [Display(Name = "Surname")]
             public string Surname { get; set; }
         }
-        public async Task<IEnumerable<State>> GetStates(int countryId)
+        public async Task<IEnumerable<State>> GetStatesAsync(int countryId)
         {
             return await _context.States.Where(s => s.CountryId == countryId).ToListAsync();
         }
-        public async Task OnGetStateSelect(string stateName, string countryId)
+        public async Task OnGetStateSelectAsync(string stateName, string countryId)
         {
             var state = await _context.Set<State>().Where(x => x.CountryId == Convert.ToInt32(countryId)).Where(x => x.Name == stateName).FirstOrDefaultAsync();
             TempData["StateId"] = Convert.ToString(state.Id);
@@ -104,9 +104,9 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
      //       ViewData["StateId"] = new SelectList(_context.States, "Id", "Name");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
-        public async Task<JsonResult> OnGetStates()
+        public async Task<JsonResult> OnGetStatesAsync()
         {
-            return new JsonResult(await GetStates(CountryId));
+            return new JsonResult(await GetStatesAsync(CountryId));
         }
         public async Task<IActionResult> OnPostRegisterAsync(string returnUrl = null)
         {          
@@ -123,7 +123,6 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
                 var user = new Models.AppUser { UserName = Input.Email, Email = Input.Email };
                     user.CountryId = CountryId;
                     user.StateId = StateId;
-                           
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
