@@ -1,5 +1,4 @@
 ﻿@model WeatherGuide.Models.AppUser
-
 @{
     ViewData["Title"] = "Edit";
 }
@@ -98,8 +97,10 @@
             </div>
         </form>
     </div>
-</div>
-@await Html.PartialAsync("_ClaimsPartial.cshtml",ViewData["Claims"])
+</div>   
+        @await Html.PartialAsync("_ClaimsPartial.cshtml",ViewData["Claims"])
+
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

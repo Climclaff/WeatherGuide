@@ -75,6 +75,9 @@ namespace WeatherGuide
                 options.AddPolicy("IsDesignerPolicy",
                     policy => policy.RequireClaim("IsDesigner", "true"));
 
+                options.AddPolicy("IsSuperAdminPolicy",
+                    policy => policy.RequireClaim("IsSuperAdmin", "true"));
+
             });
         }
 
