@@ -70,9 +70,10 @@ namespace WeatherGuide
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("IsAdminPolicy",
-                    policy => policy.RequireClaim("IsAdmin"));
+                    policy => policy.RequireClaim("IsAdmin", "true"));
+                
                 options.AddPolicy("IsDesignerPolicy",
-                    policy => policy.RequireClaim("IsDesigner"));
+                    policy => policy.RequireClaim("IsDesigner", "true"));
 
             });
         }

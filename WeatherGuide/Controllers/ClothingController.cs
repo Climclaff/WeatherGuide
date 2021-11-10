@@ -12,7 +12,7 @@ using System.IO;
 
 namespace WeatherGuide.Controllers
 {
-    [Authorize("IsAdminPolicy")]
+    [Authorize("IsDesignerPolicy")]
     public class ClothingController : Controller
     {
         private readonly ApplicationDbContext _context;

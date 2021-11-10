@@ -36,6 +36,12 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Administration" asp-action="Index">Administration</a>
                                 </li>
                             }
+                            if (User.FindFirst("IsDesigner").Value == "true")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Clothing" asp-action="Index">Clothing management</a>
+                                </li>
+                            }
                         }
                         <li>
                             @await Html.PartialAsync("_SelectLanguagePartial")

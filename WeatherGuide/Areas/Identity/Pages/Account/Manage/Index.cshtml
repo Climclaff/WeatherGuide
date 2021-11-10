@@ -12,16 +12,16 @@
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Username"></label>
+                 <label> Username</label>
                 <input asp-for="Username" class="form-control" disabled />
             </div>
             <div class="form-group">
-                <label asp-for="CountryId" class="control-label"></label>
+                 <label> Country</label>
                 <select asp-for="CountryId" class ="form-control" asp-items="Model.Countries">
                 </select>               
             </div>
             <div class="form-group">
-                <label asp-for="StateId" class="control-label"></label>
+                 <label> State</label>
                 <select asp-for="StateId" class ="form-control" asp-items="Model.States">                   
                 </select>
             </div>

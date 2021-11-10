@@ -39,14 +39,14 @@
                 <span asp-validation-for="Input.Surname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CountryId" class="control-label"></label>
+                <label> Country</label>
                 <select asp-for="CountryId" class ="form-control" asp-items="Model.Countries">
                     <option value="">Select Country</option>
                 </select>
                 
             </div>
             <div class="form-group">
-                <label asp-for="StateId" class="control-label"></label>
+                 <label> State</label>
                 <select asp-for="StateId" class ="form-control"></select>
             </div>
 
@@ -92,7 +92,7 @@
         $("#CountryId").on("change", function() {
             var countryId = $(this).val();
             $("#StateId").empty();
-            $("#StateId").append("<option value=''>Select SubCategory</option>");
+            $("#StateId").append("<option value=''>Select State</option>");
             $.getJSON(`?handler=States&countryId=${countryId}`, (data) => {
                 $.each(data, function (i, item) {
                     $("#StateId").append(`<option value="${item.stateId}">${item.name}</option>`);
