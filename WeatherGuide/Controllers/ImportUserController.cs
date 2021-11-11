@@ -35,7 +35,7 @@ namespace WeatherGuide.Controllers
         {
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                 var list = new List<AppUser>();
-                using (var stream = new MemoryStream())
+                using (var stream = new MemoryStream()) 
                 {
                     await file.CopyToAsync(stream);
                     using (var package = new ExcelPackage(stream))

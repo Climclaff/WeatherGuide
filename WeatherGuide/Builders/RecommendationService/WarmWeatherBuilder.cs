@@ -12,15 +12,15 @@ namespace WeatherGuide.Builders.RecommendationService
            : base(recommendationRepository) { }
         public override async Task GenerateFirstItem()
         {
-            this.Recommendation.FirstClothing = await _recommendationRepository.GenerateRandomClothing(20, 10, 1);
+            this.Recommendation.FirstClothing = await _recommendationRepository.GenerateRandomClothing(15,35, 0, 1);
         }
         public override async Task GenerateSecondItem()
         {
-            this.Recommendation.SecondClothing = await _recommendationRepository.GenerateRandomClothing(20, 10, 2);
+            this.Recommendation.SecondClothing = await _recommendationRepository.GenerateRandomClothing(15,35, 0, 2);
         }
         public override async Task GenerateThirdItem()
         {
-            this.Recommendation.ThirdClothing = await _recommendationRepository.GenerateRandomClothing(20, 10, 3);
+            this.Recommendation.ThirdClothing = await _recommendationRepository.GenerateRandomClothing(15,35, 0, 3);
         }
     }
 }

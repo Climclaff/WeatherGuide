@@ -22,15 +22,16 @@ namespace WeatherGuide.Repository
                                      select user).SingleOrDefaultAsync();
             return currentUser;
         }
-        public async Task<Clothing> GenerateRandomClothing(int warmth, int moistureResistance, int category)
+        public async Task<Clothing> GenerateRandomClothing(int minWarmth, int maxWarmth, int moistureResistance, int category)
         {
             var clothingList = await
             _context
                 .Set<Clothing>()
-                .Where(x => x.Warmth >= warmth)
+                .Where(x => x.Warmth >= minWarmth)
+                .Where(x => x.Warmth <= maxWarmth)
                 .Where(x => x.CategoryId == category)
                 .Where(x => x.MoistureResistance >= moistureResistance)
-                .Take(3).ToListAsync();
+                .ToListAsync();
 
             var rand = new Random();
             var clothing = clothingList.ElementAt(rand.Next(clothingList.Count()));
