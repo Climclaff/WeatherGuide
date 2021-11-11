@@ -26,7 +26,7 @@ namespace WeatherGuide.Repository
         {
             var clothingList = await
             _context
-                .Set<Clothing>()
+                .Set<Clothing>()    
                 .Where(x => x.Warmth >= minWarmth)
                 .Where(x => x.Warmth <= maxWarmth)
                 .Where(x => x.CategoryId == category)

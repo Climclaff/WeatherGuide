@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using WeatherGuide.Data;
+using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 {
@@ -18,22 +21,26 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<Models.AppUser> _userManager;
         private readonly SignInManager<Models.AppUser> _signInManager;
         private readonly IEmailSender _emailSender;
-
+        private readonly ApplicationDbContext _context;
         public EmailModel(
             UserManager<Models.AppUser> userManager,
             SignInManager<Models.AppUser> signInManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _context = context;
         }
 
         public string Username { get; set; }
 
         public string Email { get; set; }
 
-        public bool IsEmailConfirmed { get; set; }
+        public string Name { get; set; }
+
+        public string Surname { get; set; }
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -44,22 +51,26 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            [Display(Name = "New email")]
-            public string NewEmail { get; set; }
+            [RegularExpression(@"^(([A-za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+[\s]{1}[A-za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+)|([A-Za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+))$",
+                ErrorMessage = "The Name field must contain alphabetical characters")]
+            [Display(Name = "New name")]
+            public string NewName { get; set; }
+            [Required]
+            [RegularExpression(@"^(([A-za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+[\s]{1}[A-za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+)|([A-Za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+))$",
+                ErrorMessage = "The Surname field must contain alphabetical characters")]
+            [Display(Name = "New surname")]
+            public string NewSurname { get; set; }
         }
 
         private async Task LoadAsync(Models.AppUser user)
         {
-            var email = await _userManager.GetEmailAsync(user);
-            Email = email;
-
+            var claims = await _userManager.GetClaimsAsync(user);
             Input = new InputModel
             {
-                NewEmail = email,
+                NewName = claims[0].Value,
+                NewSurname = claims[1].Value,
             };
 
-            IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -88,31 +99,30 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var email = await _userManager.GetEmailAsync(user);
-            if (Input.NewEmail != email)
+            var claims = await _userManager.GetClaimsAsync(user);
+            bool changes = false;
+            if (Input.NewName != claims[0].Value)
             {
-                var userId = await _userManager.GetUserIdAsync(user);
-                var code = await _userManager.GenerateChangeEmailTokenAsync(user, Input.NewEmail);
-                var callbackUrl = Url.Page(
-                    "/Account/ConfirmEmailChange",
-                    pageHandler: null,
-                    values: new { userId = userId, email = Input.NewEmail, code = code },
-                    protocol: Request.Scheme);
-                await _emailSender.SendEmailAsync(
-                    Input.NewEmail,
-                    "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-                if (_userManager.FindByEmailAsync(Input.NewEmail).Result == null)
-                {
-                    await _userManager.ChangeEmailAsync(user, Input.NewEmail, code);
-                    StatusMessage = "Your Email has been changed successfully.";
-                                   
-                    return RedirectToPage();
-                }
-
+                var claim = await _context.UserClaims.Where(x => x.ClaimType == "Name").Where(x => x.UserId == user.Id).SingleOrDefaultAsync();
+                claim.ClaimValue = Input.NewName;
+                _context.UserClaims.Update(claim);
+                await _context.SaveChangesAsync();              
+                changes = true;
             }
-
-            StatusMessage = "Your email is unchanged.";
+            if (Input.NewSurname != claims[1].Value)
+            {
+                var claim = await _context.UserClaims.Where(x => x.ClaimType == "Surname").Where(x => x.UserId == user.Id).SingleOrDefaultAsync();
+                claim.ClaimValue = Input.NewName;
+                _context.UserClaims.Update(claim);
+                await _context.SaveChangesAsync();
+                changes = true;
+            }
+            if(changes == true)
+            {
+                StatusMessage = "Your info has been changed successfully.";
+                return RedirectToPage();
+            }
+            StatusMessage = "Your info is unchanged.";
             return RedirectToPage();
         }
 

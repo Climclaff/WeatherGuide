@@ -75,13 +75,13 @@ namespace WeatherGuide.Controllers
                 for (int i = 0; i < list.Count; i++)
                 {
                     _context.Add(list[i]);
-                    int Idt = _context.Users.Max(u => u.Id);
+                    await _context.SaveChangesAsync();  
+                int Idt = _context.Users.Max(u => u.Id);
                     var user = await _userManager.FindByIdAsync(Convert.ToString(Idt));
                     for (int p = 0; p < claims.Count; ++p)
                     {
                         await _userManager.AddClaimAsync(user, claims[p]);
                     }
-                    await _context.SaveChangesAsync();
                 }
                 
             
