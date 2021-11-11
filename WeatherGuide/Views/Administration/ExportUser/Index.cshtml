@@ -1,0 +1,30 @@
+﻿@{
+	ViewData["Title"] = "Index";
+}
+<div style ="margin-top:50px;">
+ <div align="left">
+	 <a href = "/ExportUser/ExporttoExcel">Export to excel</a>
+ </div>
+ <table class="table table-boarded table-responsive">
+	 <thead>
+	  <tr>
+		  <th>Id</th> 
+		  <th>Username</th>
+		  <th>CountryId</th>
+		  <th>StateId</th>
+	 </tr>
+  </thead>
+  @{
+			foreach(System.Data.DataRow dr in ViewBag.details.Rows)
+			{
+				<tr>
+					<td>@dr["Id"] </td>
+					<td>@dr["UserName"] </td>
+					<td>@dr["CountryId"] </td>
+					<td>@dr["StateId"] </td>
+				</tr>
+			}
+  }
+ </table>
+
+</div>

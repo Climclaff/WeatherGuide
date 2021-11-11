@@ -1,0 +1,11 @@
+﻿@{
+	ViewData["Title"] = "Index";
+}
+
+<div class="container">
+<form method="post" asp-controller="ImportUser" asp-action="Import" enctype="multipart/form-data">
+	<input type="file" name="file"/>
+	<button type="submit">Import from excel</button>
+
+</form>
+</div>
