@@ -43,7 +43,8 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _context = context;
         }
-
+        [TempData]
+        public string StatusMessage { get; set; }
         [BindProperty(SupportsGet = true)]    
         public int CountryId { get; set; }
         [BindProperty(SupportsGet = true)]
@@ -85,6 +86,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
                 ErrorMessage = "The Surname field must contain alphabetical characters")]
             [Display(Name = "Surname")]
             public string Surname { get; set; }
+
         }
         public async Task<IEnumerable<State>> GetStatesAsync(int countryId)
         {
@@ -165,6 +167,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
             }
 
             // If we got this far, something failed, redisplay form
+            StatusMessage = "Error during registration, maybe user with such name already exists";
             return RedirectToPage();        
         }
     }

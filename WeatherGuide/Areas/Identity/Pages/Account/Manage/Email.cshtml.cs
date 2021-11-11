@@ -112,13 +112,15 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
             if (Input.NewSurname != claims[1].Value)
             {
                 var claim = await _context.UserClaims.Where(x => x.ClaimType == "Surname").Where(x => x.UserId == user.Id).SingleOrDefaultAsync();
-                claim.ClaimValue = Input.NewName;
+                claim.ClaimValue = Input.NewSurname;
                 _context.UserClaims.Update(claim);
                 await _context.SaveChangesAsync();
                 changes = true;
             }
             if(changes == true)
             {
+                await _signInManager.SignOutAsync();
+                await _signInManager.SignInAsync(user, false);
                 StatusMessage = "Your info has been changed successfully.";
                 return RedirectToPage();
             }
