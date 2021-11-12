@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Http;
 using WeatherGuide.Repository;
 using Microsoft.AspNetCore.Identity;
 using WeatherGuide.Services;
+using System.Globalization;
+
 namespace WeatherGuide.Controllers
 {
     public class HomeController : Controller
@@ -45,8 +47,29 @@ namespace WeatherGuide.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
+                CultureInfo culture = CultureInfo.CurrentCulture;
                 var user = await _userManager.GetUserAsync(HttpContext.User);
-                Recommendation recommendation = await _recommendationService.GetRecommendation(user);
+                Recommendation recommendation = await _recommendationService.GetRecommendation(user);                             
+                if (culture.Name == "en-US")
+                {
+                    IEnumerable<string> itemNamesEN = new List<string>() {
+                    recommendation.FirstClothing.NameEN,
+                    recommendation.SecondClothing.NameEN,
+                    recommendation.ThirdClothing.NameEN,
+                    };
+                    TempData["Items"] = itemNamesEN;
+                }
+                else
+                {
+                    IEnumerable<string> itemNamesUA = new List<string>()
+                {
+                    recommendation.FirstClothing.NameUA,
+                    recommendation.SecondClothing.NameUA,
+                    recommendation.ThirdClothing.NameUA,
+                };
+                    TempData["Items"] = itemNamesUA;
+                }
+                TempData.Keep("Items");
                 return View(recommendation);
             }
             return LocalRedirect("/Identity/Account/Login"); ;
