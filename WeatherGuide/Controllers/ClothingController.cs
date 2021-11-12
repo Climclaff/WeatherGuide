@@ -148,7 +148,18 @@ namespace WeatherGuide.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var clothing = await _context.Clothings.FindAsync(id);
+            var recommendations = await _context.Set<Recommendation>().Where(x => x.FirstClothingId == id 
+            || x.SecondClothingId == id 
+            || x.ThirdClothingId == id).ToListAsync();
+            if (recommendations.Count != 0)
+            {
+                for (int i =0; i< recommendations.Count; ++i)
+                {
+                    _context.Recommendations.Remove(recommendations[i]);
+                }
+                await _context.SaveChangesAsync();
+            }
+            var clothing = await _context.Clothings.FindAsync(id);            
             _context.Clothings.Remove(clothing);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
