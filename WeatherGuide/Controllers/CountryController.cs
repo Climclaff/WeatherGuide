@@ -132,6 +132,40 @@ namespace WeatherGuide.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if(id == 1)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            var users = await _context.Set<AppUser>().Where(x => x.CountryId == id).ToListAsync();
+            if (users.Count != 0)
+            {
+                for (int i = 0; i < users.Count; ++i)
+                {
+                    users[i].CountryId = 1;
+                    users[i].StateId = 1;
+                    _context.Users.Update(users[i]);
+                }             
+                await _context.SaveChangesAsync();
+            }
+            var measurements = await _context.Set<Measurement>().Where(x => x.CountryId == id).ToListAsync();
+            if (measurements.Count != 0)
+            {
+                for (int i = 0; i < measurements.Count; ++i)
+                {
+                    _context.Measurements.Remove(measurements[i]);
+                }
+                await _context.SaveChangesAsync();
+            }
+            var states = await _context.Set<State>().Where(x => x.CountryId == id).ToListAsync();
+            if (states.Count != 0)
+            {
+                for (int i = 0; i < states.Count; ++i)
+                {
+                    _context.States.Remove(states[i]);
+                }
+                await _context.SaveChangesAsync();
+            }          
+
             var country = await _context.Countries.FindAsync(id);
             _context.Countries.Remove(country);
             await _context.SaveChangesAsync();
