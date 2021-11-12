@@ -18,7 +18,7 @@ namespace WeatherGuide.Services
         {
             _recommendationRepository = recommendationRepository;
         }
-        public async Task<string> GetRecommendation(AppUser appUser)
+        public async Task<Recommendation> GetRecommendation(AppUser appUser)
         {
             currentUser = appUser;
             currentMeasurement = await _recommendationRepository.GetMeasurementForCurrentUser(currentUser.Id);
@@ -31,7 +31,7 @@ namespace WeatherGuide.Services
             recommendationStringBuilder.Append(recommendation.FirstClothing.NameEN+" ")
                 .Append(recommendation.SecondClothing.NameEN + " ")
                 .Append(recommendation.ThirdClothing.NameEN); 
-            return recommendationStringBuilder.ToString();
+            return recommendation;
 
         }
     }

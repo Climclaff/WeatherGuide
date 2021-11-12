@@ -102,8 +102,6 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             Countries = new SelectList(_context.Countries, nameof(Country.Id), nameof(Country.Name));
-     //       ViewData["CountryId"] = new SelectList(_context.Countries, "Id", "Name");
-     //       ViewData["StateId"] = new SelectList(_context.States, "Id", "Name");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
         public async Task<JsonResult> OnGetStatesAsync()

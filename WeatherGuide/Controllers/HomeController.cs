@@ -43,12 +43,13 @@ namespace WeatherGuide.Controllers
 
         public async Task<IActionResult> Recommendations()
         {
+            Recommendation recommendation = new Recommendation();
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
-                string recommendation = await _recommendationService.GetRecommendation(user);
+                recommendation = await _recommendationService.GetRecommendation(user);
             }
-            return View();
+            return View(recommendation);
         }
         [Authorize("IsAdminPolicy")]
         public IActionResult Administration()

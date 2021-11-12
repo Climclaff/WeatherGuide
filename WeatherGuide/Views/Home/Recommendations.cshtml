@@ -1,6 +1,50 @@
-﻿@{
+﻿@model WeatherGuide.Models.Recommendation
+@{
     ViewData["Title"] = "Recommendations";
 }
 <h1>@ViewData["Title"]</h1>
 
+ @{ ViewBag.FirstImage = "data:image/jpg;base64," + Convert.ToBase64String(Model.FirstClothing.ImageData); } 
+ @{ ViewBag.SecondImage = "data:image/jpg;base64," + Convert.ToBase64String(Model.SecondClothing.ImageData); } 
+ @{ ViewBag.ThirdImage = "data:image/jpg;base64," + Convert.ToBase64String(Model.ThirdClothing.ImageData); } 
+
 <p>Clothing recommendation page</p>
+<div class="row">
+  <div class="column">
+      <div class="image-border">
+    <img src="@ViewBag.FirstImage" class="image-center" width="400px" height="400px"/>
+      </div>
+  </div>
+  <div class="column">
+      <div class="image-border">
+    <img src="@ViewBag.SecondImage" class="image-center" width="400px" height="400px"/>
+    </div>
+  </div>
+  <div class="column">
+      <div class="image-border">
+    <img src="@ViewBag.ThirdImage" class="image-center" width="400px" height="400px"/>
+    </div>
+  </div>
+</div>
+<style>
+.image-border  {
+  max-width: 450px;
+  margin: 10px auto 0;
+  border-width: 10px;
+  border-style: solid;
+  border-image: url(https://html5book.ru/wp-content/uploads/2015/10/border-diagonal.png) 25% repeat repeat;
+  background: white;
+  }
+.image-center {
+    display:block;
+    margin: auto;
+}
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 33.33%;
+  padding: 5px;
+}
+</style>

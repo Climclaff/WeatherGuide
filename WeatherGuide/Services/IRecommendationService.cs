@@ -5,6 +5,6 @@ namespace WeatherGuide.Services
 {
     public interface IRecommendationService
     {
-        Task<string> GetRecommendation(AppUser appUser);
+        Task<Recommendation> GetRecommendation(AppUser appUser);
     }
 }
