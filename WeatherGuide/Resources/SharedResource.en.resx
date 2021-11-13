@@ -117,6 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AdministrationPage" xml:space="preserve">
+    <value>Administration page</value>
+  </data>
+  <data name="ExportUsers" xml:space="preserve">
+    <value>Exports users</value>
+  </data>
+  <data name="ImportUsers" xml:space="preserve">
+    <value>Import users</value>
+  </data>
+  <data name="ManageCategories" xml:space="preserve">
+    <value>Manage clothing categories</value>
+  </data>
+  <data name="ManageCountries" xml:space="preserve">
+    <value>Manage countries</value>
+  </data>
+  <data name="ManageCountryStates" xml:space="preserve">
+    <value>Manage country states</value>
+  </data>
+  <data name="ManageMeasurements" xml:space="preserve">
+    <value>Manage measurements</value>
+  </data>
+  <data name="ManageRecommendations" xml:space="preserve">
+    <value>Manage recommendations</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>Manage users</value>
+  </data>
   <data name="test" xml:space="preserve">
     <value>hello</value>
   </data>

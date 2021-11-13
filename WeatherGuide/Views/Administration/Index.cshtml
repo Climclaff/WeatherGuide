@@ -1,33 +1,38 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+ 
+@inject IViewLocalizer Localizer
+ 
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@{
     ViewData["Title"] = "Administration";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Administration Page</h1>
+    <h1 class="display-4">@SharedLocalizer["AdministrationPage"]</h1>
     <ul class="navbar-nav flex-grow-1">
                         <li>
-                            <a asp-area="" asp-controller="Country" asp-action="Index">Manage countries</a>
+                            <a asp-area="" asp-controller="Country" asp-action="Index">@SharedLocalizer["ManageCountries"]</a>
                         </li>
                         <li>
-                            <a asp-area="" asp-controller="State" asp-action="Index">Manage country states</a>
+                            <a asp-area="" asp-controller="State" asp-action="Index">@SharedLocalizer["ManageCountryStates"]</a>
                         </li>
                         <li>
-                            <a asp-area="" asp-controller="Measurement" asp-action="Index">Manage sensor measurements</a>
+                            <a asp-area="" asp-controller="Measurement" asp-action="Index">@SharedLocalizer["ManageMeasurements"]</a>
                         </li>
                         <li>
-                            <a asp-area="" asp-controller="Category" asp-action="Index">Manage clothing categories</a>
+                            <a asp-area="" asp-controller="Category" asp-action="Index">@SharedLocalizer["ManageCategories"]</a>
                         </li>
                         <li>
-                            <a asp-area="" asp-controller="Recommendation" asp-action="Index">Manage recommendations</a>
+                            <a asp-area="" asp-controller="Recommendation" asp-action="Index">@SharedLocalizer["ManageRecommendations"]</a>
                         </li>
                         <li>
-                            <a asp-area="" asp-controller="AppUser" asp-action="Index">Manage users</a>
+                            <a asp-area="" asp-controller="AppUser" asp-action="Index">@SharedLocalizer["ManageUsers"]</a>
                         </li>
                         <li>
-                            <a asp-area="" asp-controller="ExportUser" asp-action="Index">Export users</a>
+                            <a asp-area="" asp-controller="ExportUser" asp-action="Index">@SharedLocalizer["ExportUsers"]</a>
                         </li>
                         <li>
-                            <a asp-area="" asp-controller="ImportUser" asp-action="Index">Import users</a>
+                            <a asp-area="" asp-controller="ImportUser" asp-action="Index">@SharedLocalizer["ImportUsers"]</a>
                         </li>
    </ul>
 

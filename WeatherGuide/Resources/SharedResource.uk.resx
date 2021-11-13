@@ -117,6 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AdministrationPage" xml:space="preserve">
+    <value>Сторінка адміністрування</value>
+  </data>
+  <data name="ExportUsers" xml:space="preserve">
+    <value>Експорт користувачів</value>
+  </data>
+  <data name="ImportUsers" xml:space="preserve">
+    <value>Імпорт користувачів</value>
+  </data>
+  <data name="ManageCategories" xml:space="preserve">
+    <value>Управління категоріями одягу</value>
+  </data>
+  <data name="ManageCountries" xml:space="preserve">
+    <value>Управління країнами</value>
+  </data>
+  <data name="ManageCountryStates" xml:space="preserve">
+    <value>Управління регіонами</value>
+  </data>
+  <data name="ManageMeasurements" xml:space="preserve">
+    <value>Управління вимірами з сенсорів</value>
+  </data>
+  <data name="ManageRecommendations" xml:space="preserve">
+    <value>Управління рекомендаціями</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>Управління користувачами</value>
+  </data>
   <data name="test" xml:space="preserve">
     <value>Привіт</value>
   </data>
