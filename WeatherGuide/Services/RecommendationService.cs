@@ -18,7 +18,12 @@ namespace WeatherGuide.Services
         {
             _recommendationRepository = recommendationRepository;
         }
-        public async Task<Recommendation> GetRecommendation(AppUser appUser)
+        public async Task<Measurement> FindUserMeasurement(AppUser appUser)
+        {
+            Measurement meas = await _recommendationRepository.GetMeasurementForCurrentUser(appUser.Id);
+            return meas;
+        }
+            public async Task<Recommendation> GetRecommendation(AppUser appUser)
         {
             currentUser = appUser;
             currentMeasurement = await _recommendationRepository.GetMeasurementForCurrentUser(currentUser.Id);

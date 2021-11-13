@@ -49,7 +49,8 @@ namespace WeatherGuide.Controllers
             {
                 CultureInfo culture = CultureInfo.CurrentCulture;
                 var user = await _userManager.GetUserAsync(HttpContext.User);
-                Recommendation recommendation = await _recommendationService.GetRecommendation(user);                             
+                Measurement measurement = await _recommendationService.FindUserMeasurement(user);              
+                Recommendation recommendation = await _recommendationService.GetRecommendation(user);
                 if (culture.Name == "en-US")
                 {
                     IEnumerable<string> itemNamesEN = new List<string>() {
@@ -58,6 +59,11 @@ namespace WeatherGuide.Controllers
                     recommendation.ThirdClothing.NameEN,
                     };
                     TempData["Items"] = itemNamesEN;
+                    IEnumerable<string> measurementValues = new List<string>() {
+                        Convert.ToString((int)(measurement.Temperature * 1.8) + 32)+"°F",
+                        Convert.ToString(measurement.WindSpeed * 2)+" miles/hour",
+                        Convert.ToString(measurement.Humidity) + "%"};
+                        TempData["Measurement"] = measurementValues;
                 }
                 else
                 {
@@ -68,8 +74,14 @@ namespace WeatherGuide.Controllers
                     recommendation.ThirdClothing.NameUA,
                 };
                     TempData["Items"] = itemNamesUA;
-                }
+                    IEnumerable<string> measurementValues = new List<string>() {
+                        Convert.ToString(measurement.Temperature)+"°C",
+                        Convert.ToString(measurement.WindSpeed)+" м/с",
+                        Convert.ToString(measurement.Humidity) + "%"};
+                    TempData["Measurement"] = measurementValues;
+                }                
                 TempData.Keep("Items");
+                TempData.Keep("Measurement");
                 return View(recommendation);
             }
             return LocalRedirect("/Identity/Account/Login"); ;

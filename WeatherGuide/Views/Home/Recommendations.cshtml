@@ -2,20 +2,39 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Recommendations";
+    ViewData["Title"] = "Recommendation page";
 }
-<h1>@ViewData["Title"]</h1>
 
+<h1>@ViewData["Title"]</h1>
  @{ ViewBag.FirstImage = "data:image/jpg;base64," + Convert.ToBase64String(Model.FirstClothing.ImageData); } 
  @{ ViewBag.SecondImage = "data:image/jpg;base64," + Convert.ToBase64String(Model.SecondClothing.ImageData); } 
 @{
     ViewBag.ThirdImage = "data:image/jpg;base64," + Convert.ToBase64String(Model.ThirdClothing.ImageData);} 
- @{IEnumerable<string> items = TempData.Peek("Items") as IEnumerable<string>; }
-<p>Clothing recommendation page</p>
+@{
+    IEnumerable<string> items = TempData.Peek("Items") as IEnumerable<string>;}
+  @{IEnumerable<string> measurement = TempData.Peek("Measurement") as IEnumerable<string>; }
+
+
+
+<div class="weather-widget">
+  <div class="content">
+    <div id="location">Weather in your region</div>
+    <div id="temperature">@measurement.ToArray()[0]</div>
+    <div id="summary">Wind: @measurement.ToArray()[1]</div>
+    <div class="textbottom">Humidity: @measurement.ToArray()[2]</div>
+  </div>
+</div>
+
+<div id="recommendation">
+<p>Your recommendation for today:</p>
 @foreach(var item in items)
 {
     <p>@item</p>
 }
+</div>
+
+
+
 <div class="row">
   <div class="column">
       <div class="image-border">
@@ -54,4 +73,66 @@
   flex: 33.33%;
   padding: 5px;
 }
+
+
+
+
+.weather-widget{
+  position: relative;
+  width: 400px;
+  height: 400px;
+  left: 50%;
+  top: 50%;
+  margin-top:-220px;
+  margin-left:-200px;
+  border-radius:10px;
+}
+
+.weather-icon{
+  display:block;
+  margin: 0 auto;
+}
+
+#location{
+  text-align: center;
+  font-size: 26px;
+  /*color: skyblue;*/
+}
+
+#temperature{
+  font-weight: bold;
+  font-size: 42px;
+  text-align: center;
+  color: skyblue;
+  cursor: pointer;
+}
+
+#summary{
+  text-align: center;
+  /*color: skyblue;*/
+  font-size: 23px;
+}
+
+.content{
+  position: relative;
+  top: 50%;
+  margin-top: 43px;
+}
+
+.textbottom{
+  text-align: center;
+  margin-top: 30px;
+  font-size: 12px;
+  color: #222;
+}
+
+h1 {
+    text-align:center;
+}
+
+#recommendation{
+    font-weight: bold;
+    font-size: 20px;
+}
+
 </style>
