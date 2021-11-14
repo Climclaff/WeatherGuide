@@ -1,12 +1,10 @@
 ﻿@model WeatherGuide.Models.Clothing
-
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Clothing</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,27 +13,27 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="NameEN" class="control-label"></label>
+                <label class="control-label">@SharedLocalizer["ClothingNameEN"]</label>
                 <input asp-for="NameEN" class="form-control" />
                 <span asp-validation-for="NameEN" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="NameUA" class="control-label"></label>
+                <label class="control-label">@SharedLocalizer["ClothingNameUA"]</label>
                 <input asp-for="NameUA" class="form-control" />
                 <span asp-validation-for="NameUA" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Warmth" class="control-label"></label>
+                <label class="control-label">@SharedLocalizer["Warmth"]</label>
                 <input asp-for="Warmth" class="form-control" />
                 <span asp-validation-for="Warmth" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MoistureResistance" class="control-label"></label>
+                <label class="control-label">@SharedLocalizer["MoistureResistance"]</label>
                 <input asp-for="MoistureResistance" class="form-control" />
                 <span asp-validation-for="MoistureResistance" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
+                <label class="control-label">@SharedLocalizer["SelectCategory"]</label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
@@ -52,7 +50,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@SharedLocalizer["Back to List"]</a>
 </div>
 
 @section Scripts {

@@ -1,11 +1,11 @@
 ﻿@model WeatherGuide.Models.AppUser
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>AppUser</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -102,7 +102,7 @@
 
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@SharedLocalizer["Back to List"]</a>
 </div>
 
 @section Scripts {

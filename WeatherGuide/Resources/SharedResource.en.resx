@@ -123,8 +123,20 @@
   <data name="AdministrationPage" xml:space="preserve">
     <value>Administration page</value>
   </data>
+  <data name="Are you sure you want to delete this?" xml:space="preserve">
+    <value>Are you sure you want to delete this?</value>
+  </data>
+  <data name="Back to List" xml:space="preserve">
+    <value>Back to List</value>
+  </data>
   <data name="ClothingManagement" xml:space="preserve">
     <value>Clothing management</value>
+  </data>
+  <data name="ClothingNameEN" xml:space="preserve">
+    <value>Clothing name in English</value>
+  </data>
+  <data name="ClothingNameUA" xml:space="preserve">
+    <value>Clothing name in Ukrainian</value>
   </data>
   <data name="Confirm new password" xml:space="preserve">
     <value>Confirm new password</value>
@@ -135,8 +147,20 @@
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="Create new" xml:space="preserve">
+    <value>Create new</value>
+  </data>
   <data name="Current password" xml:space="preserve">
     <value>Current password</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
   <data name="Error during registration, maybe user with such name already exists" xml:space="preserve">
     <value>Error during registration, maybe user with such name already exists</value>
@@ -183,6 +207,9 @@
   <data name="ManageUsers" xml:space="preserve">
     <value>Manage users</value>
   </data>
+  <data name="MoistureResistance" xml:space="preserve">
+    <value>Moisture resistance parameter(0-100)</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -207,6 +234,9 @@
   <data name="Register" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>Select category, where 1 - TOP, 2 - BOTTOM, 3 - BOOTS</value>
+  </data>
   <data name="State" xml:space="preserve">
     <value>State</value>
   </data>
@@ -227,6 +257,9 @@
   </data>
   <data name="The {0} must be at least {2} and at max {1} characters long." xml:space="preserve">
     <value>The {0} must be at least {2} and at max {1} characters long.</value>
+  </data>
+  <data name="Warmth" xml:space="preserve">
+    <value>Warmth parameter(0-100)</value>
   </data>
   <data name="Your info has been changed successfully." xml:space="preserve">
     <value>Your info has been changed successfully.</value>

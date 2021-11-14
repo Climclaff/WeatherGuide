@@ -123,8 +123,20 @@
   <data name="AdministrationPage" xml:space="preserve">
     <value>Сторінка адміністрування</value>
   </data>
+  <data name="Are you sure you want to delete this?" xml:space="preserve">
+    <value>Ви впевнені, що хочете видалити це?</value>
+  </data>
+  <data name="Back to List" xml:space="preserve">
+    <value>Назад до списку</value>
+  </data>
   <data name="ClothingManagement" xml:space="preserve">
     <value>Управління одягом</value>
+  </data>
+  <data name="ClothingNameEN" xml:space="preserve">
+    <value>Назва речі англійською</value>
+  </data>
+  <data name="ClothingNameUA" xml:space="preserve">
+    <value>Назва речі українською</value>
   </data>
   <data name="Confirm new password" xml:space="preserve">
     <value>Підтвердження нового паролю</value>
@@ -135,8 +147,20 @@
   <data name="Country" xml:space="preserve">
     <value>Країна</value>
   </data>
+  <data name="Create new" xml:space="preserve">
+    <value>Новий запис</value>
+  </data>
   <data name="Current password" xml:space="preserve">
     <value>Старий пароль</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Видалити</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Деталі</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Змінити</value>
   </data>
   <data name="EmailAddress" xml:space="preserve">
     <value>Електронна пошта</value>
@@ -186,6 +210,9 @@
   <data name="ManageUsers" xml:space="preserve">
     <value>Управління користувачами</value>
   </data>
+  <data name="MoistureResistance" xml:space="preserve">
+    <value>Параметр захисту від вологи(0-100)</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Ім'я</value>
   </data>
@@ -210,6 +237,9 @@
   <data name="Register" xml:space="preserve">
     <value>Реєстрація</value>
   </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>Категорія, де 1 - ВЕРХ, 2 - НИЗ, 3 - ВЗУТТЯ</value>
+  </data>
   <data name="State" xml:space="preserve">
     <value>Регіон</value>
   </data>
@@ -230,6 +260,9 @@
   </data>
   <data name="The {0} must be at least {2} and at max {1} characters long." xml:space="preserve">
     <value>Поле {0} повинно бути довжиною від {2} до {1} символів.</value>
+  </data>
+  <data name="Warmth" xml:space="preserve">
+    <value>Параметр теплоти(0-100)</value>
   </data>
   <data name="Your info has been changed successfully." xml:space="preserve">
     <value>Ваша інформація була успішно змінена</value>
