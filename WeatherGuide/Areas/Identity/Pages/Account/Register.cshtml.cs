@@ -95,8 +95,11 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
         public async Task OnGetStateSelectAsync(string stateName, string countryId)
         {
             var state = await _context.Set<State>().Where(x => x.CountryId == Convert.ToInt32(countryId)).Where(x => x.Name == stateName).FirstOrDefaultAsync();
-            TempData["StateId"] = Convert.ToString(state.Id);
-            TempData.Keep("StateId");
+            if (state != null)
+            {
+                TempData["StateId"] = Convert.ToString(state.Id);
+                TempData.Keep("StateId");
+            }
         }
         public async Task OnGetAsync(string returnUrl = null)
         {

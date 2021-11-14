@@ -2,7 +2,7 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Recommendation page";
+    ViewData["Title"] = @Localizer["RecommendationPage"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -18,15 +18,15 @@
 
 <div class="weather-widget">
   <div class="content">
-    <div id="location">Weather in your region</div>
+    <div id="location">@Localizer["Weather"]</div>
     <div id="temperature">@measurement.ToArray()[0]</div>
-    <div id="summary">Wind: @measurement.ToArray()[1]</div>
-    <div class="textbottom">Humidity: @measurement.ToArray()[2]</div>
+    <div id="summary">@Localizer["Wind"] @measurement.ToArray()[1]</div>
+    <div class="textbottom">@Localizer["Humidity"] @measurement.ToArray()[2]</div>
   </div>
 </div>
 
 <div id="recommendation">
-<p>Your recommendation for today:</p>
+<p>@Localizer["RecommendationToday"]</p>
 @foreach(var item in items)
 {
     <p>@item</p>

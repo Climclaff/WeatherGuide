@@ -1,8 +1,10 @@
 @page "{handler?}"
 @model RegisterModel
 @using Microsoft.AspNetCore.Http.Extensions
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = @Localizer["Register"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -11,47 +13,47 @@
     <div class="col-md-4">
         <partial name="_StatusMessage" model="Model.StatusMessage" />
         <form asp-page-handler="Register" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
+            <h4>@Localizer["NewAccount"]</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Input.Email"></label>
+                <label>@Localizer["Email"]</label>
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Password"></label>
+                <label>@Localizer["Password"]</label>
                 <input asp-for="Input.Password" class="form-control" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
+                <label>@Localizer["ConfirmPassword"]</label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />           
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Name"></label>
+                <label>@Localizer["Name"]</label>
                 <input asp-for="Input.Name" class="form-control" />           
                 <span asp-validation-for="Input.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Surname"></label>
+                <label>@Localizer["Surname"]</label>
                 <input asp-for="Input.Surname" class="form-control" />           
                 <span asp-validation-for="Input.Surname" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label> Country</label>
+                <label>@Localizer["Country"]</label>
                 <select asp-for="CountryId" class ="form-control" asp-items="Model.Countries">
-                    <option value="">Select Country</option>
+                    <option value="">@Localizer["SelectCountry"]</option>
                 </select>
                 
             </div>
             <div class="form-group">
-                 <label> State</label>
+                 <label>@Localizer["State"]</label>
                 <select asp-for="StateId" class ="form-control"></select>
             </div>
 
-            <button id="btn" type="submit" class="btn btn-primary">Register</button>
+            <button id="btn" type="submit" class="btn btn-primary">@Localizer["Register"]</button>
         </form>
     </div>
     
@@ -64,7 +66,7 @@
         $("#CountryId").on("change", function() {
             var countryId = $(this).val();
             $("#StateId").empty();
-            $("#StateId").append("<option value=''>Select State</option>");
+            $("#StateId").append("<option value=''></option>");
             $.getJSON(`?handler=States&countryId=${countryId}`, (data) => {
                 $.each(data, function (i, item) {
                     $("#StateId").append(`<option value="${item.stateId}">${item.name}</option>`);

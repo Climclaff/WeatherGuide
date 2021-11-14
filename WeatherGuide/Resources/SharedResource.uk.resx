@@ -117,14 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Administration" xml:space="preserve">
+    <value>Адміністрування</value>
+  </data>
   <data name="AdministrationPage" xml:space="preserve">
     <value>Сторінка адміністрування</value>
+  </data>
+  <data name="ClothingManagement" xml:space="preserve">
+    <value>Управління одягом</value>
   </data>
   <data name="ExportUsers" xml:space="preserve">
     <value>Експорт користувачів</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Привіт,</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Головна</value>
+  </data>
   <data name="ImportUsers" xml:space="preserve">
     <value>Імпорт користувачів</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Мова:</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Вхід</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Вихід</value>
   </data>
   <data name="ManageCategories" xml:space="preserve">
     <value>Управління категоріями одягу</value>
@@ -143,6 +164,15 @@
   </data>
   <data name="ManageUsers" xml:space="preserve">
     <value>Управління користувачами</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профіль</value>
+  </data>
+  <data name="Recommendations" xml:space="preserve">
+    <value>Рекомендації</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Реєстрація</value>
   </data>
   <data name="test" xml:space="preserve">
     <value>Привіт</value>

@@ -117,14 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Administration" xml:space="preserve">
+    <value>Administration</value>
+  </data>
   <data name="AdministrationPage" xml:space="preserve">
     <value>Administration page</value>
+  </data>
+  <data name="ClothingManagement" xml:space="preserve">
+    <value>Clothing management</value>
   </data>
   <data name="ExportUsers" xml:space="preserve">
     <value>Exports users</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello,</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
   <data name="ImportUsers" xml:space="preserve">
     <value>Import users</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language:</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Log out</value>
   </data>
   <data name="ManageCategories" xml:space="preserve">
     <value>Manage clothing categories</value>
@@ -143,6 +164,15 @@
   </data>
   <data name="ManageUsers" xml:space="preserve">
     <value>Manage users</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Recommendations" xml:space="preserve">
+    <value>Recommendations</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
   </data>
   <data name="test" xml:space="preserve">
     <value>hello</value>

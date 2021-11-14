@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
 <!DOCTYPE html>
@@ -26,23 +28,23 @@
                             @await Html.PartialAsync("_SelectLanguagePartial")
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["Home"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Recommendations">Recommendations</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Recommendations">@SharedLocalizer["Recommendations"]</a>
                         </li>                      
                         @if (SignInManager.IsSignedIn(User))
                         {
                             if (User.FindFirst("IsAdmin").Value == "true")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Administration" asp-action="Index">Administration</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Administration" asp-action="Index">@SharedLocalizer["Administration"]</a>
                                 </li>
                             }
                             if (User.FindFirst("IsDesigner").Value == "true")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Clothing" asp-action="Index">Clothing management</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Clothing" asp-action="Index">@SharedLocalizer["ClothingManagement"]</a>
                                 </li>
                             }
                         }
