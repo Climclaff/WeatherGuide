@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using WeatherGuide.Data;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 {
@@ -22,16 +23,19 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<Models.AppUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _context;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
         public EmailModel(
             UserManager<Models.AppUser> userManager,
             SignInManager<Models.AppUser> signInManager,
             IEmailSender emailSender,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _context = context;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         public string Username { get; set; }
@@ -50,12 +54,12 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "{0} is required")]
             [RegularExpression(@"^(([A-za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+[\s]{1}[A-za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+)|([A-Za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+))$",
                 ErrorMessage = "The Name field must contain alphabetical characters")]
             [Display(Name = "New name")]
             public string NewName { get; set; }
-            [Required]
+            [Required(ErrorMessage = "{0} is required")]
             [RegularExpression(@"^(([A-za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+[\s]{1}[A-za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+)|([A-Za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+))$",
                 ErrorMessage = "The Surname field must contain alphabetical characters")]
             [Display(Name = "New surname")]
@@ -121,10 +125,10 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
             {
                 await _signInManager.SignOutAsync();
                 await _signInManager.SignInAsync(user, false);
-                StatusMessage = "Your info has been changed successfully.";
+                StatusMessage = _sharedLocalizer["Your info has been changed successfully."];
                 return RedirectToPage();
             }
-            StatusMessage = "Your info is unchanged.";
+            StatusMessage = _sharedLocalizer["Your info is unchanged."];
             return RedirectToPage();
         }
 

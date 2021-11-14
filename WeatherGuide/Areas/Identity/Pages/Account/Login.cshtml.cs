@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Localization;
 
 namespace WeatherGuide.Areas.Identity.Pages.Account
 {
@@ -20,14 +21,17 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
         private readonly UserManager<Models.AppUser> _userManager;
         private readonly SignInManager<Models.AppUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
         public LoginModel(SignInManager<Models.AppUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<Models.AppUser> userManager)
+            UserManager<Models.AppUser> userManager,
+            IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _sharedLocalizer = sharedLocalizer;
+                
         }
 
         [BindProperty]
@@ -42,12 +46,14 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "{0} is required")]
+            [EmailAddress(ErrorMessage = "EmailAddress")]
+            [Display(Name = "EmailAddress")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} is required")]
             [DataType(DataType.Password)]
+            [Display(Name = "Password")]
             public string Password { get; set; }
 
             [Display(Name = "Remember me?")]
@@ -96,7 +102,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, _sharedLocalizer["Invalid login attempt."]);
                     return Page();
                 }
             }

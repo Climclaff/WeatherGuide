@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using WeatherGuide.Data;
 using WeatherGuide.Models;
@@ -29,25 +30,32 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
         private readonly UserManager<Models.AppUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
         public RegisterModel(
             UserManager<Models.AppUser> userManager,
             SignInManager<Models.AppUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _context = context;
+            _sharedLocalizer = sharedLocalizer;
         }
         [TempData]
         public string StatusMessage { get; set; }
-        [BindProperty(SupportsGet = true)]    
+        [BindProperty(SupportsGet = true)]
+        [Required(ErrorMessage = "{0} is required")]
+        [Display(Name = "Country")]
         public int CountryId { get; set; }
         [BindProperty(SupportsGet = true)]
+        [Required(ErrorMessage = "{0} is required")]
+        [Display(Name = "State")]
         public int StateId { get; set; }
         public SelectList Countries { get; set; }
         [BindProperty]
@@ -58,12 +66,12 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
+            [Required(ErrorMessage = "{0} is required")]
+            [EmailAddress(ErrorMessage = "{0} is not valid")]
+            [Display(Name = "EmailAddress")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} is required")]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -74,16 +82,15 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
-            
+            [Required(ErrorMessage = "{0} is required")]          
             [RegularExpression(@"^(([A-za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+[\s]{1}[A-za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+)|([A-Za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+))$", 
-                ErrorMessage = "The Name field must contain alphabetical characters")]
+                ErrorMessage = "The field must contain alphabetical characters")]
             [Display(Name = "Name")]
             public string Name { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} is required")]
             [RegularExpression(@"^(([A-za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+[\s]{1}[A-za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+)|([A-Za-zÀ-ÙÜÞß¥ª²¯à-ùüþÿ´º³¿]+))$",
-                ErrorMessage = "The Surname field must contain alphabetical characters")]
+                ErrorMessage = "The field must contain alphabetical characters")]
             [Display(Name = "Surname")]
             public string Surname { get; set; }
 
@@ -168,7 +175,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
             }
 
             // If we got this far, something failed, redisplay form
-            StatusMessage = "Error during registration, maybe user with such name already exists";
+            StatusMessage = _sharedLocalizer["Error during registration, maybe user with such name already exists"];
             return RedirectToPage();        
         }
     }

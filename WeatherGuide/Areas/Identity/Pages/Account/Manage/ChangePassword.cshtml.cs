@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 {
@@ -14,15 +15,17 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<Models.AppUser> _userManager;
         private readonly SignInManager<Models.AppUser> _signInManager;
         private readonly ILogger<ChangePasswordModel> _logger;
-
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
         public ChangePasswordModel(
             UserManager<Models.AppUser> userManager,
             SignInManager<Models.AppUser> signInManager,
-            ILogger<ChangePasswordModel> logger)
+            ILogger<ChangePasswordModel> logger,
+            IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [BindProperty]
@@ -33,12 +36,12 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "{0} is required")]
             [DataType(DataType.Password)]
             [Display(Name = "Current password")]
             public string OldPassword { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "{0} is required")]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "New password")]
@@ -92,7 +95,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Your password has been changed.";
+            StatusMessage = _sharedLocalizer["Your password has been changed."];
 
             return RedirectToPage();
         }

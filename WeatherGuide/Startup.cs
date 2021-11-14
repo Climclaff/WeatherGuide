@@ -45,7 +45,9 @@ namespace WeatherGuide
             services.AddControllersWithViews()
                 .AddDataAnnotationsLocalization(options => {
                     options.DataAnnotationLocalizerProvider = (type, factory) =>
-                        factory.Create(typeof(SharedResource));
+                    {
+                      return factory.Create(typeof(SharedResource));
+                    };
                 })
                 .AddViewLocalization();
             services.AddScoped<IRecommendationRepository, RecommendationRepository>();

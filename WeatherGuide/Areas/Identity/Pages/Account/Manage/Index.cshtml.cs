@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using WeatherGuide.Data;
 using WeatherGuide.Models;
 namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
@@ -17,14 +18,17 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<Models.AppUser> _userManager;
         private readonly SignInManager<Models.AppUser> _signInManager;
         private readonly ApplicationDbContext _context;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
         public IndexModel(
             UserManager<Models.AppUser> userManager,
             SignInManager<Models.AppUser> signInManager,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         public string Username { get; set; }
@@ -131,7 +135,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
             }
 
                 await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = _sharedLocalizer["Your profile has been updated"];
             return RedirectToPage();
         }
     }
