@@ -1,16 +1,17 @@
 ﻿@model WeatherGuide.Models.Claims
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
 <form asp-action="ClaimChange">
-<label>Name</label>
 <div class="form-group">              
-                <label asp-for="ClaimsList[0].Id" class="control-label"></label>
-                <input asp-for="ClaimsList[0].Id" name="claimId" class="form-control" />
+                <label class="control-label">@SharedLocalizer["NameId"]</label>
+                <input asp-for="ClaimsList[0].Id" name="claimId" class="form-control"disabled />
                 <span asp-validation-for="ClaimsList[0].Id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClaimsList[0].ClaimValue" class="control-label"></label>
+                <label class="control-label">@SharedLocalizer["Name"]</label>
                 <input asp-for="ClaimsList[0].ClaimValue" name="value" class="form-control" />
                 <span asp-validation-for="ClaimsList[0].ClaimValue" class="text-danger"></span>
             </div>
@@ -19,14 +20,13 @@
             </div>
 </form>
 <form asp-action="ClaimChange">
-<label>Surname</label>
 <div class="form-group">             
-                <label asp-for="ClaimsList[1].Id" class="control-label"></label>
-                <input asp-for="ClaimsList[1].Id" name="claimId" class="form-control" />
+                <label class="control-label">@SharedLocalizer["SurnameId"]</label>
+                <input asp-for="ClaimsList[1].Id" name="claimId" class="form-control"disabled />
                 <span asp-validation-for="ClaimsList[1].Id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClaimsList[1].ClaimValue" class="control-label"></label>
+                <label class="control-label">@SharedLocalizer["Surname"]</label>
                 <input asp-for="ClaimsList[1].ClaimValue" name="value" class="form-control" />
                 <span asp-validation-for="ClaimsList[1].ClaimValue" class="text-danger"></span>
             </div>
@@ -36,15 +36,14 @@
 </form>
 @if (User.FindFirst("IsSuperAdmin") != null)
 {
-    <form asp-action="ClaimChange">
-        <label>Is Admin</label>
+    <form asp-action="ClaimChange">       
         <div class="form-group">              
-            <label asp-for="ClaimsList[2].Id" class="control-label"></label>
-            <input asp-for="ClaimsList[2].Id" name="claimId" class="form-control" />
+            <label class="control-label">@SharedLocalizer["AdministrationRightsId"]</label>
+            <input asp-for="ClaimsList[2].Id" name="claimId" class="form-control"disabled />
             <span asp-validation-for="ClaimsList[2].Id" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="ClaimsList[2].ClaimValue" class="control-label"></label>
+            <label class="control-label">@SharedLocalizer["AdministrationRights"]</label>
             <input asp-for="ClaimsList[2].ClaimValue" name="value" class="form-control" />
             <span asp-validation-for="ClaimsList[2].ClaimValue" class="text-danger"></span>
         </div>
@@ -56,12 +55,12 @@
 <form asp-action="ClaimChange">
 <label>Is Designer</label>
 <div class="form-group">
-                <label asp-for="ClaimsList[3].Id" class="control-label"></label>
-                <input asp-for="ClaimsList[3].Id" name="claimId" class="form-control" />
+                <label class="control-label">@SharedLocalizer["DesignerRightsId"]</label>
+                <input asp-for="ClaimsList[3].Id" name="claimId" class="form-control" disabled />
                 <span asp-validation-for="ClaimsList[3].Id" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClaimsList[3].ClaimValue" class="control-label"></label>
+                <label class="control-label">@SharedLocalizer["DesignerRights"]</label>
                 <input asp-for="ClaimsList[3].ClaimValue" name="value" class="form-control" />
                 <span asp-validation-for="ClaimsList[3].ClaimValue" class="text-danger"></span>
             </div>

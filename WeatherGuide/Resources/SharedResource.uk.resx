@@ -123,6 +123,12 @@
   <data name="AdministrationPage" xml:space="preserve">
     <value>Сторінка адміністрування</value>
   </data>
+  <data name="AdministrationRights" xml:space="preserve">
+    <value>Права адміністрування (true/false)</value>
+  </data>
+  <data name="AdministrationRightsId" xml:space="preserve">
+    <value>Права адміністрування (Id)</value>
+  </data>
   <data name="Are you sure you want to delete this?" xml:space="preserve">
     <value>Ви впевнені, що хочете видалити це?</value>
   </data>
@@ -155,6 +161,12 @@
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Видалити</value>
+  </data>
+  <data name="DesignerRights" xml:space="preserve">
+    <value>Права дизайнера (true/false)</value>
+  </data>
+  <data name="DesignerRightsId" xml:space="preserve">
+    <value>Права дизайнера (Id)</value>
   </data>
   <data name="Details" xml:space="preserve">
     <value>Деталі</value>
@@ -216,6 +228,9 @@
   <data name="Name" xml:space="preserve">
     <value>Ім'я</value>
   </data>
+  <data name="NameId" xml:space="preserve">
+    <value>Ім'я (Id)</value>
+  </data>
   <data name="New name" xml:space="preserve">
     <value>Нове ім'я</value>
   </data>
@@ -245,6 +260,9 @@
   </data>
   <data name="Surname" xml:space="preserve">
     <value>Прізвище</value>
+  </data>
+  <data name="SurnameId" xml:space="preserve">
+    <value>Прізвище (Id)</value>
   </data>
   <data name="test" xml:space="preserve">
     <value>Привіт</value>
