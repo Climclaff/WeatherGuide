@@ -1,11 +1,71 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
- 
 @inject IViewLocalizer Localizer
- 
 @inject IHtmlLocalizer<SharedResource> SharedLocalizer
- 
+ @{
+    ViewData["Title"] = @Localizer["MainPage"];
+}
 
-<div class="text-center">
-    <h1>@ViewData["Title"]</h1>
-    <h3>@SharedLocalizer["test"]</h3>
+<div class="MainContent">
+  <div class="saturnGraphic"> 
+    <img src="icon.png" alt="sample">
+  </div>
+  <div class="profileHeader">
+    <h1>WeatherGuide</h1>
+    <h2>@Localizer["Clothing recommendation app"]</h2>
+    <hr>
+    <p>@Localizer["MainText"]</p>
+  </div>
 </div>
+
+<style>
+    .MainContent {
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
+	max-width: 800px;
+	padding-left: 2.275%;
+	padding-right: 2.275%;
+}
+.MainContent {
+	text-align: center;
+	display: block;
+}
+ .saturnGraphic {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 50%;
+	height: 259px;
+}
+hr {
+	background-color: #6A2144;
+	height: 5px;
+}
+h1 {
+	margin: 0;
+	font-size: 36px;
+	font-family: Gotham, Tahoma, sans-serif;
+	text-align: center;
+	color: #F67A53;
+	text-transform: uppercase;
+	letter-spacing: .08em;
+	
+}
+h2 {
+	margin: 5px;
+	font-size: 16px;
+	font-family: Georgia, serif;
+	color: #282828;
+	text-align: center;
+	font-style: italic;
+	font-weight: 300;	
+}
+p {
+	font-size: 14px;
+	font-family: sans-serif;
+	color: #6F6F6F;
+	font-weight:  500;
+	line-height: 22px;
+}
+
+</style>
