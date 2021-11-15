@@ -189,6 +189,9 @@
   <data name="Home" xml:space="preserve">
     <value>Головна</value>
   </data>
+  <data name="ImgData" xml:space="preserve">
+    <value>Зображення</value>
+  </data>
   <data name="ImportUsers" xml:space="preserve">
     <value>Імпорт користувачів</value>
   </data>

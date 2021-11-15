@@ -186,6 +186,9 @@
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="ImgData" xml:space="preserve">
+    <value>Image</value>
+  </data>
   <data name="ImportUsers" xml:space="preserve">
     <value>Import users</value>
   </data>

@@ -10,37 +10,37 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NameEN)
+            @SharedLocalizer["ClothingNameEN"]
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.NameEN)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NameUA)
+           @SharedLocalizer["ClothingNameUA"]
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.NameUA)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Warmth)
+            @SharedLocalizer["Warmth"]
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Warmth)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MoistureResistance)
+            @SharedLocalizer["MoistureResistance"]
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.MoistureResistance)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
+            @SharedLocalizer["SelectCategory"]
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Category.Id)
         </dd class>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageData)
+            @SharedLocalizer["ImgData"]
         </dt>
         <dd class = "col-sm-10">
             @{ ViewBag.Image = "data:image/jpg;base64," + Convert.ToBase64String(Model.ImageData); } 
