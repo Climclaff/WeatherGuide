@@ -135,6 +135,9 @@
   <data name="Back to List" xml:space="preserve">
     <value>Назад до списку</value>
   </data>
+  <data name="CategoryTableVal" xml:space="preserve">
+    <value>Категорія</value>
+  </data>
   <data name="ClothingManagement" xml:space="preserve">
     <value>Управління одягом</value>
   </data>
@@ -228,6 +231,9 @@
   <data name="MoistureResistance" xml:space="preserve">
     <value>Параметр захисту від вологи(0-100)</value>
   </data>
+  <data name="MoistureTableVal" xml:space="preserve">
+    <value>Захист від вологи</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Ім'я</value>
   </data>
@@ -284,6 +290,9 @@
   </data>
   <data name="Warmth" xml:space="preserve">
     <value>Параметр теплоти(0-100)</value>
+  </data>
+  <data name="WarmthTableVal" xml:space="preserve">
+    <value>Теплота</value>
   </data>
   <data name="Your info has been changed successfully." xml:space="preserve">
     <value>Ваша інформація була успішно змінена</value>

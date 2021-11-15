@@ -135,6 +135,9 @@
   <data name="Back to List" xml:space="preserve">
     <value>Back to List</value>
   </data>
+  <data name="CategoryTableVal" xml:space="preserve">
+    <value>Category</value>
+  </data>
   <data name="ClothingManagement" xml:space="preserve">
     <value>Clothing management</value>
   </data>
@@ -225,6 +228,9 @@
   <data name="MoistureResistance" xml:space="preserve">
     <value>Moisture resistance parameter(0-100)</value>
   </data>
+  <data name="MoistureTableVal" xml:space="preserve">
+    <value>Moisture resistance</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -281,6 +287,9 @@
   </data>
   <data name="Warmth" xml:space="preserve">
     <value>Warmth parameter(0-100)</value>
+  </data>
+  <data name="WarmthTableVal" xml:space="preserve">
+    <value>Warmth</value>
   </data>
   <data name="Your info has been changed successfully." xml:space="preserve">
     <value>Your info has been changed successfully.</value>
