@@ -135,6 +135,9 @@
   <data name="Back to List" xml:space="preserve">
     <value>Назад до списку</value>
   </data>
+  <data name="CategoryName" xml:space="preserve">
+    <value>Назва</value>
+  </data>
   <data name="CategoryTableVal" xml:space="preserve">
     <value>Категорія</value>
   </data>
@@ -192,6 +195,9 @@
   <data name="Error during registration, maybe user with such name already exists" xml:space="preserve">
     <value>Помилка під час реєстрації, можливо користувач з такою електронною адресою вже існує</value>
   </data>
+  <data name="ExportToExcel" xml:space="preserve">
+    <value>Експорт у форматі excel</value>
+  </data>
   <data name="ExportUsers" xml:space="preserve">
     <value>Експорт користувачів</value>
   </data>
@@ -206,6 +212,9 @@
   </data>
   <data name="ImgData" xml:space="preserve">
     <value>Зображення</value>
+  </data>
+  <data name="ImportFromExcel" xml:space="preserve">
+    <value>Імпорт з таблиці excel</value>
   </data>
   <data name="ImportUsers" xml:space="preserve">
     <value>Імпорт користувачів</value>

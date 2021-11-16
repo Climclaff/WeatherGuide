@@ -135,6 +135,9 @@
   <data name="Back to List" xml:space="preserve">
     <value>Back to List</value>
   </data>
+  <data name="CategoryName" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="CategoryTableVal" xml:space="preserve">
     <value>Category</value>
   </data>
@@ -189,6 +192,9 @@
   <data name="Error during registration, maybe user with such name already exists" xml:space="preserve">
     <value>Error during registration, maybe user with such name already exists</value>
   </data>
+  <data name="ExportToExcel" xml:space="preserve">
+    <value>Export to excel</value>
+  </data>
   <data name="ExportUsers" xml:space="preserve">
     <value>Export users</value>
   </data>
@@ -203,6 +209,9 @@
   </data>
   <data name="ImgData" xml:space="preserve">
     <value>Image</value>
+  </data>
+  <data name="ImportFromExcel" xml:space="preserve">
+    <value>Import from excel</value>
   </data>
   <data name="ImportUsers" xml:space="preserve">
     <value>Import users</value>

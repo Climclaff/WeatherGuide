@@ -1,9 +1,11 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@{
 	ViewData["Title"] = "Index";
 }
 <div style ="margin-top:50px;">
  <div align="left">
-	 <a href = "/ExportUser/ExporttoExcel">Export to excel</a>
+	 <a href = "/ExportUser/ExporttoExcel">@SharedLocalizer["ExportToExcel"]</a>
  </div>
  <table class="table table-boarded table-responsive">
 	 <thead>
