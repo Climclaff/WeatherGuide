@@ -181,7 +181,7 @@
     <value>Error during registration, maybe user with such name already exists</value>
   </data>
   <data name="ExportUsers" xml:space="preserve">
-    <value>Exports users</value>
+    <value>Export users</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>Hello,</value>
