@@ -156,11 +156,20 @@
   <data name="Country" xml:space="preserve">
     <value>Країна</value>
   </data>
+  <data name="CountryId" xml:space="preserve">
+    <value>ID країни</value>
+  </data>
+  <data name="CountryName" xml:space="preserve">
+    <value>Назва країни</value>
+  </data>
   <data name="Create new" xml:space="preserve">
     <value>Новий запис</value>
   </data>
   <data name="Current password" xml:space="preserve">
     <value>Старий пароль</value>
+  </data>
+  <data name="DateTime" xml:space="preserve">
+    <value>Дата й час</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Видалити</value>
@@ -191,6 +200,9 @@
   </data>
   <data name="Home" xml:space="preserve">
     <value>Головна</value>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>Вологість</value>
   </data>
   <data name="ImgData" xml:space="preserve">
     <value>Зображення</value>
@@ -267,11 +279,20 @@
   <data name="State" xml:space="preserve">
     <value>Регіон</value>
   </data>
+  <data name="StateId" xml:space="preserve">
+    <value>ID регіону</value>
+  </data>
+  <data name="StateName" xml:space="preserve">
+    <value>Назва регіону</value>
+  </data>
   <data name="Surname" xml:space="preserve">
     <value>Прізвище</value>
   </data>
   <data name="SurnameId" xml:space="preserve">
     <value>Прізвище (Id)</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Температура</value>
   </data>
   <data name="test" xml:space="preserve">
     <value>Привіт</value>
@@ -288,11 +309,17 @@
   <data name="The {0} must be at least {2} and at max {1} characters long." xml:space="preserve">
     <value>Поле {0} повинно бути довжиною від {2} до {1} символів.</value>
   </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Пошта</value>
+  </data>
   <data name="Warmth" xml:space="preserve">
     <value>Параметр теплоти(0-100)</value>
   </data>
   <data name="WarmthTableVal" xml:space="preserve">
     <value>Теплота</value>
+  </data>
+  <data name="WindSpeed" xml:space="preserve">
+    <value>Швидкість вітру</value>
   </data>
   <data name="Your info has been changed successfully." xml:space="preserve">
     <value>Ваша інформація була успішно змінена</value>

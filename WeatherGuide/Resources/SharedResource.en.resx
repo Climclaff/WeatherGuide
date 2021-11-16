@@ -156,11 +156,20 @@
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="CountryId" xml:space="preserve">
+    <value>ID of the country</value>
+  </data>
+  <data name="CountryName" xml:space="preserve">
+    <value>Country name</value>
+  </data>
   <data name="Create new" xml:space="preserve">
     <value>Create new</value>
   </data>
   <data name="Current password" xml:space="preserve">
     <value>Current password</value>
+  </data>
+  <data name="DateTime" xml:space="preserve">
+    <value>Date and time</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
@@ -188,6 +197,9 @@
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>Humidity</value>
   </data>
   <data name="ImgData" xml:space="preserve">
     <value>Image</value>
@@ -264,11 +276,20 @@
   <data name="State" xml:space="preserve">
     <value>State</value>
   </data>
+  <data name="StateId" xml:space="preserve">
+    <value>Id of the state</value>
+  </data>
+  <data name="StateName" xml:space="preserve">
+    <value>State name</value>
+  </data>
   <data name="Surname" xml:space="preserve">
     <value>Surname</value>
   </data>
   <data name="SurnameId" xml:space="preserve">
     <value>Surname (Id)</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Temperature</value>
   </data>
   <data name="test" xml:space="preserve">
     <value>hello</value>
@@ -285,11 +306,17 @@
   <data name="The {0} must be at least {2} and at max {1} characters long." xml:space="preserve">
     <value>The {0} must be at least {2} and at max {1} characters long.</value>
   </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Username</value>
+  </data>
   <data name="Warmth" xml:space="preserve">
     <value>Warmth parameter(0-100)</value>
   </data>
   <data name="WarmthTableVal" xml:space="preserve">
     <value>Warmth</value>
+  </data>
+  <data name="WindSpeed" xml:space="preserve">
+    <value>Wind speed</value>
   </data>
   <data name="Your info has been changed successfully." xml:space="preserve">
     <value>Your info has been changed successfully.</value>

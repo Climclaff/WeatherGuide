@@ -13,32 +13,32 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Temperature" class="control-label"></label>
+                <label class="control-label">@SharedLocalizer["Temperature"]</label>
                 <input asp-for="Temperature" class="form-control" />
                 <span asp-validation-for="Temperature" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Humidity" class="control-label"></label>
+               <label class="control-label">@SharedLocalizer["Humidity"]</label>
                 <input asp-for="Humidity" class="form-control" />
                 <span asp-validation-for="Humidity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="WindSpeed" class="control-label"></label>
+                <label class="control-label">@SharedLocalizer["WindSpeed"]</label>
                 <input asp-for="WindSpeed" class="form-control" />
                 <span asp-validation-for="WindSpeed" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateTime" class="control-label"></label>
+                <label class="control-label">@SharedLocalizer["DateTime"]</label>
                 <input asp-for="DateTime" class="form-control" />
                 <span asp-validation-for="DateTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CountryId" class="control-label"></label>
+                <label class="control-label">@SharedLocalizer["CountryId"]</label>
                 <select asp-for="CountryId" class="form-control" asp-items="ViewBag.CountryId"></select>
                 <span asp-validation-for="CountryId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StateId" class="control-label"></label>
+                <label class="control-label">@SharedLocalizer["StateId"]</label>
                 <select asp-for="StateId" class="form-control" asp-items="ViewBag.StateId"></select>
                 <span asp-validation-for="StateId" class="text-danger"></span>
             </div>
