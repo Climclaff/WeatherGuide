@@ -129,6 +129,9 @@
   <data name="AdministrationRightsId" xml:space="preserve">
     <value>Administration rights</value>
   </data>
+  <data name="AppUserId" xml:space="preserve">
+    <value>User ID</value>
+  </data>
   <data name="Are you sure you want to delete this?" xml:space="preserve">
     <value>Are you sure you want to delete this?</value>
   </data>
@@ -197,6 +200,9 @@
   </data>
   <data name="ExportUsers" xml:space="preserve">
     <value>Export users</value>
+  </data>
+  <data name="FirstClothingId" xml:space="preserve">
+    <value>First clothing ID</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>Hello,</value>
@@ -279,6 +285,9 @@
   <data name="Register" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="SecondClothingId" xml:space="preserve">
+    <value>Second clothing ID </value>
+  </data>
   <data name="SelectCategory" xml:space="preserve">
     <value>Select category, where 1 - TOP, 2 - BOTTOM, 3 - BOOTS</value>
   </data>
@@ -314,6 +323,9 @@
   </data>
   <data name="The {0} must be at least {2} and at max {1} characters long." xml:space="preserve">
     <value>The {0} must be at least {2} and at max {1} characters long.</value>
+  </data>
+  <data name="ThirdClothingId" xml:space="preserve">
+    <value>Third clothing ID</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>Username</value>

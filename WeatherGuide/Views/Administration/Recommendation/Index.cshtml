@@ -9,19 +9,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.User)
+                 @SharedLocalizer["AppUserId"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstClothing)
+               @SharedLocalizer["FirstClothingId"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SecondClothing)
+                 @SharedLocalizer["SecondClothingId"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ThirdClothing)
+                 @SharedLocalizer["ThirdClothingId"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateTime)
+                 @SharedLocalizer["DateTime"]
             </th>
             <th></th>
         </tr>
@@ -45,7 +45,6 @@
                 @Html.DisplayFor(modelItem => item.DateTime)
             </td>
             <td>
-                 <a asp-action="Edit" asp-route-id="@item.Id">@SharedLocalizer["Edit"]</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">@SharedLocalizer["Details"]</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">@SharedLocalizer["Delete"]</a>
             </td>

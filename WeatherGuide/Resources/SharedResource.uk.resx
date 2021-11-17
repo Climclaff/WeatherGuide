@@ -129,6 +129,9 @@
   <data name="AdministrationRightsId" xml:space="preserve">
     <value>Права адміністрування (Id)</value>
   </data>
+  <data name="AppUserId" xml:space="preserve">
+    <value>ID користувача</value>
+  </data>
   <data name="Are you sure you want to delete this?" xml:space="preserve">
     <value>Ви впевнені, що хочете видалити це?</value>
   </data>
@@ -200,6 +203,9 @@
   </data>
   <data name="ExportUsers" xml:space="preserve">
     <value>Експорт користувачів</value>
+  </data>
+  <data name="FirstClothingId" xml:space="preserve">
+    <value>ID першої речі</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>Привіт,</value>
@@ -282,6 +288,9 @@
   <data name="Register" xml:space="preserve">
     <value>Реєстрація</value>
   </data>
+  <data name="SecondClothingId" xml:space="preserve">
+    <value>ID другої речі</value>
+  </data>
   <data name="SelectCategory" xml:space="preserve">
     <value>Категорія, де 1 - ВЕРХ, 2 - НИЗ, 3 - ВЗУТТЯ</value>
   </data>
@@ -317,6 +326,9 @@
   </data>
   <data name="The {0} must be at least {2} and at max {1} characters long." xml:space="preserve">
     <value>Поле {0} повинно бути довжиною від {2} до {1} символів.</value>
+  </data>
+  <data name="ThirdClothingId" xml:space="preserve">
+    <value>ID третьої речі</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>Пошта</value>
