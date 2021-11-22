@@ -883,7 +883,6 @@ C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\bin\Debug\netcor
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
-C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.csproj.AssemblyReference.cache
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Login.en.resources
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Login.uk.resources
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Manage.ChangePassword.en.resources
@@ -1017,3 +1016,4 @@ C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcor
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.dll
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.pdb
 C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.genruntimeconfig.cache
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
