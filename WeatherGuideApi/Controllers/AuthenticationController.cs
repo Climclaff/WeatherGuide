@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -64,9 +65,14 @@ namespace WeatherGuideApi.Controllers
                         new Claim("IsDesigner", "false")
                         };
             for (int i = 0; i < claims.Count; ++i)
-                await _userManager.AddClaimAsync(user, claims[i]);           
+                await _userManager.AddClaimAsync(user, claims[i]);          
             return Ok(new Response { Status = "Success", Message = "User created" });
         }
+
+
+       
+           
+        
 
         [HttpPost]
         [Route("Login")]
@@ -95,12 +101,53 @@ namespace WeatherGuideApi.Controllers
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo,
-                    User = user.UserName
+                    user = user.UserName
                 }
                     );
             }
             return Unauthorized();
         }
+
+        [Authorize]
+        [HttpPost]
+        [Route("AutoLogin")]
+        public async Task<IActionResult> AutoLogin([FromBody] UsrModel usr)
+        {
+            var curUser = await _userManager.FindByNameAsync(usr.User);
+            if (curUser != null)
+            {
+                var userRoles = await _userManager.GetRolesAsync(curUser);
+                var authClaims = new List<Claim>
+                 {
+                     new Claim(ClaimTypes.Name, curUser.UserName),
+                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                 };
+                foreach (var userRole in userRoles)
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                }
+                
+          var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+                var token = new JwtSecurityToken(
+                    issuer: _configuration["JWT:ValidIssuer"],
+                    audience: _configuration["JWT:ValidAudience"],
+                    expires: DateTime.Now.AddHours(3),
+                   //expires: DateTime.Now.AddSeconds(15),
+                     claims: authClaims,
+                    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256));
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                      user = curUser.UserName
+                });
+            }
+            return Unauthorized();
+        }
+
+
+    }
+    public class UsrModel
+    {
+        public string User { get; set; }
     }
 }

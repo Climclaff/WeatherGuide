@@ -29,16 +29,27 @@ namespace WeatherGuideApi.Controllers
        [Authorize]
        [HttpGet]
         [Route("Recommendation")]
-        public async Task<IActionResult> Recommendation([FromBody] UserIdModel model)
+        public async Task<IActionResult> Recommendation([FromQuery(Name="username")] string username)
         {
-            var user = await _userManager.FindByIdAsync(model.userId);
+            var user = await _userManager.FindByNameAsync(username);
             Measurement measurement = await _recommendationService.FindUserMeasurement(user);
+            if (user == null || measurement == null)
+            {
+                return BadRequest();
+            }
             Recommendation recommendation = await _recommendationService.GetRecommendation(user);
             return Ok(new
             {
-                firstClothingName = recommendation.FirstClothing.NameEN,
-                secondClothingName = recommendation.SecondClothing.NameEN,
-                thirdClothingName = recommendation.ThirdClothing.NameEN,
+                measurement = measurement,
+                firstClothingNameEN = recommendation.FirstClothing.NameEN,
+                secondClothingNameEN = recommendation.SecondClothing.NameEN,
+                thirdClothingNameEN = recommendation.ThirdClothing.NameEN,
+                firstClothingNameUA = recommendation.FirstClothing.NameUA,
+                secondClothingNameUA = recommendation.SecondClothing.NameUA,
+                thirdClothingNameUA = recommendation.ThirdClothing.NameUA,
+                firstClothingImage = recommendation.FirstClothing.ImageData,
+                secondClothingImage = recommendation.SecondClothing.ImageData,
+                thirdClothingImage = recommendation.ThirdClothing.ImageData
             });
         }
     }
