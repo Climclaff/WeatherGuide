@@ -1,0 +1,16 @@
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\obj\Debug\netcoreapp3.1\IotEmul.csproj.AssemblyReference.cache
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\obj\Debug\netcoreapp3.1\IotEmul.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\obj\Debug\netcoreapp3.1\IotEmul.AssemblyInfoInputs.cache
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\obj\Debug\netcoreapp3.1\IotEmul.AssemblyInfo.cs
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\obj\Debug\netcoreapp3.1\IotEmul.csproj.CoreCompileInputs.cache
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\bin\Debug\netcoreapp3.1\IotEmul.exe
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\bin\Debug\netcoreapp3.1\IotEmul.deps.json
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\bin\Debug\netcoreapp3.1\IotEmul.runtimeconfig.json
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\bin\Debug\netcoreapp3.1\IotEmul.runtimeconfig.dev.json
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\bin\Debug\netcoreapp3.1\IotEmul.dll
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\bin\Debug\netcoreapp3.1\IotEmul.pdb
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\obj\Debug\netcoreapp3.1\IotEmul.csproj.CopyComplete
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\obj\Debug\netcoreapp3.1\IotEmul.dll
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\obj\Debug\netcoreapp3.1\IotEmul.pdb
+C:\Users\Climclaff\source\repos\Works\WeatherGuide\IotEmul\obj\Debug\netcoreapp3.1\IotEmul.genruntimeconfig.cache

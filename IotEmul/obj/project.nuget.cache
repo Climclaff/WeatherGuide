@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "WWnt2QkH4w7CTGu0tbEBDOVNfH3jPT1T7FMKRWAlt6s4zY85scLcBfVpc2olr9It88z1rx12l+niMAvy2dDjXQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Climclaff\\source\\repos\\Works\\WeatherGuide\\IotEmul\\IotEmul.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Climclaff\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
