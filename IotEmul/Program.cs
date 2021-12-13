@@ -105,9 +105,10 @@ namespace IotEmul
             });
             task.Start(); 
             while (true)
-            {
-                int resultIndex = -1;
+            {             
                 PrintMenu();
+                waitForInput:
+                int resultIndex = -1;
                 string input = Console.ReadLine();
                 if (input == "1")
                 {
@@ -174,6 +175,10 @@ namespace IotEmul
                     Console.WriteLine("Продовжити роботу?");
                     Console.ReadLine();
                     continue;
+                }
+                else
+                {
+                    goto waitForInput;
                 }
             }
         }
