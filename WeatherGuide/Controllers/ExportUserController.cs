@@ -33,20 +33,25 @@ namespace WeatherGuide.Controllers
         }
         public IActionResult ExportToExcel()
         {
-            DataSet ds = new DataSet();
-            ds.Tables.Add(_context.Users.ToListAsync().Result.ToDataTable());
+            DataSet userSet= new DataSet();
+            DataSet userRightSet = new DataSet();   
+            userSet.Tables.Add(_context.Users.ToListAsync().Result.ToDataTable());
+            userRightSet.Tables.Add(_context.UserClaims.ToListAsync().Result.ToDataTable());
             var stream = new MemoryStream();
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (var package = new ExcelPackage(stream))
             {
-                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
-                worksheet.Cells.LoadFromDataTable(ds.Tables[0], true);
+                var userWorksheet = package.Workbook.Worksheets.Add("Sheet1");
+                var rightsWorksheet = package.Workbook.Worksheets.Add("Sheet2");
+                userWorksheet.Cells.LoadFromDataTable(userSet.Tables[0], true);
+                rightsWorksheet.Cells.LoadFromDataTable(userRightSet.Tables[0], true);
                 package.Save();
             }
             stream.Position = 0;
             string excelname = $"UserList-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
-            return File(stream,"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",excelname);
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelname);
         }
+
     }
     public static class DataTableExtensions
     {

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "UfFpMU7cWGIWa+A4HuwszViCbvEQIFsRbBAjXwDCysCnlaW8+B4pI6DKCRspCbCXOZTJGkgl3cOiMvqJMn9mDw==",
+  "success": true,
+  "projectFilePath": "F:\\work\\WeatherGuide\\IotEmul\\IotEmul.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\gsala\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

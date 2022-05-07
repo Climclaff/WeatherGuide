@@ -20,6 +20,7 @@ namespace WeatherGuide.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Clothing> Clothings { get; set; }
         public DbSet<Recommendation> Recommendations { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
     }
 }

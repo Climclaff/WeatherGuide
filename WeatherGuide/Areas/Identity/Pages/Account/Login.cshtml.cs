@@ -11,7 +11,12 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Configuration;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace WeatherGuide.Areas.Identity.Pages.Account
 {
@@ -22,16 +27,18 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
         private readonly SignInManager<Models.AppUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
+        private readonly IConfiguration _configuration;
         public LoginModel(SignInManager<Models.AppUser> signInManager, 
             ILogger<LoginModel> logger,
             UserManager<Models.AppUser> userManager,
-            IStringLocalizer<SharedResource> sharedLocalizer)
+            IStringLocalizer<SharedResource> sharedLocalizer,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _sharedLocalizer = sharedLocalizer;
-                
+            _configuration = configuration;                       
         }
 
         [BindProperty]
@@ -88,7 +95,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation("User logged in.");               
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -112,3 +119,34 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
         }
     }
 }
+
+/*
+var user = await _userManager.FindByNameAsync(model.UserName);
+if (user != null && await _userManager.CheckPasswordAsync(user, model.Password) != false)
+{
+    var userRoles = await _userManager.GetRolesAsync(user);
+    var authClaims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                };
+    foreach (var userRole in userRoles)
+    {
+        authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+    }
+    var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+    var token = new JwtSecurityToken(
+        issuer: _configuration["JWT:ValidIssuer"],
+        audience: _configuration["JWT:ValidAudience"],
+        expires: DateTime.Now.AddHours(3),
+        claims: authClaims,
+        signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256));
+    return Ok(new
+    {
+        token = new JwtSecurityTokenHandler().WriteToken(token),
+        user = user.UserName
+    }
+        );
+}
+return Unauthorized();
+*/

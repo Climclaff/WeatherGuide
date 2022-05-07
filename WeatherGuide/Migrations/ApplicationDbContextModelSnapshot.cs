@@ -15,7 +15,7 @@ namespace WeatherGuide.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.20")
+                .HasAnnotation("ProductVersion", "3.1.21")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -357,6 +357,29 @@ namespace WeatherGuide.Migrations
                     b.ToTable("Recommendations");
                 });
 
+            modelBuilder.Entity("WeatherGuide.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("WeatherGuide.Models.State", b =>
                 {
                     b.Property<int>("Id")
@@ -476,6 +499,13 @@ namespace WeatherGuide.Migrations
                     b.HasOne("WeatherGuide.Models.Clothing", "ThirdClothing")
                         .WithMany("ThirdRecommendation")
                         .HasForeignKey("ThirdClothingId");
+                });
+
+            modelBuilder.Entity("WeatherGuide.Models.Review", b =>
+                {
+                    b.HasOne("WeatherGuide.Models.AppUser", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("WeatherGuide.Models.State", b =>

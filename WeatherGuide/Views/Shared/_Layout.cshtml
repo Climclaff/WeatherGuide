@@ -35,6 +35,9 @@
                         </li>                      
                         @if (SignInManager.IsSignedIn(User))
                         {
+                            <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Review" asp-action="Reviews">@SharedLocalizer["Reviews"]</a>
+                            </li>                      
                             if (User.FindFirst("IsAdmin").Value == "true")
                             {
                                 <li class="nav-item">
@@ -47,6 +50,7 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Clothing" asp-action="Index">@SharedLocalizer["ClothingManagement"]</a>
                                 </li>
                             }
+
                         }
                     </ul>
                 </div>
@@ -61,7 +65,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - WeatherGuide
+            &copy; 2022 - WeatherGuide
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

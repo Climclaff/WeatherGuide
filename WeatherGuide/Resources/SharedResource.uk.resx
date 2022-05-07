@@ -204,8 +204,17 @@
   <data name="ExportUsers" xml:space="preserve">
     <value>Експорт користувачів</value>
   </data>
+  <data name="File is corrupted" xml:space="preserve">
+    <value>Стан файлу пошкоджено або він містить помилки</value>
+  </data>
   <data name="FirstClothingId" xml:space="preserve">
     <value>ID першої речі</value>
+  </data>
+  <data name="Geolocation service changed your location" xml:space="preserve">
+    <value>Сервіс геолокації визначив і змінив вашу локацію.</value>
+  </data>
+  <data name="Geolocation service could not locate you, it means that your country or region is not supported by our application." xml:space="preserve">
+    <value>Сервіс геолокації не зміг співвіднести вашу приблизну локацію зі списком підтримуваних регіонів. Це означає, що ваша країна або регіон ще не підтримується нашим додатком.</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>Привіт,</value>
@@ -287,6 +296,9 @@
   </data>
   <data name="Register" xml:space="preserve">
     <value>Реєстрація</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Відгуки</value>
   </data>
   <data name="SecondClothingId" xml:space="preserve">
     <value>ID другої речі</value>

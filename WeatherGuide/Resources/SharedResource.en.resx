@@ -145,7 +145,7 @@
     <value>Category</value>
   </data>
   <data name="ClothingManagement" xml:space="preserve">
-    <value>Clothing management</value>
+    <value>Manage clothes</value>
   </data>
   <data name="ClothingNameEN" xml:space="preserve">
     <value>Clothing name in English</value>
@@ -201,8 +201,17 @@
   <data name="ExportUsers" xml:space="preserve">
     <value>Export users</value>
   </data>
+  <data name="File is corrupted" xml:space="preserve">
+    <value>File is corrupted</value>
+  </data>
   <data name="FirstClothingId" xml:space="preserve">
     <value>First clothing ID</value>
+  </data>
+  <data name="Geolocation service changed your location" xml:space="preserve">
+    <value>Geolocation service changed your location</value>
+  </data>
+  <data name="Geolocation service could not locate you, it means that your country or region is not supported by our application." xml:space="preserve">
+    <value>Geolocation service could not locate you, it means that your country or region is not supported by our application.</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>Hello,</value>
@@ -284,6 +293,9 @@
   </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Reviews</value>
   </data>
   <data name="SecondClothingId" xml:space="preserve">
     <value>Second clothing ID </value>

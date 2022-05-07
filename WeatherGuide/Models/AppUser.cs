@@ -17,6 +17,7 @@ namespace WeatherGuide.Models
         public State State { get; set; }
 
         public ICollection<Recommendation> Recommendations { get; set; }
+        public ICollection<Review> Reviews { get; set; }
 
 
     }

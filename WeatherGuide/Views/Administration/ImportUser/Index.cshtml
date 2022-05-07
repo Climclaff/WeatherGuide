@@ -4,6 +4,7 @@
 	ViewData["Title"] = "Index";
 }
 
+<h3><strong>@TempData["Message"]</strong></h3>
 <div class="container">
 <form method="post" asp-controller="ImportUser" asp-action="Import" enctype="multipart/form-data">
 	<input type="file" name="file"/>

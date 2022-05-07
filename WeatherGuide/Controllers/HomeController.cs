@@ -14,6 +14,9 @@ using WeatherGuide.Repository;
 using Microsoft.AspNetCore.Identity;
 using WeatherGuide.Services;
 using System.Globalization;
+using WeatherGuide.Helpers.Geolocation;
+using WeatherGuide.Models.Geolocation;
+using Newtonsoft.Json;
 
 namespace WeatherGuide.Controllers
 {
@@ -39,7 +42,7 @@ namespace WeatherGuide.Controllers
 
         public IActionResult Index()
         {              
-            ViewData["Title"] = _localizer["Header"];
+            ViewData["Title"] = _localizer["Header"];  
             return View();
         }
 
@@ -103,6 +106,7 @@ namespace WeatherGuide.Controllers
 
             return LocalRedirect(returnUrl);
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
