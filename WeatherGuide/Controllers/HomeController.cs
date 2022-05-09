@@ -17,6 +17,7 @@ using System.Globalization;
 using WeatherGuide.Helpers.Geolocation;
 using WeatherGuide.Models.Geolocation;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace WeatherGuide.Controllers
 {
@@ -28,9 +29,11 @@ namespace WeatherGuide.Controllers
         private readonly IRecommendationService _recommendationService;
         private readonly IStringLocalizer<HomeController> _localizer;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
+        private readonly IMemoryCache _memoryCache;
         public HomeController(ILogger<HomeController> logger, IStringLocalizer<HomeController> localizer, 
                               IStringLocalizer<SharedResource> sharedLocalizer, IRecommendationService recommendationService, 
-                              UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+                              UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
+                              IMemoryCache memoryCache)
         {
             _logger = logger;
             _localizer = localizer;
@@ -38,6 +41,7 @@ namespace WeatherGuide.Controllers
             _userManager = userManager;
             _recommendationService = recommendationService;
             _signInManager = signInManager;
+            _memoryCache = memoryCache;
         }
 
         public IActionResult Index()
@@ -52,8 +56,29 @@ namespace WeatherGuide.Controllers
             {
                 CultureInfo culture = CultureInfo.CurrentCulture;
                 var user = await _userManager.GetUserAsync(HttpContext.User);
-                Measurement measurement = await _recommendationService.FindUserMeasurement(user);              
-                Recommendation recommendation = await _recommendationService.GetRecommendation(user);
+
+                if (!_memoryCache.TryGetValue(user.Id.ToString() + "recommendation", out Recommendation cacheRecommendation))
+                {
+                    cacheRecommendation = await _recommendationService.GetRecommendation(user);
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromSeconds(900));
+
+                    _memoryCache.Set(user.Id.ToString()+"recommendation", cacheRecommendation, cacheEntryOptions);
+                }
+                Recommendation recommendation = cacheRecommendation;
+
+
+                if (!_memoryCache.TryGetValue(user.Id.ToString() + "measurement", out Measurement cacheMeasurement))
+                {
+                    cacheMeasurement = await _recommendationService.FindUserMeasurement(user);
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromSeconds(900));
+
+                    _memoryCache.Set(user.Id.ToString() + "measurement", cacheMeasurement, cacheEntryOptions);
+                }
+                Measurement measurement = cacheMeasurement;          
+                
+
                 if (culture.Name == "en-US")
                 {
                     IEnumerable<string> itemNamesEN = new List<string>() {

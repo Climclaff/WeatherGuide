@@ -11,7 +11,6 @@ namespace WeatherGuide.Services
     public class RecommendationService : IRecommendationService
     {
         private readonly IRecommendationRepository _recommendationRepository = null;
-        StringBuilder recommendationStringBuilder = new StringBuilder(255);
         AppUser currentUser = new AppUser();
         Measurement currentMeasurement = new Measurement();
         public RecommendationService(IRecommendationRepository recommendationRepository)
@@ -33,9 +32,6 @@ namespace WeatherGuide.Services
             recommendation.DateTime = DateTime.UtcNow;
             recommendation.AppUserId = currentUser.Id;
             await _recommendationRepository.GenerateRecommendation(recommendation);
-            recommendationStringBuilder.Append(recommendation.FirstClothing.NameEN+" ")
-                .Append(recommendation.SecondClothing.NameEN + " ")
-                .Append(recommendation.ThirdClothing.NameEN); 
             return recommendation;
 
         }

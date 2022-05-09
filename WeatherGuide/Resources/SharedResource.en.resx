@@ -288,6 +288,9 @@
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
   </data>
+  <data name="Recommendation cooldown" xml:space="preserve">
+    <value>You can't change region for 15 minutes after receiving a recommendation. Try again later.</value>
+  </data>
   <data name="Recommendations" xml:space="preserve">
     <value>Recommendations</value>
   </data>
@@ -299,6 +302,9 @@
   </data>
   <data name="SecondClothingId" xml:space="preserve">
     <value>Second clothing ID </value>
+  </data>
+  <data name="seconds" xml:space="preserve">
+    <value>seconds</value>
   </data>
   <data name="SelectCategory" xml:space="preserve">
     <value>Select category, where 1 - TOP, 2 - BOTTOM, 3 - BOOTS</value>

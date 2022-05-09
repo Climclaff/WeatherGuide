@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Localization;
 using WeatherGuide.Data;
 using WeatherGuide.Models;
@@ -19,16 +20,19 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<Models.AppUser> _signInManager;
         private readonly ApplicationDbContext _context;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
+        private readonly IMemoryCache _memoryCache;
         public IndexModel(
             UserManager<Models.AppUser> userManager,
             SignInManager<Models.AppUser> signInManager,
             ApplicationDbContext context,
-            IStringLocalizer<SharedResource> sharedLocalizer)
+            IStringLocalizer<SharedResource> sharedLocalizer,
+            IMemoryCache memoryCache)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
             _sharedLocalizer = sharedLocalizer;
+            _memoryCache = memoryCache;
         }
 
         public string Username { get; set; }
@@ -104,7 +108,15 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-                StateId = Convert.ToInt32(TempData.Peek("StateId"));
+
+            var cacheEntry = _memoryCache.Get<Recommendation>(user.Id.ToString() + "recommendation");
+            if(cacheEntry != null)
+            {
+                StatusMessage = _sharedLocalizer["Recommendation cooldown"];
+                return RedirectToPage();
+            }
+
+            StateId = Convert.ToInt32(TempData.Peek("StateId"));
             if (StateId == 0)
             {
                 var state = await _context.Set<State>().Where(x => x.CountryId == CountryId).FirstOrDefaultAsync();

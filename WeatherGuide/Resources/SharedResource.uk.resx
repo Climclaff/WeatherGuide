@@ -291,6 +291,9 @@
   <data name="Profile" xml:space="preserve">
     <value>Профіль</value>
   </data>
+  <data name="Recommendation cooldown" xml:space="preserve">
+    <value>Ви не можете змінювати регіон протягом 15 хвилин після отримання рекомендації. Спробуйте пізніше.</value>
+  </data>
   <data name="Recommendations" xml:space="preserve">
     <value>Рекомендації</value>
   </data>
@@ -302,6 +305,9 @@
   </data>
   <data name="SecondClothingId" xml:space="preserve">
     <value>ID другої речі</value>
+  </data>
+  <data name="seconds" xml:space="preserve">
+    <value>секунд</value>
   </data>
   <data name="SelectCategory" xml:space="preserve">
     <value>Категорія, де 1 - ВЕРХ, 2 - НИЗ, 3 - ВЗУТТЯ</value>
