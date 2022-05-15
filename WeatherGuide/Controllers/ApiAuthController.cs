@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,8 +73,6 @@ namespace WeatherGuide.Controllers
 
 
 
-
-
         [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
@@ -111,9 +110,10 @@ namespace WeatherGuide.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         [Route("AutoLogin")]
-        public async Task<IActionResult> AutoLogin([FromBody] UsrModel usr)
+        public async Task<IActionResult> AutoLogin()
         {
-            var curUser = await _userManager.FindByNameAsync(usr.User);
+            var name = User.FindFirst(ClaimTypes.Name)?.Value;
+            var curUser = await _userManager.FindByNameAsync(name);
             if (curUser != null)
             {
                 var userRoles = await _userManager.GetRolesAsync(curUser);
@@ -132,7 +132,6 @@ namespace WeatherGuide.Controllers
                     issuer: _configuration["JWT:ValidIssuer"],
                     audience: _configuration["JWT:ValidAudience"],
                     expires: DateTime.Now.AddHours(3),
-                     //expires: DateTime.Now.AddSeconds(15),
                      claims: authClaims,
                     signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256));
                 return Ok(new

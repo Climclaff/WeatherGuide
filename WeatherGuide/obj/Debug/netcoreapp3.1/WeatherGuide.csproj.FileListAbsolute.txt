@@ -1290,6 +1290,7 @@ F:\work\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\refs\WindowsBase.dll
 F:\work\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\WeatherGuide.Views.dll
 F:\work\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\WeatherGuide.Views.pdb
 F:\work\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\EPPlus.dll
+F:\work\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 F:\work\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
 F:\work\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 F:\work\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
@@ -1436,6 +1437,8 @@ F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Manage.ChangePassword.uk.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Manage.Email.en.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Manage.Email.uk.resources
+F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Manage.Geolocation.en.resources
+F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Manage.Geolocation.uk.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Manage.Index.en.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Manage.Index.uk.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Manage._Layout.en.resources
@@ -1446,12 +1449,16 @@ F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Register.uk.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Controllers.HomeController.en.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Controllers.HomeController.uk.resources
+F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Controllers.ReviewController.en.resources
+F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Controllers.ReviewController.uk.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.SharedResource.en.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.SharedResource.uk.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Views.Home.Index.en.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Views.Home.Index.uk.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Views.Home.Recommendations.en.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Views.Home.Recommendations.uk.resources
+F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Views.Review.Reviews.en.resources
+F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Views.Review.Reviews.uk.resources
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.csproj.GenerateResource.cache
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.GeneratedMSBuildEditorConfig.editorconfig
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.AssemblyInfoInputs.cache
@@ -1487,6 +1494,7 @@ F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\P
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml.g.cs
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml.g.cs
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\GenerateRecoveryCodes.cshtml.g.cs
+F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\Geolocation.cshtml.g.cs
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\Index.cshtml.g.cs
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\PersonalData.cshtml.g.cs
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml.g.cs
@@ -1548,6 +1556,7 @@ F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administra
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Administration\State\Index.cshtml.g.cs
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Home\Recommendations.cshtml.g.cs
+F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Review\Reviews.cshtml.g.cs
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
@@ -1562,12 +1571,3 @@ F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.csproj.Co
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.dll
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.pdb
 F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.genruntimeconfig.cache
-F:\work\WeatherGuide\WeatherGuide\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Manage.Geolocation.en.resources
-F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Areas.Identity.Pages.Account.Manage.Geolocation.uk.resources
-F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\Geolocation.cshtml.g.cs
-F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\Razor\Views\Review\Reviews.cshtml.g.cs
-F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Views.Review.Reviews.en.resources
-F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Views.Review.Reviews.uk.resources
-F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Controllers.ReviewController.en.resources
-F:\work\WeatherGuide\WeatherGuide\obj\Debug\netcoreapp3.1\WeatherGuide.Resources.Controllers.ReviewController.uk.resources

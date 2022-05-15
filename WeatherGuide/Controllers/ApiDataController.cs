@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WeatherGuide.Data;
 using WeatherGuide.Models;
@@ -42,17 +43,13 @@ namespace WeatherGuide.Controllers
                 countries.Add(new CountryModel() { Id = dbCountries[i].Id, Name = dbCountries[i].Name });
             }
 
-            LoginModel model = new LoginModel();
-            model.UserName = "admin@gmail.com";
-            model.Password = "121212qqQQ_";
 
             return Ok(new
             {
-                data = countries,
-                model = model
-            }); ;
-
+                data = countries
+            }); 
         }
+
         [HttpGet]
         [Route("State/{id?}")]
         public async Task<IActionResult> State([FromQuery(Name = "id")] int id)
@@ -84,11 +81,13 @@ namespace WeatherGuide.Controllers
 
         }
 
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         [Route("ProfileCountry")]
-        public async Task<IActionResult> ProfileCountry([FromQuery(Name = "username")] string username)
+        public async Task<IActionResult> ProfileCountry()
         {
+            var username = User.FindFirst(ClaimTypes.Name)?.Value;
             var curUser = await _userManager.FindByNameAsync(username);
             if (curUser == null)
             {
@@ -115,11 +114,13 @@ namespace WeatherGuide.Controllers
 
         }
 
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         [Route("ProfileState")]
-        public async Task<IActionResult> ProfileState([FromQuery(Name = "username")] string username)
+        public async Task<IActionResult> ProfileState()
         {
+            var username = User.FindFirst(ClaimTypes.Name)?.Value;
             var curUser = await _userManager.FindByNameAsync(username);
             if (curUser == null)
             {
@@ -162,8 +163,9 @@ namespace WeatherGuide.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         [Route("UserInfo")]
-        public async Task<IActionResult> UserInfo([FromQuery(Name = "username")] string username)
+        public async Task<IActionResult> UserInfo()
         {
+            var username = User.FindFirst(ClaimTypes.Name)?.Value;
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
             {
@@ -184,9 +186,9 @@ namespace WeatherGuide.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         [Route("ChangeLocation")]
-        public async Task<IActionResult> ChangeLocation([FromQuery(Name = "username")] string username,
-            [FromQuery(Name = "countryid")] int countryId, [FromQuery(Name = "stateid")] int stateId)
+        public async Task<IActionResult> ChangeLocation([FromQuery(Name = "countryid")] int countryId, [FromQuery(Name = "stateid")] int stateId)
         {
+            var username = User.FindFirst(ClaimTypes.Name)?.Value;
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
             {
@@ -206,8 +208,9 @@ namespace WeatherGuide.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         [Route("ChangeName")]
-        public async Task<IActionResult> ChangeName([FromQuery(Name = "username")] string username, [FromBody] ChangeNameModel model)
+        public async Task<IActionResult> ChangeName([FromBody] ChangeNameModel model)
         {
+            var username = User.FindFirst(ClaimTypes.Name)?.Value;
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
             {
@@ -239,13 +242,13 @@ namespace WeatherGuide.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         [Route("ChangePassword")]
-        public async Task<IActionResult> ChangePassword([FromQuery(Name = "username")] string username, [FromBody] ChangePasswordModel model)
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
-
+            var username = User.FindFirst(ClaimTypes.Name)?.Value;
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
             {
@@ -267,8 +270,9 @@ namespace WeatherGuide.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         [Route("Recommendation")]
-        public async Task<IActionResult> Recommendation([FromQuery(Name = "username")] string username)
+        public async Task<IActionResult> Recommendation()
         {
+            var username = User.FindFirst(ClaimTypes.Name)?.Value;
             var user = await _userManager.FindByNameAsync(username);
             Measurement measurement = await _recommendationService.FindUserMeasurement(user);
             if (user == null || measurement == null)

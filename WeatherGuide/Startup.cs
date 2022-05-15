@@ -21,6 +21,7 @@ using WeatherGuide.Repository;
 using WeatherGuide.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Diagnostics;
 
 namespace WeatherGuide
 {
@@ -89,6 +90,7 @@ namespace WeatherGuide
                     ValidateAudience = true,
                     ValidAudience = Configuration["JWT:ValidAudience"],
                     ValidIssuer = Configuration["JWT:ValidIssuer"],
+                    ClockSkew = TimeSpan.FromMinutes(10),
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("JWT:Secret").Value))
                 };
             });
