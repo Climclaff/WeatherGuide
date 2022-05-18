@@ -10,6 +10,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using WeatherGuide.Attributes;
 using WeatherGuide.Helpers.Geolocation;
 using WeatherGuide.Models;
 using WeatherGuide.Models.Geolocation;
@@ -17,6 +18,7 @@ using WeatherGuide.Repository;
 
 namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 {
+    [WebRequestLimitRazor(Name = "Limit Profile Web", Seconds = 5, MaxRequestCount = 7)]
     public class GeolocationModel : PageModel
     {
         private readonly UserManager<Models.AppUser> _userManager;

@@ -14,9 +14,11 @@ using WeatherGuide.Data;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using WeatherGuide.Attributes;
 
 namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 {
+    [WebRequestLimitRazor(Name = "Limit Profile Web", Seconds = 5, MaxRequestCount = 7)]
     public partial class EmailModel : PageModel
     {
         private readonly UserManager<Models.AppUser> _userManager;

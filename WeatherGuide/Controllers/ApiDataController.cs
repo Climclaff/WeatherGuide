@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WeatherGuide.Attributes;
 using WeatherGuide.Data;
 using WeatherGuide.Models;
 using WeatherGuide.Models.ApiModels;
@@ -22,13 +25,16 @@ namespace WeatherGuide.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly IRecommendationService _recommendationService;
+        private readonly IMemoryCache _memoryCache;
         public ApiDataController(UserManager<AppUser> userManager,
             ApplicationDbContext context,
-            IRecommendationService recommendationService)
+            IRecommendationService recommendationService,
+            IMemoryCache cache)
         {
             _userManager = userManager;
             _context = context;
             _recommendationService = recommendationService;
+            _memoryCache = cache;
         }
 
 
@@ -185,14 +191,16 @@ namespace WeatherGuide.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
+        [ApiRequestLimit(Name = "Limit Change Location", Seconds = 5, MaxRequestCount = 2)]
         [Route("ChangeLocation")]
         public async Task<IActionResult> ChangeLocation([FromQuery(Name = "countryid")] int countryId, [FromQuery(Name = "stateid")] int stateId)
         {
             var username = User.FindFirst(ClaimTypes.Name)?.Value;
             var user = await _userManager.FindByNameAsync(username);
-            if (user == null)
-            {
-                return BadRequest();
+            var cacheEntry = _memoryCache.Get<Recommendation>(user.Id.ToString() + "recommendation");
+            if (cacheEntry != null)
+            {               
+                return StatusCode(420);
             }
             if (countryId != user.CountryId || stateId != user.StateId)
             {
@@ -206,6 +214,7 @@ namespace WeatherGuide.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [ApiRequestLimit(Name = "Limit Change Name", Seconds = 5, MaxRequestCount = 2)]
         [HttpPost]
         [Route("ChangeName")]
         public async Task<IActionResult> ChangeName([FromBody] ChangeNameModel model)
@@ -240,6 +249,7 @@ namespace WeatherGuide.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [ApiRequestLimit(Name = "Limit Change Password", Seconds = 5, MaxRequestCount = 2)]
         [HttpPost]
         [Route("ChangePassword")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordModel model)
@@ -268,18 +278,39 @@ namespace WeatherGuide.Controllers
             return Ok();
         }
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [ApiRequestLimit(Name = "Limit Get Recommendation", Seconds = 10, MaxRequestCount = 1)]
         [HttpGet]
         [Route("Recommendation")]
         public async Task<IActionResult> Recommendation()
         {
             var username = User.FindFirst(ClaimTypes.Name)?.Value;
             var user = await _userManager.FindByNameAsync(username);
-            Measurement measurement = await _recommendationService.FindUserMeasurement(user);
+
+            if (!_memoryCache.TryGetValue(user.Id.ToString() + "recommendation", out Recommendation cacheRecommendation))
+            {
+                cacheRecommendation = await _recommendationService.GetRecommendation(user);
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromSeconds(900));
+
+                _memoryCache.Set(user.Id.ToString() + "recommendation", cacheRecommendation, cacheEntryOptions);
+            }
+            Recommendation recommendation = cacheRecommendation;
+
+
+            if (!_memoryCache.TryGetValue(user.Id.ToString() + "measurement", out Measurement cacheMeasurement))
+            {
+                cacheMeasurement = await _recommendationService.FindUserMeasurement(user);
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromSeconds(900));
+
+                _memoryCache.Set(user.Id.ToString() + "measurement", cacheMeasurement, cacheEntryOptions);
+            }
+            Measurement measurement = cacheMeasurement;
+
             if (user == null || measurement == null)
             {
                 return BadRequest();
             }
-            Recommendation recommendation = await _recommendationService.GetRecommendation(user);
             return Ok(new
             {
                 measurement = measurement,

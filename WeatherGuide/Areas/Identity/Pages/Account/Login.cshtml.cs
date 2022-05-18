@@ -17,10 +17,12 @@ using Microsoft.Extensions.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using WeatherGuide.Attributes;
 
 namespace WeatherGuide.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
+    [WebRequestLimitRazor(Name = "Limit Login Web", Seconds = 5, MaxRequestCount = 3)]
     public class LoginModel : PageModel
     {
         private readonly UserManager<Models.AppUser> _userManager;
@@ -83,7 +85,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account
 
             ReturnUrl = returnUrl;
         }
-
+     
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");

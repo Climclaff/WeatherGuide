@@ -1,0 +1,8 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+
+<h1 class="text-danger">@SharedLocalizer["Error"]</h1>
+<h2 class="text-danger">@SharedLocalizer["TooManyRequests"]</h2>
+
+<a href="javascript:window.location.reload(true)">@SharedLocalizer["Try again"]</a>

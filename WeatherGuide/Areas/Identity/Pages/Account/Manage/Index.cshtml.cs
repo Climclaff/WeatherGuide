@@ -10,10 +10,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Localization;
+using WeatherGuide.Attributes;
 using WeatherGuide.Data;
 using WeatherGuide.Models;
 namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 {
+    [WebRequestLimitRazor(Name = "Limit Profile Web", Seconds = 5, MaxRequestCount = 7)]
     public partial class IndexModel : PageModel
     {
         private readonly UserManager<Models.AppUser> _userManager;

@@ -195,6 +195,9 @@
   <data name="EmailAddress" xml:space="preserve">
     <value>Електронна пошта</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Помилка</value>
+  </data>
   <data name="Error during registration, maybe user with such name already exists" xml:space="preserve">
     <value>Помилка під час реєстрації, можливо користувач з такою електронною адресою вже існує</value>
   </data>
@@ -347,6 +350,12 @@
   </data>
   <data name="ThirdClothingId" xml:space="preserve">
     <value>ID третьої речі</value>
+  </data>
+  <data name="TooManyRequests" xml:space="preserve">
+    <value>Ви відсилаєте занадто багато запитів на сервер.</value>
+  </data>
+  <data name="Try again" xml:space="preserve">
+    <value>Спробувати ще раз</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>Пошта</value>
