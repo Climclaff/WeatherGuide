@@ -1,4 +1,4 @@
-﻿@model WeatherGuide.Models.Recommendation
+﻿@model WeatherGuide.Models.ViewModels.RecommendationViewModel
 @using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @{
@@ -6,10 +6,10 @@
 }
 
 <h1>@ViewData["Title"]</h1>
- @{ ViewBag.FirstImage = "data:image/jpg;base64," + Convert.ToBase64String(Model.FirstClothing.ImageData); } 
- @{ ViewBag.SecondImage = "data:image/jpg;base64," + Convert.ToBase64String(Model.SecondClothing.ImageData); } 
+ @{ ViewBag.FirstImage = "data:image/jpg;base64," + Convert.ToBase64String(Model.FirstClothingImage); } 
+ @{ ViewBag.SecondImage = "data:image/jpg;base64," + Convert.ToBase64String(Model.SecondClothingImage); } 
 @{
-    ViewBag.ThirdImage = "data:image/jpg;base64," + Convert.ToBase64String(Model.ThirdClothing.ImageData);} 
+    ViewBag.ThirdImage = "data:image/jpg;base64," + Convert.ToBase64String(Model.ThirdClothingImage);} 
 @{
     IEnumerable<string> items = TempData.Peek("Items") as IEnumerable<string>;}
   @{IEnumerable<string> measurement = TempData.Peek("Measurement") as IEnumerable<string>; }

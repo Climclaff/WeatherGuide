@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using WeatherGuide.Attributes;
 using WeatherGuide.Data;
+using WeatherGuide.Helpers;
 using WeatherGuide.Models;
 using WeatherGuide.Models.ApiModels;
+using WeatherGuide.Models.ViewModels;
 using WeatherGuide.Services;
 
 namespace WeatherGuide.Controllers
@@ -25,16 +28,16 @@ namespace WeatherGuide.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly IRecommendationService _recommendationService;
-        private readonly IMemoryCache _memoryCache;
+        private readonly IDistributedCache _cache;
         public ApiDataController(UserManager<AppUser> userManager,
             ApplicationDbContext context,
             IRecommendationService recommendationService,
-            IMemoryCache cache)
+            IDistributedCache cache)
         {
             _userManager = userManager;
             _context = context;
             _recommendationService = recommendationService;
-            _memoryCache = cache;
+            _cache = cache;
         }
 
 
@@ -191,13 +194,13 @@ namespace WeatherGuide.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
-        [ApiRequestLimit(Name = "Limit Change Location", Seconds = 5, MaxRequestCount = 2)]
+        [ApiRequestLimit(Name = "Limit Change Location", Seconds = 10, MaxRequestCount = 3)]
         [Route("ChangeLocation")]
         public async Task<IActionResult> ChangeLocation([FromQuery(Name = "countryid")] int countryId, [FromQuery(Name = "stateid")] int stateId)
         {
             var username = User.FindFirst(ClaimTypes.Name)?.Value;
             var user = await _userManager.FindByNameAsync(username);
-            var cacheEntry = _memoryCache.Get<Recommendation>(user.Id.ToString() + "recommendation");
+            var cacheEntry = _cache.GetAsync(user.Id.ToString() + "recommendation");
             if (cacheEntry != null)
             {               
                 return StatusCode(420);
@@ -214,7 +217,7 @@ namespace WeatherGuide.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [ApiRequestLimit(Name = "Limit Change Name", Seconds = 5, MaxRequestCount = 2)]
+        [ApiRequestLimit(Name = "Limit Change Name", Seconds = 10, MaxRequestCount = 3)]
         [HttpPost]
         [Route("ChangeName")]
         public async Task<IActionResult> ChangeName([FromBody] ChangeNameModel model)
@@ -249,7 +252,7 @@ namespace WeatherGuide.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [ApiRequestLimit(Name = "Limit Change Password", Seconds = 5, MaxRequestCount = 2)]
+        [ApiRequestLimit(Name = "Limit Change Password", Seconds = 10, MaxRequestCount = 3)]
         [HttpPost]
         [Route("ChangePassword")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordModel model)
@@ -286,26 +289,32 @@ namespace WeatherGuide.Controllers
             var username = User.FindFirst(ClaimTypes.Name)?.Value;
             var user = await _userManager.FindByNameAsync(username);
 
-            if (!_memoryCache.TryGetValue(user.Id.ToString() + "recommendation", out Recommendation cacheRecommendation))
+            Recommendation recommendation;
+            RecommendationViewModel model = new RecommendationViewModel();
+            var distCacheRecommendation = await _cache.GetAsync(user.Id.ToString() + "recommendation");
+            if (distCacheRecommendation == null)
             {
-                cacheRecommendation = await _recommendationService.GetRecommendation(user);
-                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                recommendation = await _recommendationService.GetRecommendation(user);
+                model.FirstClothingImage = recommendation.FirstClothing.ImageData;
+                model.SecondClothingImage = recommendation.SecondClothing.ImageData;
+                model.ThirdClothingImage = recommendation.ThirdClothing.ImageData;
+                model.FirstClothingNameEN = recommendation.FirstClothing.NameEN;
+                model.FirstClothingNameUA = recommendation.FirstClothing.NameUA;
+                model.SecondClothingNameEN = recommendation.SecondClothing.NameEN;
+                model.SecondClothingNameUA = recommendation.SecondClothing.NameUA;
+                model.ThirdClothingNameEN = recommendation.ThirdClothing.NameEN;
+                model.ThirdClothingNameUA = recommendation.ThirdClothing.NameUA;
+
+                var cacheEntryOptions = new DistributedCacheEntryOptions()
                     .SetSlidingExpiration(TimeSpan.FromSeconds(900));
-
-                _memoryCache.Set(user.Id.ToString() + "recommendation", cacheRecommendation, cacheEntryOptions);
+                await _cache.SetAsync(user.Id.ToString() + "recommendation", model.ToByteArray(), cacheEntryOptions);
             }
-            Recommendation recommendation = cacheRecommendation;
-
-
-            if (!_memoryCache.TryGetValue(user.Id.ToString() + "measurement", out Measurement cacheMeasurement))
+            else
             {
-                cacheMeasurement = await _recommendationService.FindUserMeasurement(user);
-                var cacheEntryOptions = new MemoryCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromSeconds(900));
-
-                _memoryCache.Set(user.Id.ToString() + "measurement", cacheMeasurement, cacheEntryOptions);
+                model = distCacheRecommendation.FromByteArray<RecommendationViewModel>();
             }
-            Measurement measurement = cacheMeasurement;
+
+            Measurement measurement = await _recommendationService.FindUserMeasurement(user);
 
             if (user == null || measurement == null)
             {
@@ -314,15 +323,15 @@ namespace WeatherGuide.Controllers
             return Ok(new
             {
                 measurement = measurement,
-                firstClothingNameEN = recommendation.FirstClothing.NameEN,
-                secondClothingNameEN = recommendation.SecondClothing.NameEN,
-                thirdClothingNameEN = recommendation.ThirdClothing.NameEN,
-                firstClothingNameUA = recommendation.FirstClothing.NameUA,
-                secondClothingNameUA = recommendation.SecondClothing.NameUA,
-                thirdClothingNameUA = recommendation.ThirdClothing.NameUA,
-                firstClothingImage = recommendation.FirstClothing.ImageData,
-                secondClothingImage = recommendation.SecondClothing.ImageData,
-                thirdClothingImage = recommendation.ThirdClothing.ImageData
+                firstClothingNameEN = model.FirstClothingNameEN,
+                secondClothingNameEN = model.SecondClothingNameEN,
+                thirdClothingNameEN = model.ThirdClothingNameEN,
+                firstClothingNameUA = model.FirstClothingNameUA,
+                secondClothingNameUA = model.SecondClothingNameUA,
+                thirdClothingNameUA = model.ThirdClothingNameUA,
+                firstClothingImage = model.FirstClothingImage,
+                secondClothingImage = model.SecondClothingImage,
+                thirdClothingImage = model.ThirdClothingImage
             });
         }
     }

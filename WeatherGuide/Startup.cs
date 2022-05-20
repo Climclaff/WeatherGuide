@@ -22,6 +22,8 @@ using WeatherGuide.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authentication.Certificate;
+using System.Net;
 
 namespace WeatherGuide
 {
@@ -55,6 +57,18 @@ namespace WeatherGuide
                     };
                 })
                 .AddViewLocalization();
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = (int)HttpStatusCode.TemporaryRedirect;
+                options.HttpsPort = 5001;
+            });
+            services.AddDistributedSqlServerCache(options =>
+            {
+                options.ConnectionString =
+                    Configuration.GetConnectionString("DistCache_ConnectionString");
+                options.SchemaName = "dbo";
+                options.TableName = "CachedValues";
+            });
             services.AddScoped<IRecommendationRepository, RecommendationRepository>();
             services.AddScoped<IRecommendationService, RecommendationService>();
             services.AddScoped<IGeolocationRepository, GeolocationRepository>();
@@ -75,25 +89,29 @@ namespace WeatherGuide
             {
                 options.EnableEndpointRouting = false;
             });
-            services.AddAuthentication(options =>
+
+            services.AddAuthentication(              
+            options =>
             {
-             //   options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-             //   options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-             //   options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.SaveToken = true;
-                options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new TokenValidationParameters()
+
+                //   options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                //   options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                //   options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidAudience = Configuration["JWT:ValidAudience"],
-                    ValidIssuer = Configuration["JWT:ValidIssuer"],
-                    ClockSkew = TimeSpan.FromMinutes(10),
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("JWT:Secret").Value))
-                };
-            });
+                    options.SaveToken = true;
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidAudience = Configuration["JWT:ValidAudience"],
+                        ValidIssuer = Configuration["JWT:ValidIssuer"],
+                        ClockSkew = TimeSpan.FromMinutes(10),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("JWT:Secret").Value))
+                    };
+                });
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("IsAdminPolicy",
@@ -107,6 +125,7 @@ namespace WeatherGuide
 
             });
             
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,7 +140,7 @@ namespace WeatherGuide
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+               // app.UseHsts();
             }
             app.UseRequestLocalization();
             app.UseHttpsRedirection();

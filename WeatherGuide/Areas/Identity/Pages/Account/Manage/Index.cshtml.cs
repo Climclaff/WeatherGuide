@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Localization;
 using WeatherGuide.Attributes;
@@ -15,26 +16,26 @@ using WeatherGuide.Data;
 using WeatherGuide.Models;
 namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 {
-    [WebRequestLimitRazor(Name = "Limit Profile Web", Seconds = 5, MaxRequestCount = 7)]
+    [WebRequestLimitRazor(Name = "Limit Profile Web", Seconds = 10, MaxRequestCount = 7)]
     public partial class IndexModel : PageModel
     {
         private readonly UserManager<Models.AppUser> _userManager;
         private readonly SignInManager<Models.AppUser> _signInManager;
         private readonly ApplicationDbContext _context;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
-        private readonly IMemoryCache _memoryCache;
+        private readonly IDistributedCache _cache;
         public IndexModel(
             UserManager<Models.AppUser> userManager,
             SignInManager<Models.AppUser> signInManager,
             ApplicationDbContext context,
             IStringLocalizer<SharedResource> sharedLocalizer,
-            IMemoryCache memoryCache)
+            IDistributedCache cache)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
             _sharedLocalizer = sharedLocalizer;
-            _memoryCache = memoryCache;
+            _cache = cache;
         }
 
         public string Username { get; set; }
@@ -111,7 +112,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var cacheEntry = _memoryCache.Get<Recommendation>(user.Id.ToString() + "recommendation");
+            var cacheEntry = _cache.GetAsync(user.Id.ToString() + "recommendation");
             if(cacheEntry != null)
             {
                 StatusMessage = _sharedLocalizer["Recommendation cooldown"];

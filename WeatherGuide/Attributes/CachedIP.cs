@@ -1,11 +1,14 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 
 namespace WeatherGuide.Attributes
 {
-    public class CachedIP
+    [Serializable]
+    public class CachedIP 
     {
-        public IPAddress Value { get; set; }
+        public string Value { get; set; }
 
         public int RequestCount { get; set; }
+
     }
 }

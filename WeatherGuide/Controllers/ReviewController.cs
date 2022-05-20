@@ -30,7 +30,7 @@ namespace WeatherGuide.Controllers
             _context = context;
             _localizer = localizer;
         }
-        [WebRequestLimit(Name = "Limit Review Get", Seconds = 5, MaxRequestCount = 3)]
+        [WebRequestLimit(Name = "Limit Review Get", Seconds = 10, MaxRequestCount = 4)]
         public async Task<ActionResult> Reviews()
         {
             var applicationDbContext = _context.Reviews.Include(m => m.User);
@@ -58,9 +58,10 @@ namespace WeatherGuide.Controllers
             return View(model);
         }
 
-        [WebRequestLimit(Name = "Limit Review Post", Seconds = 5, MaxRequestCount = 2)]
+        [WebRequestLimit(Name = "Limit Review Post", Seconds = 10, MaxRequestCount = 1)]
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<ActionResult> AddReview([Bind("Id,Content,AppUserId,DateTime")] Review review)
         {
             if (review.Content == null)

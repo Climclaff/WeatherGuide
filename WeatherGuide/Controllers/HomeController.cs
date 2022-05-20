@@ -18,6 +18,10 @@ using WeatherGuide.Helpers.Geolocation;
 using WeatherGuide.Models.Geolocation;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Caching.Distributed;
+using WeatherGuide.Helpers;
+using WeatherGuide.Models.ViewModels;
+using WeatherGuide.Attributes;
 
 namespace WeatherGuide.Controllers
 {
@@ -29,11 +33,11 @@ namespace WeatherGuide.Controllers
         private readonly IRecommendationService _recommendationService;
         private readonly IStringLocalizer<HomeController> _localizer;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
-        private readonly IMemoryCache _memoryCache;
+        private readonly IDistributedCache _cache;
         public HomeController(ILogger<HomeController> logger, IStringLocalizer<HomeController> localizer, 
                               IStringLocalizer<SharedResource> sharedLocalizer, IRecommendationService recommendationService, 
                               UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-                              IMemoryCache memoryCache)
+                              IDistributedCache cache)
         {
             _logger = logger;
             _localizer = localizer;
@@ -41,7 +45,7 @@ namespace WeatherGuide.Controllers
             _userManager = userManager;
             _recommendationService = recommendationService;
             _signInManager = signInManager;
-            _memoryCache = memoryCache;
+            _cache = cache;
         }
 
         public IActionResult Index()
@@ -50,41 +54,69 @@ namespace WeatherGuide.Controllers
             return View();
         }
 
+
+        [WebRequestLimit(Name = "Limit Recommendation Get", Seconds = 10, MaxRequestCount = 1)]
         public async Task<IActionResult> Recommendations()
         {
             if (User.Identity.IsAuthenticated)
             {
                 CultureInfo culture = CultureInfo.CurrentCulture;
                 var user = await _userManager.GetUserAsync(HttpContext.User);
-
-                if (!_memoryCache.TryGetValue(user.Id.ToString() + "recommendation", out Recommendation cacheRecommendation))
+                Recommendation recommendation;
+                RecommendationViewModel model = new RecommendationViewModel();
+                var distCacheRecommendation = await _cache.GetAsync(user.Id.ToString() + "recommendation"); 
+                if(distCacheRecommendation == null)
                 {
-                    cacheRecommendation = await _recommendationService.GetRecommendation(user);
-                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    recommendation = await _recommendationService.GetRecommendation(user);
+                    model.FirstClothingImage = recommendation.FirstClothing.ImageData;
+                    model.SecondClothingImage = recommendation.SecondClothing.ImageData;
+                    model.ThirdClothingImage = recommendation.ThirdClothing.ImageData;
+                    model.FirstClothingNameEN = recommendation.FirstClothing.NameEN;
+                    model.FirstClothingNameUA = recommendation.FirstClothing.NameUA;
+                    model.SecondClothingNameEN = recommendation.SecondClothing.NameEN;
+                    model.SecondClothingNameUA = recommendation.SecondClothing.NameUA;
+                    model.ThirdClothingNameEN = recommendation.ThirdClothing.NameEN;
+                    model.ThirdClothingNameUA = recommendation.ThirdClothing.NameUA;
+
+                    var cacheEntryOptions = new DistributedCacheEntryOptions()
                         .SetSlidingExpiration(TimeSpan.FromSeconds(900));
-
-                    _memoryCache.Set(user.Id.ToString()+"recommendation", cacheRecommendation, cacheEntryOptions);
+                    await _cache.SetAsync(user.Id.ToString() + "recommendation", model.ToByteArray(), cacheEntryOptions);
                 }
-                Recommendation recommendation = cacheRecommendation;
-
-
-                if (!_memoryCache.TryGetValue(user.Id.ToString() + "measurement", out Measurement cacheMeasurement))
+                else
                 {
-                    cacheMeasurement = await _recommendationService.FindUserMeasurement(user);
-                    var cacheEntryOptions = new MemoryCacheEntryOptions()
-                        .SetSlidingExpiration(TimeSpan.FromSeconds(900));
-
-                    _memoryCache.Set(user.Id.ToString() + "measurement", cacheMeasurement, cacheEntryOptions);
+                    model = distCacheRecommendation.FromByteArray<RecommendationViewModel>();
                 }
-                Measurement measurement = cacheMeasurement;          
-                
+
+                Measurement measurement = await _recommendationService.FindUserMeasurement(user);
+
+                /* if (!_memoryCache.TryGetValue(user.Id.ToString() + "recommendation", out Recommendation cacheRecommendation))
+                 {
+                     cacheRecommendation = await _recommendationService.GetRecommendation(user);
+                     var cacheEntryOptions = new MemoryCacheEntryOptions()
+                         .SetSlidingExpiration(TimeSpan.FromSeconds(900));
+
+                     _memoryCache.Set(user.Id.ToString()+"recommendation", cacheRecommendation, cacheEntryOptions);
+                 }
+                 Recommendation recommendation = cacheRecommendation;
+
+
+                 if (!_memoryCache.TryGetValue(user.Id.ToString() + "measurement", out Measurement cacheMeasurement))
+                 {
+                     cacheMeasurement = await _recommendationService.FindUserMeasurement(user);
+                     var cacheEntryOptions = new MemoryCacheEntryOptions()
+                         .SetSlidingExpiration(TimeSpan.FromSeconds(900));
+
+                     _memoryCache.Set(user.Id.ToString() + "measurement", cacheMeasurement, cacheEntryOptions);
+                 }
+                 Measurement measurement = cacheMeasurement;          
+                 */
 
                 if (culture.Name == "en-US")
                 {
                     IEnumerable<string> itemNamesEN = new List<string>() {
-                    recommendation.FirstClothing.NameEN,
-                    recommendation.SecondClothing.NameEN,
-                    recommendation.ThirdClothing.NameEN,
+                    model.FirstClothingNameEN,
+                    model.SecondClothingNameEN,
+                    model.ThirdClothingNameEN,
                     };
                     TempData["Items"] = itemNamesEN;
                     IEnumerable<string> measurementValues = new List<string>() {
@@ -97,9 +129,9 @@ namespace WeatherGuide.Controllers
                 {
                     IEnumerable<string> itemNamesUA = new List<string>()
                 {
-                    recommendation.FirstClothing.NameUA,
-                    recommendation.SecondClothing.NameUA,
-                    recommendation.ThirdClothing.NameUA,
+                    model.FirstClothingNameUA,
+                    model.SecondClothingNameUA,
+                    model.ThirdClothingNameUA,
                 };
                     TempData["Items"] = itemNamesUA;
                     IEnumerable<string> measurementValues = new List<string>() {
@@ -110,7 +142,7 @@ namespace WeatherGuide.Controllers
                 }                
                 TempData.Keep("Items");
                 TempData.Keep("Measurement");
-                return View(recommendation);
+                return View(model);
             }
             return LocalRedirect("/Identity/Account/Login"); ;
         }

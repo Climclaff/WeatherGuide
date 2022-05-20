@@ -24,7 +24,7 @@ using WeatherGuide.Models;
 namespace WeatherGuide.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    [WebRequestLimitRazor(Name = "Limit Register Web", Seconds = 5, MaxRequestCount = 3)]
+    [WebRequestLimitRazor(Name = "Limit Register Web", Seconds = 10, MaxRequestCount = 3)]
     public class RegisterModel : PageModel
     {
         private readonly ApplicationDbContext _context;
