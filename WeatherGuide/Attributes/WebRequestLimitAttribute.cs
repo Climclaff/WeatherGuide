@@ -67,6 +67,10 @@ namespace WeatherGuide.Attributes
                     await next();
                 }
             }
+            else
+            {
+                await next();
+            }
         }
     }
    
