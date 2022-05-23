@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
@@ -26,21 +27,21 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
         private readonly ILogger<ChangePasswordModel> _logger;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
         private readonly IGeolocationRepository _geolocationRepository = null;
-        private readonly IMemoryCache _memoryCache;
+        private readonly IDistributedCache _cache;
         public GeolocationModel(
             UserManager<Models.AppUser> userManager,
             SignInManager<Models.AppUser> signInManager,
             ILogger<ChangePasswordModel> logger,
             IStringLocalizer<SharedResource> sharedLocalizer,
             IGeolocationRepository geolocationRepository,
-            IMemoryCache memoryCache)
+            IDistributedCache cache)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _sharedLocalizer = sharedLocalizer;
             _geolocationRepository = geolocationRepository;
-            _memoryCache = memoryCache; 
+            _cache = cache; 
         }
 
         [TempData]
@@ -64,8 +65,8 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            var cacheEntry = _memoryCache.Get<Recommendation>(user.Id.ToString() + "recommendation");
-            if (cacheEntry != null)
+            var cacheEntry = _cache.GetAsync(user.Id.ToString() + "recommendation");
+            if (cacheEntry.Result != null)
             {
                 StatusMessage = _sharedLocalizer["Recommendation cooldown"];
                 return RedirectToPage();

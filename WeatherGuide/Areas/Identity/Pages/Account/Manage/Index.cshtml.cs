@@ -113,7 +113,7 @@ namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
             }
 
             var cacheEntry = _cache.GetAsync(user.Id.ToString() + "recommendation");
-            if(cacheEntry != null)
+            if(cacheEntry.Result != null)
             {
                 StatusMessage = _sharedLocalizer["Recommendation cooldown"];
                 return RedirectToPage();

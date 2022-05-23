@@ -201,7 +201,7 @@ namespace WeatherGuide.Controllers
             var username = User.FindFirst(ClaimTypes.Name)?.Value;
             var user = await _userManager.FindByNameAsync(username);
             var cacheEntry = _cache.GetAsync(user.Id.ToString() + "recommendation");
-            if (cacheEntry != null)
+            if (cacheEntry.Result != null)
             {               
                 return StatusCode(420);
             }
