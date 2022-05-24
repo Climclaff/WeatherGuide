@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,12 @@ using System.Threading.Tasks;
 using WeatherGuide.Attributes;
 using WeatherGuide.Data;
 using WeatherGuide.Helpers;
+using WeatherGuide.Helpers.Geolocation;
 using WeatherGuide.Models;
 using WeatherGuide.Models.ApiModels;
+using WeatherGuide.Models.Geolocation;
 using WeatherGuide.Models.ViewModels;
+using WeatherGuide.Repository;
 using WeatherGuide.Services;
 
 namespace WeatherGuide.Controllers
@@ -29,15 +33,18 @@ namespace WeatherGuide.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IRecommendationService _recommendationService;
         private readonly IDistributedCache _cache;
+        private readonly IGeolocationRepository _geolocationRepository;
         public ApiDataController(UserManager<AppUser> userManager,
             ApplicationDbContext context,
             IRecommendationService recommendationService,
-            IDistributedCache cache)
+            IDistributedCache cache,
+            IGeolocationRepository geolocationRepository)
         {
             _userManager = userManager;
             _context = context;
             _recommendationService = recommendationService;
             _cache = cache;
+            _geolocationRepository = geolocationRepository;
         }
 
 
@@ -215,6 +222,36 @@ namespace WeatherGuide.Controllers
             }
             return StatusCode(400);
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPost]
+        [ApiRequestLimit(Name = "Limit Change GeolocationService", Seconds = 10, MaxRequestCount = 3)]
+        [Route("GeolocationService")]
+        public async Task<IActionResult> GeolocationService()
+        {
+            var username = User.FindFirst(ClaimTypes.Name)?.Value;
+            var user = await _userManager.FindByNameAsync(username);
+            var cacheEntry = _cache.GetAsync(user.Id.ToString() + "recommendation");
+            if (cacheEntry.Result != null)
+            {
+                return StatusCode(420);
+            }
+            GeoInfoModel geoInfo = new GeoInfoModel();
+            GeoHelper geoHelper = new GeoHelper();
+            var result = await geoHelper.GetGeoInfo();
+            if (result != null)
+            {
+                geoInfo = JsonConvert.DeserializeObject<GeoInfoModel>(result);
+                bool isSupported = await _geolocationRepository.DBSupportsLocation(geoInfo);
+                if (isSupported)
+                {
+                    await _geolocationRepository.ApplyGeolocationToUser(user.Id, geoInfo);
+                    return Ok();
+                }              
+            }
+            return StatusCode(400);
+        }
+
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [ApiRequestLimit(Name = "Limit Change Name", Seconds = 10, MaxRequestCount = 3)]

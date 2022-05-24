@@ -19,7 +19,7 @@ namespace WeatherGuide.Repository
             var country = await CheckCountryByName(model.CountryName);
             if (country != null)
             {
-                var region = await CheckStateByName(model.City);
+                var region = await CheckStateByName(model.Region);
                 if(region != null)
                 {
                     return true;
@@ -31,7 +31,7 @@ namespace WeatherGuide.Repository
         {
             AppUser currentUser = await _context.Users.FindAsync(userId);
             var country = await CheckCountryByName(model.CountryName);
-            var state = await CheckStateByName(model.City);
+            var state = await CheckStateByName(model.Region);
             if (country != null && state != null)
             {
                 currentUser.CountryId = country.Id;
@@ -54,8 +54,9 @@ namespace WeatherGuide.Repository
             var state = await
             _context
                .Set<State>()
-               .Where(x => x.Name == stateName)
+               .Where(x => x.Name == stateName  )
                .SingleOrDefaultAsync();
+
             return state;
 
         }

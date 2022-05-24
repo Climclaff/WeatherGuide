@@ -9,5 +9,10 @@ namespace WeatherGuide.Models.Geolocation
 
         [JsonProperty("city")]
         public string City { get; set; }
+
+        [JsonProperty("region_name")]
+        public string Region { get; set; }
+
+
     }
 }

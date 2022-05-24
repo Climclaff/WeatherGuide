@@ -49,9 +49,9 @@ namespace WeatherGuide.Attributes
                     if (ip.RequestCount > MaxRequestCount)
                     {
                         error = true;
-                        context.Result = new ContentResult
+                        context.Result = new ViewResult
                         {
-                            Content = "Too many requests."
+                            ViewName = "RequestLimit"
                         };
                         context.HttpContext.Response.StatusCode = (int)HttpStatusCode.TooManyRequests;
                     }
@@ -70,41 +70,5 @@ namespace WeatherGuide.Attributes
             }
         }
 
-        /*
-        public override void OnResultExecuting(ResultExecutingContext context)
-        {
-            bool isAdmin = false;
-            if (context.HttpContext.Request.HttpContext.User.Identity.IsAuthenticated == true)
-            {
-                 isAdmin = context.HttpContext.Request.HttpContext.User.FindFirst("IsAdmin").Value == "true" ? true : false;
-            }
-            if (!isAdmin)
-            {
-                var ipAddress = context.HttpContext.Request.HttpContext.Connection.RemoteIpAddress;
-                var memoryCacheKey = $"{Name}-{ipAddress}";
-                if (!Cache.TryGetValue(memoryCacheKey, out CachedIP ip))
-                {
-                    ip = new CachedIP();
-                    ip.Value = ipAddress.ToString();
-                    ip.RequestCount = 1;
-                    var cacheEntryOptions = new MemoryCacheEntryOptions()
-                        .SetAbsoluteExpiration(TimeSpan.FromSeconds(Seconds));
-
-                    Cache.Set(memoryCacheKey, ip, cacheEntryOptions);
-                }
-                else
-                {
-                    ip.RequestCount++;
-                }
-                if (ip.RequestCount > MaxRequestCount)
-                {
-                    context.Result = new ViewResult
-                    {
-                        ViewName = "RequestLimit"
-                    };
-                    context.HttpContext.Response.StatusCode = (int)HttpStatusCode.TooManyRequests;
-                }
-            }
-        }*/
     }
 }
