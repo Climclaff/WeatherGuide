@@ -89,27 +89,6 @@ namespace WeatherGuide.Controllers
 
                 Measurement measurement = await _recommendationService.FindUserMeasurement(user);
 
-                /* if (!_memoryCache.TryGetValue(user.Id.ToString() + "recommendation", out Recommendation cacheRecommendation))
-                 {
-                     cacheRecommendation = await _recommendationService.GetRecommendation(user);
-                     var cacheEntryOptions = new MemoryCacheEntryOptions()
-                         .SetSlidingExpiration(TimeSpan.FromSeconds(900));
-
-                     _memoryCache.Set(user.Id.ToString()+"recommendation", cacheRecommendation, cacheEntryOptions);
-                 }
-                 Recommendation recommendation = cacheRecommendation;
-
-
-                 if (!_memoryCache.TryGetValue(user.Id.ToString() + "measurement", out Measurement cacheMeasurement))
-                 {
-                     cacheMeasurement = await _recommendationService.FindUserMeasurement(user);
-                     var cacheEntryOptions = new MemoryCacheEntryOptions()
-                         .SetSlidingExpiration(TimeSpan.FromSeconds(900));
-
-                     _memoryCache.Set(user.Id.ToString() + "measurement", cacheMeasurement, cacheEntryOptions);
-                 }
-                 Measurement measurement = cacheMeasurement;          
-                 */
 
                 if (culture.Name == "en-US")
                 {

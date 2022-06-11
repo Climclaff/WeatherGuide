@@ -196,7 +196,7 @@
     <value>Error</value>
   </data>
   <data name="Error during registration, maybe user with such name already exists" xml:space="preserve">
-    <value>Error during registration, maybe user with such name already exists</value>
+    <value>Error during registration, maybe user with such name already exists, or you came up with a weak password.</value>
   </data>
   <data name="ExportToExcel" xml:space="preserve">
     <value>Export to excel</value>

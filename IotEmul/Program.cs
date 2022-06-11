@@ -40,7 +40,7 @@ namespace IotEmul
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-            var result = client.PostAsync("https://localhost:44302/api/Iot/SendMeasurement", byteContent).Result;
+            var result = client.PostAsync("https://localhost:5001/api/Iot/SendMeasurement", byteContent).Result;
 
             var responseString = await result.Content.ReadAsStringAsync();
         }
@@ -65,6 +65,7 @@ namespace IotEmul
         {
             sensors.Add(new Sensor(1, 1));
             sensors.Add(new Sensor(1, 2));
+            sensors.Add(new Sensor(1, 14));
             sensors.Add(new Sensor(2, 3));
             sensors.Add(new Sensor(2, 4));
             sensors.Add(new Sensor(2, 5));

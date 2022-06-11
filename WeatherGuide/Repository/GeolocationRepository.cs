@@ -20,10 +20,11 @@ namespace WeatherGuide.Repository
             if (country != null)
             {
                 var region = await CheckStateByName(model.Region);
-                if(region != null)
+                var city = await CheckStateByName(model.City);
+                if (region != null || city != null)
                 {
                     return true;
-                }
+                }             
             }
             return false;
         }
@@ -32,10 +33,18 @@ namespace WeatherGuide.Repository
             AppUser currentUser = await _context.Users.FindAsync(userId);
             var country = await CheckCountryByName(model.CountryName);
             var state = await CheckStateByName(model.Region);
-            if (country != null && state != null)
+            var city = await CheckStateByName(model.City);
+            if (country != null)
             {
                 currentUser.CountryId = country.Id;
-                currentUser.StateId = state.Id;
+                if (state != null)
+                {                 
+                    currentUser.StateId = state.Id;                  
+                }
+                if (city != null)
+                {
+                    currentUser.StateId = city.Id;
+                }
                 _context.Update(currentUser);
                 await _context.SaveChangesAsync();
             }

@@ -199,7 +199,7 @@
     <value>Помилка</value>
   </data>
   <data name="Error during registration, maybe user with such name already exists" xml:space="preserve">
-    <value>Помилка під час реєстрації, можливо користувач з такою електронною адресою вже існує</value>
+    <value>Помилка під час реєстрації, можливо користувач з такою електронною адресою вже існує, або ви придумали слабкий пароль.</value>
   </data>
   <data name="ExportToExcel" xml:space="preserve">
     <value>Експорт у форматі excel</value>
