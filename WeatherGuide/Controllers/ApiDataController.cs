@@ -317,8 +317,10 @@ namespace WeatherGuide.Controllers
 
             return Ok();
         }
+
+
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [ApiRequestLimit(Name = "Limit Get Recommendation", Seconds = 10, MaxRequestCount = 1)]
+        [ApiRequestLimit(Name = "Limit Get Recommendation", Seconds = 10, MaxRequestCount = 3)]
         [HttpGet]
         [Route("Recommendation")]
         public async Task<IActionResult> Recommendation()

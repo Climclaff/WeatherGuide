@@ -55,7 +55,7 @@ namespace WeatherGuide.Controllers
         }
 
 
-        [WebRequestLimit(Name = "Limit Recommendation Get", Seconds = 10, MaxRequestCount = 1)]
+        [WebRequestLimit(Name = "Limit Recommendation Get", Seconds = 10, MaxRequestCount = 3)]
         public async Task<IActionResult> Recommendations()
         {
             if (User.Identity.IsAuthenticated)

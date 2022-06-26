@@ -19,7 +19,7 @@ using WeatherGuide.Repository;
 
 namespace WeatherGuide.Areas.Identity.Pages.Account.Manage
 {
-    [WebRequestLimitRazor(Name = "Limit Profile Web", Seconds = 10, MaxRequestCount = 7)]
+    [WebRequestLimitRazor(Name = "Limit Profile Web", Seconds = 10, MaxRequestCount = 30)]
     public class GeolocationModel : PageModel
     {
         private readonly UserManager<Models.AppUser> _userManager;

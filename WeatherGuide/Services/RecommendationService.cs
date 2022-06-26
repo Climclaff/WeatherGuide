@@ -11,7 +11,6 @@ namespace WeatherGuide.Services
     public class RecommendationService : IRecommendationService
     {
         private readonly IRecommendationRepository _recommendationRepository = null;
-        AppUser currentUser = new AppUser();
         Measurement currentMeasurement = new Measurement();
         public RecommendationService(IRecommendationRepository recommendationRepository)
         {
@@ -24,13 +23,12 @@ namespace WeatherGuide.Services
         }
             public async Task<Recommendation> GetRecommendation(AppUser appUser)
         {
-            currentUser = appUser;
-            currentMeasurement = await _recommendationRepository.GetMeasurementForCurrentUser(currentUser.Id);
+            currentMeasurement = await _recommendationRepository.GetMeasurementForCurrentUser(appUser.Id);
             Recommender recommender = new Recommender();
             RecommendationBuilder builder = WeatherBuilderFactory.createBuilder(_recommendationRepository, currentMeasurement);
             Recommendation recommendation = await recommender.Build(builder);
             recommendation.DateTime = DateTime.UtcNow;
-            recommendation.AppUserId = currentUser.Id;
+            recommendation.AppUserId = appUser.Id;
             await _recommendationRepository.GenerateRecommendation(recommendation);
             return recommendation;
 
