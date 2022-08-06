@@ -1,0 +1,7 @@
+![Screenshot](mainPage.png)
+![Screenshot](reviewPage.png)
+![Screenshot](recommendationPage.png)
+![Screenshot](profileMain.png)
+![Screenshot](profilePassword.png)
+![Screenshot](clothingManagementPage.png)
+![Screenshot](administrationPage.png)
